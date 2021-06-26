@@ -10,8 +10,8 @@ img
 
 iframe
 {
-    width:"100%";
-    height:"100%";
+    width:100%;
+    height:100%;
     background: whitesmoke;
 }
 </style>
@@ -45,7 +45,29 @@ iframe
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-<iframe src="aws_step_functions\process_manager.html"></iframe>
+<!-- <iframe src="aws_step_functions\process_manager.html"></iframe> -->
+States can be orchestrated using ASF State Machine.
+<br/>
+<div>
+    <img src="./images/aws_mapping_process_manager.png" alt="Process Manager">
+</div>
+<br/>
+<b>ASF snippet</b>:
+<br/>
+<pre>
+  <code>
+    {
+    "Comment": "ASF Template",
+    "StartAt": "Function",
+    "States": {
+        "Function": {
+        "Type": "Pass",
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
