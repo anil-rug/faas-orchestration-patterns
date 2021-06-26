@@ -5,7 +5,7 @@ img
     float:none;
     margin-left:auto;
     margin-right:auto;
-    width:60%;
+    width:40%;
 }
 
 iframe
@@ -88,7 +88,6 @@ Here the message routing "Process Manager" pattern for ADF is presented. Here th
 </div>
 </details>
 
-
 <br />
 
 ----
@@ -111,8 +110,42 @@ Here the message routing "Process Manager" pattern for ADF is presented. Here th
 
 **Synonyms**: -
 
+**Mapping**:
+
+<details>
+<summary><b>AWS Step Functions</b></summary>
+ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+<br/>
+<div>
+    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+</div>
+</details>
+
+<details>
+<summary><b>Zeebe</b></summary>
+In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+<br/>
+<div>
+    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+</div>
+</details>
+
+<details>
+<summary><b>Azure Durable Functions</b></summary>
+In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+<br/>
+<div>
+    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
+</div>
+</details>
+
+
 
 ## References
 
 <a id="1">[Hohpe and Woolf 2004]</a>
 Hohpe, G. and Woolf, B., 2004. Enterprise integration patterns: Designing, building, and deploying messaging solutions. Addison-Wesley Professional.
+
+
+***
+<sup id="1">1. https://aws.amazon.com/api-gateway<a href="https://aws.amazon.com/api-gateway" title="AWS API Gateway"></a></sup>
