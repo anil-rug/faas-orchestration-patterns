@@ -1,5 +1,21 @@
-# FaaS Orchestration - Patterns
-## These are patterns
+## Patterns
+
+### Process Manager
+
+![A test image](image.png)
+
+
+**Problem**: How does the serverless workflow determine the path in which the message needs to flow if it consists of multiple Functions and conditions?
+
+**Decision**: The _Process Manager_ acts as a central processing component for the system. As workflows are influenced by each step's output message, execution states need to be maintained, and based on the result; the succeeding component is invoked.
+
+**Source**: 
+
+**Pattern**: Enterprise Integration Pattern
+
+**Type**: Construct
+
+**Synonyms**: -
 
 You can use the [editor on GitHub](https://github.com/anil-rug/faas-orchestration-patterns/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
