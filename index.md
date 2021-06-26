@@ -1025,7 +1025,7 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
 <br/>
 <pre>
-  <code>
+  <code class="language-javascript">
 
     const df = require("durable-functions");
 
