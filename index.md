@@ -35,14 +35,20 @@ img
 **Synonyms**: -
 
 <div>
-    <iframe src="aws_step_functions\process_manager.md" frameborder="0" height="400"
-      width="95%"></iframe></p>
+    <iframe src="aws_step_functions\process_manager.html" frameborder="0" height="400"
+      width="95%"></iframe>
 </div>
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-@[:markdown](aws_step_functions\process_manager.md)
+<!-- @[:markdown](aws_step_functions\process_manager.md) -->
 </details>
+
+<embed type="text/html" src="aws_step_functions\process_manager.html" width="500" height="200">
+
+<OBJECT data="aws_step_functions\process_manager.html">
+Warning: file_to_include.html could not be included.
+</OBJECT>
 
 <br />
 
