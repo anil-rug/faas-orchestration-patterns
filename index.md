@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## These are patterns
 
 You can use the [editor on GitHub](https://github.com/anil-rug/faas-orchestration-patterns/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
