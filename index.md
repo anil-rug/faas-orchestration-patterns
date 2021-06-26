@@ -15,7 +15,8 @@ iframe
     background: whitesmoke;
 }
 </style>
-
+<link href="prism.css" rel="stylesheet" />
+<script src="prism.js"></script>
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Patterns](#patterns)
@@ -1022,9 +1023,22 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 <summary><b>Azure Durable Functions</b></summary>
 In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code>
+
+    const df = require("durable-functions");
+
+    module.exports = df.orchestrator(function* (context) {
+        try {
+            const function1 = yield context.df.callActivity("function1", context.df.getInput())
+            return function1;
+        }
+        catch (error) {
+            console.error(error)
+        }
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -1075,10 +1089,10 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+The Workflow Data pattern is function-specific, and sharing utilities, libraries, and helper code can be done by placing all these compiled files in a folder at the root level of the functions.
 <br/>
 <div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/azure_mapping_workflow_data.png" alt="Workflow Data">
 </div>
 </details>
 
