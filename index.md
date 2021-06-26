@@ -41,7 +41,7 @@ img
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-@[format](aws_step_functions/process_manager.md)
+@[:markdown](aws_step_functions\process_manager.md)
 </details>
 
 <br />
