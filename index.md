@@ -34,21 +34,23 @@ img
 
 **Synonyms**: -
 
-<!-- <div>
-    <iframe src="aws_step_functions\process_manager.html" frameborder="0" height="400"
-      width="95%"></iframe>
-</div> -->
+**Mapping**:
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-<embed type="text/html" src="aws_step_functions\process_manager.html" width="95%" height="400">
+<embed type="text/html" src="aws_step_functions\process_manager.html" width="100%" style="background: whitesmoke">
 </details>
 
-<!-- <embed type="text/html" src="aws_step_functions\process_manager.html" width="500" height="200"> -->
-<!-- 
-<OBJECT data="aws_step_functions\process_manager.html">
-Warning: file_to_include.html could not be included.
-</OBJECT> -->
+<details>
+<summary><b>Zeebe</b></summary>
+<embed type="text/html" src="aws_step_functions\process_manager.html" width="100%" style="background: whitesmoke">
+</details>
+
+<details>
+<summary><b>Azure Durable Functions</b></summary>
+<embed type="text/html" src="aws_step_functions\process_manager.html" width="100%" style="background: whitesmoke">
+</details>
+
 
 <br />
 

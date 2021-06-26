@@ -1,3 +1,18 @@
-<b>Problem</b>: How does the serverless workflow determine the path in which the message needs to flow if it consists of multiple functions and conditions?
+States can be orchestrated using ASF State Machine.
 
-**Decision**: The _Process Manager_ acts as a central processing component for the system. As workflows are influenced by each step's output message, execution states need to be maintained, and based on the result; the succeeding component is invoked.
+<img src="../images/aws_mapping_process_manager.png" alt="Process Manager">
+
+<pre>
+  <code>
+    {
+    "Comment": "ASF Template",
+    "StartAt": "Function",
+    "States": {
+        "Function": {
+        "Type": "Pass",
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
