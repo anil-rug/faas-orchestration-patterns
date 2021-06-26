@@ -41,9 +41,7 @@ img
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-<body width="95%" height="400"y>
-<embed type="text/html" src="aws_step_functions\process_manager.html">
-</body>
+<embed type="text/html" src="aws_step_functions\process_manager.html" width="95%" height="400">
 </details>
 
 <!-- <embed type="text/html" src="aws_step_functions\process_manager.html" width="500" height="200"> -->
