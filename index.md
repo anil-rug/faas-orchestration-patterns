@@ -10,7 +10,8 @@ img
 
 iframe
 {
-    width="100%";
+    width:"100%";
+    height:"100%";
     background: whitesmoke;
 }
 </style>
@@ -44,9 +45,7 @@ iframe
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-
-<iframe src="aws_step_functions\process_manager.html" width="100%"></iframe>
-<!-- <embed type="text/html" src="aws_step_functions\process_manager.html"> -->
+<iframe src="aws_step_functions\process_manager.html"></iframe>
 </details>
 
 <details>
