@@ -8,7 +8,7 @@ img
     width:60%;
 }
 
-embed
+iframe
 {
     width="100%";
     background: whitesmoke;
@@ -44,7 +44,9 @@ embed
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-<embed type="text/html" src="aws_step_functions\process_manager.html">
+
+<iframe src="aws_step_functions\process_manager.html" width="100%"></iframe>
+<!-- <embed type="text/html" src="aws_step_functions\process_manager.html"> -->
 </details>
 
 <details>
