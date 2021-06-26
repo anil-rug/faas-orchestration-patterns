@@ -7,6 +7,12 @@ img
     margin-right:auto;
     width:60%;
 }
+
+embed
+{
+    width="100%";
+    background: whitesmoke;
+}
 </style>
 
 ## Table of Contents
@@ -38,7 +44,7 @@ img
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-<embed type="text/html" src="aws_step_functions\process_manager.html" width="100%" style="background: whitesmoke">
+<embed type="text/html" src="aws_step_functions\process_manager.html">
 </details>
 
 <details>
