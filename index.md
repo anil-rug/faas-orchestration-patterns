@@ -72,12 +72,20 @@ States can be orchestrated using ASF State Machine.
 
 <details>
 <summary><b>Zeebe</b></summary>
-<embed type="text/html" src="aws_step_functions\process_manager.html" width="100%" style="background: whitesmoke">
+The "Process Manager" pattern for Zeebe is the broker coordinating the various tasks in the workflow. Here the various tasks are associated with their corresponding hosted function.
+<br/>
+<div>
+    <img src="./images/zeebe_mapping_process_manager.png" alt="Process Manager">
+</div>
 </details>
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-<embed type="text/html" src="aws_step_functions\process_manager.html" width="100%" style="background: whitesmoke">
+Here the message routing "Process Manager" pattern for ADF is presented. Here the various functions are orchestrated using the primary Orchestration Function.
+<br/>
+<div>
+    <img src="./images/adf_mapping_process_manager.png" alt="Process Manager">
+</div>
 </details>
 
 
