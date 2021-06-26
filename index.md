@@ -41,14 +41,16 @@ img
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-<!-- @[:markdown](aws_step_functions\process_manager.md) -->
+<body width="95%" height="400"y>
+<embed type="text/html" src="aws_step_functions\process_manager.html">
+</body>
 </details>
 
 <!-- <embed type="text/html" src="aws_step_functions\process_manager.html" width="500" height="200"> -->
-
+<!-- 
 <OBJECT data="aws_step_functions\process_manager.html">
 Warning: file_to_include.html could not be included.
-</OBJECT>
+</OBJECT> -->
 
 <br />
 
