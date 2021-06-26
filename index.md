@@ -1,15 +1,25 @@
+<style>
+img
+{
+    display:block;
+    float:none;
+    margin-left:auto;
+    margin-right:auto;
+    width:60%;
+}
+</style>
+
 ## Patterns
 
-### Process Manager
+### **Process Manager**
 
-![A test image](image.png)
+![Design Decision - Process Manager](images/Design_decisions_process_manager.png)
 
-
-**Problem**: How does the serverless workflow determine the path in which the message needs to flow if it consists of multiple Functions and conditions?
+**Problem**: How does the serverless workflow determine the path in which the message needs to flow if it consists of multiple functions and conditions?
 
 **Decision**: The _Process Manager_ acts as a central processing component for the system. As workflows are influenced by each step's output message, execution states need to be maintained, and based on the result; the succeeding component is invoked.
 
-**Source**: 
+**Source**: [[Hohpe and Woolf 2004]](#1)
 
 **Pattern**: Enterprise Integration Pattern
 
@@ -17,38 +27,34 @@
 
 **Synonyms**: -
 
-You can use the [editor on GitHub](https://github.com/anil-rug/faas-orchestration-patterns/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+<details>
+<summary><b>AWS Step Functions</b></summary>
++ markdown list 1
+  + nested list 1
+  + nested list 2
++ markdown list 2
+</details>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<br />
 
-### Markdown
+### **Event and Document Message**
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+![Design Decision - Event and Document Message](images/Design_decisions_event_document_message.png)
 
-```markdown
-Syntax highlighted code block
+**Problem**: How can the serverless workflow and its involved functions be executed/triggered?
 
-# Header 1
-## Header 2
-### Header 3
+**Decision**: External services or clients can invoke the serverless data processing workflow by an _Event Message_. Furthermore, _Event Messages_ can be used to invoke other workflows or services. As functions are considered a black box, the _Document Message_ containing the data structure message is the most optimum choice when communicating between internal states/functions.
 
-- Bulleted
-- List
+**Source**: [[Hohpe and Woolf 2004]](#1)
 
-1. Numbered
-2. List
+**Pattern**: Enterprise Integration Pattern
 
-**Bold** and _Italic_ and `Code` text
+**Type**: Construct
 
-[Link](url) and ![Image](src)
-```
+**Synonyms**: -
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+## References
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/anil-rug/faas-orchestration-patterns/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+<a id="1">[Hohpe and Woolf 2004]</a>
+Hohpe, G. and Woolf, B., 2004. Enterprise integration patterns: Designing, building, and deploying messaging solutions. Addison-Wesley Professional.
