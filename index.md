@@ -884,19 +884,40 @@ The Gateway pattern is function-specific, and the pattern mapping is equivalent 
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+ASF offers InputPath and ResultSelector<sup><a href="#13" id="13">13</a></sup> to limit the input or output passed by filtering the JSON notation using Paths<sup><a href="#14" id="14">14</a></sup> respectively. The below figure shows how the Content Filter pattern can be accomplished using InputPath or using ResultSelector. Additionally, ASF provides user with OutputPath<sup><a href="#15" id="15">15</a></sup> that enables to select a portion of the message output.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_content_filter.png" alt="Content Filter">
 </div>
+<br/>
+Users have the added benefit of performing the entire filtering or code-specific filtering using custom-developed filters through AWS Lambdas, shown by the below code snippet.
+<pre>
+  <code class="language-javascript">
+    // Import utils
+    const lambdaGateway = require("/opt/utility/utlis.js");
+
+    exports.lambdaHandler = async (event, context, callback) => {
+    // Input Gateway logic
+    const data = lambdaGateway.inputGateway(event, context);
+
+    // Start : Business logic
+    // Content Filter logic - Users can follow custom logic
+    const transformedData = utils.removeField(data, ["field_1", "field_2"]);
+    // End : Business logic
+
+    // Output Gateway logic
+    lambdaGateway.outputGateway(JSON.stringify(transformedData), callback);
+    };
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+The Content Filter pattern is function-specific, and the pattern mapping is equivalent to ASF Content Filter pattern. This pattern can also be realized according to the below figure. Here the Input/Output Variable can be used to modify the payload sent to the functions. Furthermore, with the help of Expressions and FEEL (Friendly Enough Expression Language)<sup><a href="#16" id="16">16</a></sup>, variables can be accessed and calculated dynamically.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_content_filter.png" alt="Content Filter">
 </div>
 </details>
 
@@ -947,19 +968,47 @@ The Content Filter pattern is function-specific, and the pattern mapping is equi
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+ASF offers a feature called Parameters that facilitates users to augment the message with missing information by using static key-value pairs or use values selected from the input data with Paths.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_content_enricher.png" alt="Content Enricher">
 </div>
+<br/>
+For complex Content Enricher scenarios, the below code snippet presents how the user can implement custom fetch and enrich message logic through AWS Lambda.
+<pre>
+  <code class="language-javascript">
+    // Import required libraries
+    const lambdaGateway = require("/opt/utility/utlis.js");
+    const s3Operation = require("/opt/utility/aws_s3_service.js");
+
+    exports.lambdaHandler = async (event, context, callback) => {
+    // Input Gateway logic
+    const data = lambdaGateway.inputGateway(event, context);
+
+    // Start : Business logic
+
+    // Content Enricher logic - Users can follow custom logic
+    // Fetch data from data source
+    const new_data = await s3Operation.getPayload("key", "bucketName");
+    // Append data
+    const transformedData = utils.addNewField(data, {
+        new_field: new_data,
+    });
+    // End : Business logic
+
+    // Output Gateway logic
+    lambdaGateway.outputGateway(JSON.stringify(transformedData), callback);
+    };
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+ The Content Enricher pattern is function-specific, and the pattern mapping is equivalent to the ASF Content Enricher pattern. With the help of Expressions and FEEL, as shown in the below figure, the Input/Output Variables can be altered and augmented with the necessary information.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_content_enricher.png" alt="Content Enricher">
 </div>
 </details>
 
@@ -1011,25 +1060,22 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+ASF limits the payload size that can be passed to the workflow and between states to 256KB<sup><a href="#12" id="12">12</a></sup>, and any executions that pass large payloads can be terminated. The payload restriction barrier can be solved by employing the Claim Check pattern as shown by the below figure. In ASF, this pattern is implemented in AWS Lambdas using the Content Filter that first ensures that the large payload is stored in Amazon Simple Storage Service (Amazon S3) persistent storage and replaced by the Amazon Resource Name (ARN) bucket name and key value. Then the filtered message is sent to the following states, and any state that needs this data uses the Content Enricher pattern to recover the saved data again.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_claim_check.png" alt="Claim Check">
 </div>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
-<br/>
-<div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+The Claim Check pattern internally uses the Content Filter and Enricher pattern. Hence, the mapping is similar to AWS Step Functions Claim Check pattern.
+
 </details>
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
- The Claim Check pattern internally uses the Content Filter and Enricher pattern. Hence, the mapping is similar to AWS Step Functions.
+ The Claim Check pattern internally uses the Content Filter and Enricher pattern. Hence, the mapping is similar to AWS Step Functions Claim Check pattern.
 </details>
 
 <br />
@@ -1058,25 +1104,17 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
-<br/>
-<div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+In ASF, the Normalizer pattern is achieved using either the ResultSelector, ResultPath\footnote{https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultpath.html}, or OutputPath Output processing constructs. These output processing constructs also can be combined to achieve complex normalization of the message. The transformation can also be performed inside AWS Lambdas using Content Filter or Content Enricher patterns.
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
-<br/>
-<div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+The Normalizer pattern is function-specific, and the pattern can be achieved using the Content Filter or Content Enricher patterns.
 </details>
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-
+The Normalizer pattern is function-specific, and the pattern can be achieved using the Content Filter or Content Enricher patterns.
 </details>
 
 <br />
@@ -1105,19 +1143,15 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
-<br/>
-<div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+The Message History pattern is available only for ASF Standard Executions, as the states are persisted on disk, while the Express Execution lacks this pattern due to its processing strategy of utilizing the memory. Furthermore, ASF Standard Executions provide the developers with a visual representation of the path that the message has traversed and information like input/output payload, response, execution time, and execution status.
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+The message history of the Zeebe workflow is maintained using variables as shown in the below figure.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_message_history.png" alt="Message History">
 </div>
 </details>
 
@@ -1156,19 +1190,50 @@ The Message History of the Azure Durable Orchestration function is maintained us
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+ASF supports Splitter and Aggregator with the help of dynamic parallelism Map state type as shown by the below figure and code snippet. The Map state will execute the same steps for multiple entries of an array in the state input. The below are the mandatory fields for Map state:<br/>
+- <b>Iterator</b>: The object that defines a state machine that will process each element of the array
+- <b>ItemsPath</b>: Path of the array where the input is located
+- <b>MaxConcurrency</b>: Upper bound on how many invocations of the Iterator may run in parallel
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_splitter_and_aggregator.png" alt="Splitter and Aggregator">
 </div>
+<br/>
+<pre>
+  <code class="language-javascript">
+    {
+    "Comment": "Callback",
+    "StartAt": "MapState",
+    "States": {
+        "MapState": {
+        "Type": "Map",
+        "ItemsPath": "$.array",
+        "MaxConcurrency": 0,
+        "Iterator": {
+            "StartAt": "State 1",
+            "States": {
+            "State 1": {
+                "Type": "Pass",
+                "Result": "Done!",
+                "End": true
+            }
+            }
+        },
+        "ResultPath": "$.output",
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+The below figure presents how the Splitter and Aggregator pattern is implemented using BPMN 2.0. Here "Function 2" is configured with Parallel Multi Instance which takes an input collection and performs dynamic parallelism to process the data.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_splitter_and_aggregator.png" alt="Splitter and Aggregator">
 </div>
 </details>
 
@@ -1225,19 +1290,74 @@ The presented code snippet shows how the Splitter and Aggregator pattern is impl
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+ASF provides three options to terminate an execution. If the user wants a stop the workflow the below terminal states can be used:
+- <b>Succeeded</b>: Terminate Workflow execution with Succeeded status
+- <b>End</b>: Stop the workflow with the normal flow
+- <b>Fail</b>: Terminate Workflow execution with Failed status
 <br/>
+The below figure and code snippet presents an example how the Implicit Termination pattern is achieved by ASF.
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_event_document_message.png" alt="Implicit Termination">
 </div>
+<br/>
+<pre>
+  <code class="language-json">
+    {
+    "Comment": "Implicit Termination",
+    "StartAt": "State 1",
+    "States": {
+        "State 1": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+            "Payload": {
+            "Input.$": "$"
+            }
+        },
+        "Next": "ChoiceState"
+        },
+        "ChoiceState": {
+        "Type": "Choice",
+        "Choices": [
+            {
+            "Variable": "$.variable",
+            "BooleanEquals": true,
+            "Next": "SuccessState"
+            },
+            {
+            "Variable": "$.variable",
+            "BooleanEquals": false,
+            "Next": "OtherState"
+            }
+        ]
+        },
+        "SuccessState": {
+        "Type": "Succeed"
+        },
+        "OtherState": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+            "Payload": {
+            "Input.$": "$"
+            }
+        },
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+The Implicit Termination pattern in BPMN 2.0 is implemented using the End Event. The below figure illustrates how the End Event can stop the execution of the workflow. Here, the functions have been terminated in both branches, with the first branch ends after one function's execution, while the other branch has two.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_implicit_termination.png" alt="Implicit Termination">
 </div>
 </details>
 
@@ -1283,19 +1403,42 @@ Implicit termination pattern in ADF occurs when the Orchestration function reach
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+ASF can execute another ASF workflow by utilizing the state with Task type and its ARN identifier, shown by the below figure and code snippet. ASF additionally allows the user to pass a payload when executing another ASF workflow.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_nested_workflow.png" alt="Nested Workflow">
 </div>
+<br/>
+<pre>
+  <code class="language-json">
+    {
+    "Comment": "Nested Workflow",
+    "StartAt": "Start state machine execution",
+    "States": {
+        "Start state machine execution": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::states:startExecution",
+        "Parameters": {
+            "StateMachineArn": "arn:aws:states:REGION:ACCOUNT_ID:stateMachine:STATE_MACHINE_NAME",
+            "Input": {
+            "StatePayload": "Hello from Step Functions!",
+            "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$": "$$.Execution.Id"
+            }
+        },
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+Using BPMN 2.0 with Zeebe Modeler, a Nested workflow pattern is constructed using the SubProcess element. The below figure presents how another workflow that consist of "Function 2" can be invoked from the parent workflow.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_nested_workflow.png" alt="Nested Workflow">
 </div>
 </details>
 
@@ -1611,3 +1754,13 @@ Russell, N., Ter Hofstede, A.H., Edmond, D. and Van der Aalst, W.M., 2005, Octob
 <sup id="10"><a href="https://aws.amazon.com/secrets-manager" title="SecretManager">10. https://aws.amazon.com/secrets-manager</a></sup>
 
 <sup id="11"><a href="https://aws.amazon.com/s3" title="S3">11. https://aws.amazon.com/s3</a></sup>
+
+<sup id="12"><a href="https://aws.amazon.com/about-aws/whats-new/2020/09/aws-step-functions-increases-payload-size-to-256kb" title="Payload">12. https://aws.amazon.com/about-aws/whats-new/2020/09/aws-step-functions-increases-payload-size-to-256kb</a></sup>
+
+<sup id="13"><a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html" title="Params">13. https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html</a></sup>
+
+<sup id="14"><a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-paths.html" title="Path">14. https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-paths.html</a></sup>
+
+<sup id="15"><a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-outputpath.html" title="OuputPath">15. https://docs.aws.amazon.com/step-functions/latest/dg/input-output-outputpath.html</a></sup>
+
+<sup id="16"><a href="https://docs.camunda.io/docs/reference/feel/what-is-feel" title="S3">16. https://docs.camunda.io/docs/reference/feel/what-is-feel</a></sup>
