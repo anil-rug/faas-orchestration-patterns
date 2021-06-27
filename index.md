@@ -213,7 +213,7 @@ In ASF, Message Endpoint are linked to states with the "Task" type. The Task sta
 The Message Endpoint construct, which accepts the messages and processes the message, is mapped to the "Service Task" with Type = "lambda" (Based on the FaaS vendor provider). The below figure illustrates how this construct can be used in the BPMN 2.0 Zeebe modeler.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_message_endpoint.png" alt="Message Endpoint">
 </div>
 <br/>
 <pre>
@@ -276,19 +276,46 @@ The Message Endpoint construct, which receives the messages and processes the me
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+ASF externalize the Pipes and Filters pattern as represented in the below figure and code snippet by extracting the coordination from the filter implementations into a state machine that orchestrates the sequence of events.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_pipes_and_filters.png" alt="Pipes and Filters">
 </div>
+<br/>
+<pre>
+  <code class="language-json">
+    {
+    "Comment": "Pipes And Filter Pattern",
+    "StartAt": "State 1",
+    "States": {
+        "State 1": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME"
+        },
+        "Next": "State 2"
+        },
+        "State 2": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME"
+        },
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+The below figure shows how each Service task (filter) performs only one distinct operation, and the pipes that are the sequence/message flow coordinate the various tasks.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_pipes_and_filters.png" alt="Pipes and Filters">
 </div>
 </details>
 
@@ -341,19 +368,53 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+The depicted figure and code snippet shows how the Multicast pattern can be mapped to the Parallel state offered by ASF. Here the mandatory field while configuring this state is Branches. Branches support one to multiple possible paths, with each route consisting of one or many state transitions. In the Parallel state, each branch is provided with a copy of the input data. This pattern does not require the output of each branch to produce outputs that have a homogenous structure. However, for a data processing pipeline's simplicity and ease of operations, each branch should produce outputs complying with a uniform format.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_multicast.png" alt="Multicast">
 </div>
+<pre>
+  <code class="language-json">
+    {
+    "Comment": "Multicast Pattern",
+    "StartAt": "MulticastState",
+    "States": {
+        "MulticastState": {
+        "Type": "Parallel",
+        "Branches": [
+            {
+            "StartAt": "Function 1",
+            "States": {
+                "Function 1": {
+                "Type": "Pass",
+                "End": true
+                }
+            }
+            },
+            {
+            "StartAt": "Function 2",
+            "States": {
+                "Function 2": {
+                "Type": "Pass",
+                "End": true
+                }
+            }
+            }
+        ],
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+With the "Parallel Gateway", the "Multicast" pattern can be implemented using BPMN 2.0 Zeebe Modeler. The below figure shows how the same message is transferred to two functions parallelly.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_multicast.png" alt="Multicast">
 </div>
 </details>
 
@@ -409,19 +470,67 @@ The "Multicast" pattern is implemented in ADF by following the below code snippe
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+ASF offers a Choice state as shown in the below figure and code snippet which is equivalent to the Content-based Router. Here ASF allows users to parse the document message, and based on the defined rules, one or multiple paths are chosen. Additionally, if none of the criteria are met, the Choice state offers a Default path.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_content_based_router.png" alt="Content-based Router">
 </div>
+<br/>
+<pre>
+  <code class="language-json">
+    {
+    "Comment": "Content-based Router",
+    "StartAt": "ChoiceState",
+    "States": {
+        "ChoiceState": {
+        "Type": "Choice",
+        "Choices": [
+            {
+            "Variable": "$.variable",
+            "BooleanEquals": true,
+            "Next": "Choice 1"
+            },
+            {
+            "Variable": "$.variable",
+            "BooleanEquals": false,
+            "Next": "Choice 2"
+            }
+        ]
+        },
+        "Choice 1": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+            "Payload": {
+            "Input.$": "$"
+            }
+        },
+        "End": true
+        },
+        "Choice 2": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+            "Payload": {
+            "Input.$": "$"
+            }
+        },
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+"Exclusive Gateway" simulates the "Content-based Router" operations by controlling the message flow between the various branches. This gateway can also deliver the message to one or multiple branches based on the condition expression, as shown in the below figure.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_content_based_router.png" alt="Content-based Router">
 </div>
 </details>
 
@@ -477,19 +586,100 @@ With the below code snippet, a Content-based Router is realized in ADF by using 
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+ASF does not natively support the Loop construct. However, the Loop construct can be achieved by orchestrating multiple states. The below figure and code snippet represents the pattern assembled using the "While" loop logic.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_while_loop.png" alt="While Loop">
 </div>
+<br/>
+<pre>
+  <code class="language-json">
+    {
+    "Comment": "Loop",
+    "StartAt": "ChoiceState",
+    "States": {
+        "State 1": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+            "Payload": {
+            "Input.$": "$"
+            }
+        },
+        "Next": "ChoiceState"
+        },
+        "ChoiceState": {
+        "Type": "Choice",
+        "Choices": [
+            {
+            "Variable": "$.variable",
+            "BooleanEquals": true,
+            "Next": "CompletedState"
+            }
+        ],
+        "Default": "State 1"
+        },
+        "CompletedState": {
+        "Type": "Pass",
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
+<br/>
+
+While, the below figure and code snippet shows how the same Loop construct has been realized using a "Do-While" logic.
+<br/>
+<div>
+    <img src="./images/aws_mapping_do_while_loop.png" alt="Do-While Loop">
+</div>
+<br/>
+<pre>
+  <code class="language-json">
+    {
+    "Comment": "Loop",
+    "StartAt": "State 1",
+    "States": {
+        "State 1": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+            "Payload": {
+            "Input.$": "$"
+            }
+        },
+        "Next": "ChoiceState"
+        },
+        "ChoiceState": {
+        "Type": "Choice",
+        "Choices": [
+            {
+            "Variable": "$.variable",
+            "BooleanEquals": true,
+            "Next": "PassState"
+            }
+        ],
+        "Default": "State 1"
+        },
+        "PassState": {
+        "Type": "Pass",
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+Zeebe Modeler does not provide an out-of-the-box implementation to perform loops even if BPMN 2.0 has a loop task element. However, the below figure shows how the loop pattern can be implemented using a combination of "Service task", "Exclusive Gateway",  and sequence/message flow connector.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_loop.png" alt="Loop">
 </div>
 </details>
 
