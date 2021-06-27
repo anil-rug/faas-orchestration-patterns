@@ -715,7 +715,7 @@ In ADF, looping of the functions can be implemented using entry/exit controlled 
 
 ### **Delay**
 
-![Design Decision - Delay](images/Design_decisions_event_delay.png)
+![Design Decision - Delay](images/Design_decisions_delay.png)
 
 **Problem**: There are situations during a workflow execution when it needs to be paused or delayed to wait for a response/acknowledgment from an external system. How can the workflow incorporate a delay or wait?
 
@@ -1341,19 +1341,47 @@ In ADF, a nested workflow pattern is constructed when another durable orchestrat
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+ASF provides a means to suspend a workflow until a task token is returned. A task might need to wait for human approval, integrate with a third party, or call legacy systems that can pause ASF indefinitely and wait for an external process or workflow to complete. For these situations, ASF with Callback task as shown in the below figure and code snippet allows passing a task token to the target integrated services, and it will wait until the task token is returned.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_callback.png" alt="Callback">
 </div>
+<br/>
+<pre>
+  <code class="language-json">
+    {
+    "Comment": "Callback",
+    "StartAt": "Step 1",
+    "States": {
+        "Step 1": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke.waitForTaskToken",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+            "Payload": {
+            "Input.$": "$",
+            "TaskToken.$": "$$.Task.Token"
+            }
+        },
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
+
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+The below figures present two ways how the Callback pattern can be invoked. The former method shows how using variables, expression conditions, and Service tasks; the callback can be invoked. In the latter method, the User needs to perform the operation and manually accept the workflow's task to progress until the end.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_callback.png" alt="Callback">
+</div>
+<br/>
+<div>
+    <img src="./images/zeebe_mapping_user_callback.png" alt="User Callback">
 </div>
 </details>
 
@@ -1389,7 +1417,7 @@ The callback pattern can be implemented in ADF using <i>waitForExternalEvent</i>
 
 **Problem**: How can the system handle error exceptions that might occur in the workflow and manage them gracefully?
 
-**Decision**:  The _Error Handling_ pattern helps handle exceptions due to abnormal input or conditions and can retry the processing when needed.
+**Decision**: The _Error Handling_ pattern helps handle exceptions due to abnormal input or conditions and can retry the processing when needed.
 
 **Source**: [[Russell et al. 2006a]](#3)
 
@@ -1403,19 +1431,64 @@ The callback pattern can be implemented in ADF using <i>waitForExternalEvent</i>
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+The Error handling pattern is crucial for any system, and ASF provides the Error handling feature to handle various errors like state machine definition issues, task failures, and transient issues. Apart from handling errors, ASF offers the Catch and Retry fields that help reprocess the state in case of failures. The below figure and code snippet shows how ASF handles exceptions with a retry option.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_error_handling.png" alt="Error Handling">
 </div>
+<br/>
+<pre>
+  <code class="language-json">
+    {
+    "Comment": "Nested Workflow",
+    "StartAt": "Step 1",
+    "States": {
+        "Step 1": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+            "Payload": {
+            "Input.$": "$"
+            }
+        },
+        "Catch": [
+            {
+            "ErrorEquals": [
+                "States.TaskFailed"
+            ],
+            "Next": "NotifyError"
+            }
+        ],
+        "Retry": [
+            {
+            "ErrorEquals": [
+                "States.Timeout"
+            ],
+            "IntervalSeconds": 3,
+            "MaxAttempts": 2,
+            "BackoffRate": 1.5
+            }
+        ],
+        "End": true
+        },
+        "NotifyError": {
+        "Type": "Fail",
+        "Cause": "Invalid response.",
+        "Error": "ErrorA"
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+The below figure presents how error handling can be implemented using Zeebe. Here the Error boundary event is placed on the Service task, and in case an error happens in the function, the error handling function is triggered. Furthermore, Service tasks have a retries feature that will reinvoke the task in case of a failure.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_error_handling.png" alt="Error Handling">
 </div>
 </details>
 
@@ -1470,20 +1543,12 @@ Error handling<sup><a href="#8" id="8">8</a></sup> in ADF is implemented using t
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
-<br/>
-<div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+AWS Lambda Layers<sup><a href="#9" id="9">9</a></sup> help keep the deployment package granular and making development more manageable, which can help avoid errors when installing package dependencies. Here all the utility functions like accessing AWS Secret Manager<sup><a href="#10" id="10">10</a></sup>, AWS S3<sup><a href="#11" id="11">11</a></sup> operations, and accessing external services can be deployed on the layer, and attaching this layer to the Lambdas offer all the functionalities.
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
-<br/>
-<div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+The Workflow Data pattern is function-specific, and the pattern mapping is equivalent to AWS Step Functions.
 </details>
 
 <details>
@@ -1491,7 +1556,10 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 The Workflow Data pattern is function-specific, and sharing utilities, libraries, and helper code can be done by placing all these compiled files in a folder at the root level of the functions.
 <br/>
 <div>
-    <img src="./images/azure_mapping_workflow_data.png" alt="Workflow Data">
+    <img src="./images/azure_mapping_workflow_data.png" alt="Workflow Data" style="
+    height: 200px;
+    width: 150px;
+">
 </div>
 </details>
 
@@ -1518,13 +1586,13 @@ van Der Aalst, W.M., Ter Hofstede, A.H., Kiepuszewski, B. and Barros, A.P., 2003
 <a id="5">[Russell et al. 2005]</a>
 Russell, N., Ter Hofstede, A.H., Edmond, D. and Van der Aalst, W.M., 2005, October. Workflow data patterns: Identification, representation and tool support. In International Conference on Conceptual Modeling (pp. 353-368). Springer, Berlin, Heidelberg.
 
-
 ***
+
 <sup id="1"><a href="https://aws.amazon.com/api-gateway" title="AWS API Gateway">1. https://aws.amazon.com/api-gateway</a></sup>
 
 <sup id="2"><a href="https://en.wikipedia.org/wiki/MapReduce" title="MapReduce">2. https://en.wikipedia.org/wiki/MapReduce</a></sup>
 
-<sup id="20"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=javascript" title="Timers">20. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=javascript</a></sup>
+<sup id="20"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=javascript" title="Sequence">20. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=javascript</a></sup>
 
 <sup id="3"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-timers?tabs=javascript" title="Timers">3. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-timers?tabs=javascript</a></sup>
 
@@ -1537,3 +1605,9 @@ Russell, N., Ter Hofstede, A.H., Edmond, D. and Van der Aalst, W.M., 2005, Octob
 <sup id="7"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-external-events?tabs=javascript" title="CallBack">7. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-external-events?tabs=javascript</a></sup>
 
 <sup id="8"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-error-handling?tabs=javascript" title="ErrorHandling">8. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-error-handling?tabs=javascript</a></sup>
+
+<sup id="9"><a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers" title="Layers">9. https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers</a></sup>
+
+<sup id="10"><a href="https://aws.amazon.com/secrets-manager" title="SecretManager">10. https://aws.amazon.com/secrets-manager</a></sup>
+
+<sup id="11"><a href="https://aws.amazon.com/s3" title="S3">11. https://aws.amazon.com/s3</a></sup>
