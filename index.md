@@ -733,19 +733,46 @@ In ADF, looping of the functions can be implemented using entry/exit controlled 
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+The Delay construct can be mapped to the ASF Wait state as shown by the below figure and code snippet. ASF offers the option to delay/pause the ASF execution using seconds or with a relative date-time value. The Delay pattern is ideal when using ASF Standard execution. Although ASF Express offers a Wait state, the users need to be aware that the whole state execution for express workflow is capped at 5 minutes. Hence, making the Wait state an anti-pattern when implemented for Express workflow.
 <br/>
 <div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/aws_mapping_delay.png" alt="Delay">
 </div>
+<br/>
+<pre>
+  <code class="language-json">
+    {
+    "Comment": "Wait",
+    "StartAt": "State 1",
+    "States": {
+        "State 1": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::lambda:invoke",
+        "Parameters": {
+            "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+            "Payload": {
+            "Input.$": "$"
+            }
+        },
+        "Next": "WaitState"
+        },
+        "WaitState": {
+        "Type": "Wait",
+        "Seconds": 10,
+        "End": true
+        }
+    }
+    }
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+ The below figure depicts how the BPMN 2.0 "Timer" event is used to achieve the "Delay" pattern.
 <br/>
 <div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/zeebe_mapping_delay.png" alt="Delay">
 </div>
 </details>
 
@@ -800,25 +827,35 @@ ADF provides durable timers<sup><a href="#3" id="3">3</a></sup> for orchestrator
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+The Messaging Gateway is a function-specific design pattern. In ASF, this pattern is accomplished by encapsulating input/output messaging-specific method calls as a separate package in AWS Lambda, shown in the below code snippet. This pattern enables the developers to focus on the business logic present in AWS Lambda without worrying about handling the input/output of data.
 <br/>
-<div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    // Import Gateway Logic
+    const lambdaGateway = require("/opt/utility/lambda_gateway.js");
+
+    exports.lambdaHandler = async (event, context, callback) => {
+    // Input Gateway logic
+    const event = lambdaGateway.inputGateway(event, context);
+
+    // Start : Business logic
+    // End : Business logic
+
+    // Output Gateway logic
+    lambdaGateway.outputGateway(JSON.stringify(event), callback);
+    };
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
-<br/>
-<div>
-    <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+The Gateway pattern is function-specific, and the pattern mapping is equivalent to the pattern defined for AWS Step Functions.
 </details>
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
- The Gateway pattern is function-specific, and the pattern mapping is equivalent to Section~\ref{subsubsection:aws_gateway}.
+ The Gateway pattern is function-specific, and the pattern mapping is equivalent to the pattern defined for AWS Step Functions.
 </details>
 
 <br />
