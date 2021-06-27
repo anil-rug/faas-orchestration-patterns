@@ -170,7 +170,7 @@ In ADF, the Event message construct invokes the orchestration function, and the 
 
 ### **Message Endpoint**
 
-![Design Decision - Message Endpoint](images/Design_decisions_event_document_message.png)
+![Design Decision - Message Endpoint](images/Design_decisions_message_endpoint.png)
 
 **Problem**: How are various functions in a serverless workflow connected?
 
@@ -223,7 +223,7 @@ The Message Endpoint construct, which receives the messages and processes the me
 
 ### **Pipes and Filters**
 
-![Design Decision - Pipes and Filters](images/Design_decisions_event_document_message.png)
+![Design Decision - Pipes and Filters](images/Design_decisions_pipes_and_filters.png)
 
 **Problem**: How to decompose a task that performs complex processing into a series of separate elements that can be reused?
 
@@ -288,7 +288,7 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 ### **Multicast**
 
-![Design Decision - Multicast](images/Design_decisions_event_document_message.png)
+![Design Decision - Multicast](images/Design_decisions_multicast.png)
 
 **Problem**: How will the serverless workflow route the same message to several endpoints and process them differently?
 
@@ -356,7 +356,7 @@ The "Multicast" pattern is implemented in ADF by following the below code snippe
 
 ### **Content-based Router**
 
-![Design Decision - Content-based Router](images/Design_decisions_event_document_message.png)
+![Design Decision - Content-based Router](images/Design_decisions_content_based_router.png)
 
 **Problem**: Functions must be orchestrated to adhere to a process flow to generate an error-free/desired output. How can the messages be routed to the correct workflow execution path within the workflow based on the message content?
 
@@ -424,7 +424,7 @@ With the below code snippet, a Content-based Router is realized in ADF by using 
 
 ### **Loop**
 
-![Design Decision - Loop](images/Design_decisions_event_document_message.png)
+![Design Decision - Loop](images/Design_decisions_loop.png)
 
 **Problem**: In a serverless workflow, certain functions have to be executed multiple times to produce the desired outcome. How can the workflow orchestrate a function to be reused when it needs to be triggered recursively?
 
@@ -490,7 +490,7 @@ In ADF, looping of the functions can be implemented using entry/exit controlled 
 
 ### **Delay**
 
-![Design Decision - Delay](images/Design_decisions_event_document_message.png)
+![Design Decision - Delay](images/Design_decisions_event_delay.png)
 
 **Problem**: There are situations during a workflow execution when it needs to be paused or delayed to wait for a response/acknowledgment from an external system. How can the workflow incorporate a delay or wait?
 
@@ -557,7 +557,7 @@ ADF provides durable timers<sup><a href="#3" id="3">3</a></sup> for orchestrator
 
 ### **Gateway**
 
-![Design Decision - Gateway](images/Design_decisions_event_document_message.png)
+![Design Decision - Gateway](images/Design_decisions_gateway.png)
 
 **Problem**: Business and operational/implementation logic must be as decoupled as possible to allow core business logic to remain simple?
 
@@ -604,7 +604,7 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 ### **Content Filter**
 
-![Design Decision - Content Filter](images/Design_decisions_event_document_message.png)
+![Design Decision - Content Filter](images/Design_decisions_content_filter.png)
 
 **Problem**: How can the workflow simplify dealing with large messages and transmit only the essential data to the required functions?
 
@@ -667,7 +667,7 @@ The Content Filter pattern is function-specific, and the pattern mapping is equi
 
 ### **Content Enricher**
 
-![Design Decision - Content Enricher](images/Design_decisions_event_document_message.png)
+![Design Decision - Content Enricher](images/Design_decisions_content_enricher.png)
 
 **Problem**: How can the workflow fetch additional data required by the functions to process the message?
 
@@ -731,7 +731,7 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 ### **Claim Check**
 
-![Design Decision - Claim Check](images/Design_decisions_event_document_message.png)
+![Design Decision - Claim Check](images/Design_decisions_claim_check.png)
 
 **Problem**: Functions that pass large payloads of data within the workflow can be terminated due to size limitations. How will the communication between functions be handled when large messages need to be passed within the workflow?
 
@@ -778,7 +778,7 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 ### **Normalizer**
 
-![Design Decision - Normalizer](images/Design_decisions_event_document_message.png)
+![Design Decision - Normalizer](images/Design_decisions_normalizer.png)
 
 **Problem**: How can the output from each terminal function in the workflow branches be normalized, which otherwise would require having an additional normalization function?
 
@@ -825,7 +825,7 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 ### **Message History**
 
-![Design Decision - Message History](images/Design_decisions_event_document_message.png)
+![Design Decision - Message History](images/Design_decisions_message_history.png)
 
 **Problem**: How can we effectively analyze and debug the flow of messages in a loosely coupled and granular system?
 
@@ -876,7 +876,7 @@ The Message History of the Azure Durable Orchestration function is maintained us
 
 ### **Splitter and Aggregator**
 
-![Design Decision - Splitter and Aggregator](images/Design_decisions_event_document_message.png)
+![Design Decision - Splitter and Aggregator](images/Design_decisions_splitter_and_aggregator.png)
 
 **Problem**: How can the serverless workflow process multiple homogeneous records concurrently that are part of a single payload?
 
@@ -945,7 +945,7 @@ The presented code snippet shows how the Splitter and Aggregator pattern is impl
 
 ### **Implicit termination**
 
-![Design Decision - Implicit termination](images/Design_decisions_event_document_message.png)
+![Design Decision - Implicit termination](images/Design_decisions_implicit_termination.png)
 
 **Problem**: How to terminate the workflow when no execution steps are remaining?
 
@@ -1003,7 +1003,7 @@ Implicit termination pattern in ADF occurs when the Orchestration function reach
 
 ### **Nested Workflows**
 
-![Design Decision - Nested Workflows](images/Design_decisions_event_document_message.png)
+![Design Decision - Nested Workflows](images/Design_decisions_nested_workflows.png)
 
 **Problem**: If some tasks are alike, how do we abstract and represent them as a hierarchical and reusable model?
 
@@ -1061,7 +1061,7 @@ In ADF, a nested workflow pattern is constructed when another durable orchestrat
 
 ### **Callback**
 
-![Design Decision - Callback](images/Design_decisions_event_document_message.png)
+![Design Decision - Callback](images/Design_decisions_callback.png)
 
 **Problem**: How can the serverless workflow handle external invocations from a service or a human-performed activity?
 
@@ -1123,7 +1123,7 @@ The callback pattern can be implemented in ADF using <i>waitForExternalEvent</i>
 
 ### **Error Handling**
 
-![Design Decision - Error Handling](images/Design_decisions_event_document_message.png)
+![Design Decision - Error Handling](images/Design_decisions_error_handling.png)
 
 **Problem**: How can the system handle error exceptions that might occur in the workflow and manage them gracefully?
 
@@ -1186,7 +1186,7 @@ Error handling<sup><a href="#8" id="8">8</a></sup> in ADF is implemented using t
 
 ### **Workflow Data**
 
-![Design Decision - Workflow Data](images/Design_decisions_event_document_message.png)
+![Design Decision - Workflow Data](images/Design_decisions_workflow_data.png)
 
 **Problem**:
 
