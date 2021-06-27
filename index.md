@@ -217,24 +217,24 @@ The Message Endpoint construct, which accepts the messages and processes the mes
 </div>
 <br/>
 <pre>
-  <code>
-    <?xml version="1.0" encoding="UTF-8"?>
-    <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="Definitions_0dmi4p0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.11.0">
-    <bpmn:process id="Zeebe_Process" name="Zeebe Model" isExecutable="true">
-        <bpmn:serviceTask id="ServiceTask_Lambda" name="Service Task">
-        <bpmn:extensionElements>
-            <zeebe:taskDefinition type="lambda" />
-        </bpmn:extensionElements>
-        </bpmn:serviceTask>
-    </bpmn:process>
-    <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-        <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Zeebe_Process">
-        <bpmndi:BPMNShape id="Activity_079frpn_di" bpmnElement="ServiceTask_Lambda">
-            <dc:Bounds x="160" y="80" width="100" height="80" />
-        </bpmndi:BPMNShape>
-        </bpmndi:BPMNPlane>
-    </bpmndi:BPMNDiagram>
-    </bpmn:definitions>
+  <code class="language-xml">
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+    &lt;bpmn:definitions xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:bpmndi=&quot;http://www.omg.org/spec/BPMN/20100524/DI&quot; xmlns:dc=&quot;http://www.omg.org/spec/DD/20100524/DC&quot; xmlns:zeebe=&quot;http://camunda.org/schema/zeebe/1.0&quot; id=&quot;Definitions_0dmi4p0&quot; targetNamespace=&quot;http://bpmn.io/schema/bpmn&quot; exporter=&quot;Zeebe Modeler&quot; exporterVersion=&quot;0.11.0&quot;&gt;
+    &lt;bpmn:process id=&quot;Zeebe_Process&quot; name=&quot;Zeebe Model&quot; isExecutable=&quot;true&quot;&gt;
+        &lt;bpmn:serviceTask id=&quot;ServiceTask_Lambda&quot; name=&quot;Service Task&quot;&gt;
+        &lt;bpmn:extensionElements&gt;
+            &lt;zeebe:taskDefinition type=&quot;lambda&quot; /&gt;
+        &lt;/bpmn:extensionElements&gt;
+        &lt;/bpmn:serviceTask&gt;
+    &lt;/bpmn:process&gt;
+    &lt;bpmndi:BPMNDiagram id=&quot;BPMNDiagram_1&quot;&gt;
+        &lt;bpmndi:BPMNPlane id=&quot;BPMNPlane_1&quot; bpmnElement=&quot;Zeebe_Process&quot;&gt;
+        &lt;bpmndi:BPMNShape id=&quot;Activity_079frpn_di&quot; bpmnElement=&quot;ServiceTask_Lambda&quot;&gt;
+            &lt;dc:Bounds x=&quot;160&quot; y=&quot;80&quot; width=&quot;100&quot; height=&quot;80&quot; /&gt;
+        &lt;/bpmndi:BPMNShape&gt;
+        &lt;/bpmndi:BPMNPlane&gt;
+    &lt;/bpmndi:BPMNDiagram&gt;
+    &lt;/bpmn:definitions&gt;
   </code>
 </pre>
 </details>
