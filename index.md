@@ -155,7 +155,7 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions, as depicted by the figure.
 <br/>
 <div>
     <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
@@ -206,11 +206,13 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+The Message Endpoint construct, which receives the messages and processes the message, is realized by the Activity Function. The functions must be idempotent as it follows the at-least-once execution strategy. The below code snippet illustrates how this construct can be used in ADF.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const function = yield context.df.callActivity("Activity Function", "Payload")
+  </code>
+</pre>
 </details>
 
 <br />
@@ -257,11 +259,25 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+"Pipes and Filters" play an essential aspect in standardizing a workflow execution and this is referred to as Function Chaining pattern<sup><a href="#20" id="20">20</a></sup> in ADF. The below code snippet shows how each Activity Function (filter) performs only one distinct operation and the pipes that are the JSON message that coordinate the various functions.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    import * as df from "durable-functions"
+
+    module.exports = df.orchestrator(function* (context) {
+        try {
+            const function1Result = yield context.df.callActivity("function1", context.df.getInput())
+            const function2Result = yield context.df.callActivity("function2", function1Result)
+            const function3Result = yield context.df.callActivity("function3", function2Result)
+            return function3Result;
+        }
+        catch (error) {
+            console.error(error)
+        }
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -308,11 +324,28 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+The "Multicast" pattern is implemented in ADF by following the below code snippet. In this implementation, the same data is sent to multiple Activity Functions and executed simultaneously.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const df = require("durable-functions");
+
+    module.exports = df.orchestrator(function* (context) {
+        const parallelTasks = [];
+
+        // Get input
+        const data = context.df.getInput()
+
+        // Perform parallel processing
+        parallelTasks.push(context.df.callActivity("function1", data));
+        parallelTasks.push(context.df.callActivity("function2", data));
+
+        const arrayParallelTasksResult = yield context.df.Task.all(parallelTasks);
+
+        return arrayParallelTasksResult
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -359,11 +392,28 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+With the below code snippet, a Content-based Router is realized in ADF by using conditionals to control the orchestration flow.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const df = require("durable-functions");
+
+    module.exports = df.orchestrator(function* (context) {
+        var result
+        // Get input
+        const data = context.df.getInput()
+
+        // Perform parallel processing
+        if (data.isFunction1) {
+            result = yield context.df.callActivity("function1", data)
+        } else {
+            result = yield context.df.callActivity("function2", data)
+        }
+
+        return result
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -410,11 +460,26 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+In ADF, looping of the functions can be implemented using entry/exit controlled loops. The below code snippet shows how Loop pattern is implemented using a <i>While</i> loop. 
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const df = require("durable-functions");
+
+    module.exports = df.orchestrator(function* (context) {
+        var result
+        // Get input
+        const data = context.df.getInput()
+
+        // Loop till condition is false
+        while (data.loopCondition) {
+            result = yield context.df.callActivity("function1", data)
+        }
+
+        return result
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -461,11 +526,27 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+ADF provides durable timers<sup><a href="#3" id="3">3</a></sup> for orchestrator functions to implement delays or set up timeouts on async actions. The below code snippet depicts how the "Delay" pattern is used in ADF.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const df = require("durable-functions");
+    const moment = require("moment");
+
+    module.exports = df.orchestrator(function* (context) {
+
+        const function1Result = yield context.df.callActivity("function1", context.df.getInput())
+
+        // Perform delay operation
+        const delay = moment.utc(context.df.currentUtcDateTime).add(30, "s");
+        yield context.df.createTimer(delay.toDate())
+
+        const function2Result = yield context.df.callActivity("function2", function1Result)
+
+        return function2Result
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -512,11 +593,7 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
-<br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+ The Gateway pattern is function-specific, and the pattern mapping is equivalent to Section~\ref{subsubsection:aws_gateway}.
 </details>
 
 <br />
@@ -563,11 +640,23 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+The Content Filter pattern is function-specific, and the pattern mapping is equivalent to code snippet presented in Section~\ref{subsubsection:aws_content_filter}. This pattern can also be realized in the Orchestration function using the below code snippet by filtering data before sending it as a payload to the subsequent function call.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const df = require("durable-functions");
+    const utils = require("../utility/utils.js");
+
+    module.exports = df.orchestrator(function* (context) {
+        var function1Result = yield context.df.callActivity("function1", context.df.getInput())
+        // Start : Filter result
+        function1Result = utils.removeField(function1Result,'parameter1')
+        // End : Filter result
+        const function2Result = yield context.df.callActivity("function2", function1Result)
+        return function2Result
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -614,11 +703,24 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+ The Content Enricher pattern is function-specific, and the pattern mapping is equivalent to Section~\ref{subsubsection:aws_content_filter}. The pattern can also be performed in the orchestration function by following the below template. The below code snippet shows how a function's result enriches another function and then is used as a payload to another activity function.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const df = require("durable-functions");
+    const utils = require("../utility/utils.js");
+
+    module.exports = df.orchestrator(function* (context) {
+        var function1Result = yield context.df.callActivity("function1", context.df.getInput())
+        var function2Result = yield context.df.callActivity("function2", context.df.getInput())
+        // Start : Enrich result
+        function1Result = utils.addNewField(function1Result, function2Result)
+        // End : Enrich result
+        const function3Result = yield context.df.callActivity("function3", function1Result)
+        return function3Result
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -665,11 +767,7 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
-<br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+ The Claim Check pattern internally uses the Content Filter and Enricher pattern. Hence, the mapping is similar to AWS Step Functions.
 </details>
 
 <br />
@@ -716,11 +814,7 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
-<br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+
 </details>
 
 <br />
@@ -767,10 +861,10 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+The Message History of the Azure Durable Orchestration function is maintained using the execution history table<sup><a href="#4" id="4">4</a></sup> as shown in the below figure. When <i>yield</i> is invoked the Activity function result is stored in the History Table. In a Azure Durable Orchestration function execution, the Activity Functions have an at-least-once policy making the History Table crucial to check if the function has been executed or not. The History Table provides the input and result for each function.
 <br/>
 <div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
+    <img src="./images/adf_mapping_message_history.png" alt="Message History">
 </div>
 </details>
 
@@ -818,11 +912,29 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+The presented code snippet shows how the Splitter and Aggregator pattern is implemented using ADF and is also referred to as Fan-out/Fan-in pattern<sup><a href="#5" id="5">5</a></sup>. Similar to Multicast, in this pattern, the data is processed using a parallel construct. In ADF, the Splitter and Aggregator pattern is implemented by first splitting the data into batches, and then each batch is processed using the same function parallelly. The result of each branch is aggregated using another Activity Function.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const df = require("durable-functions");
+
+    module.exports = df.orchestrator(function* (context) {
+        const mapTasks = [];
+
+        // Get a list of batches to process in parallel
+        const batch = yield context.df.callActivity("function1");
+
+        // Perform parallel processing of the batches (Map)
+        for (let i = 0; i < batch.length; i++) {
+            mapTasks.push(context.df.callActivity("function2", batch[i]));
+        }
+        const arrayParallelTasksResult = yield context.df.Task.all(mapTasks);
+
+        // Aggregate the results (Reduce)
+        yield context.df.callActivity("function3", arrayParallelTasksResult);
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -869,11 +981,18 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+Implicit termination pattern in ADF occurs when the Orchestration function reaches the last execution statement or when a "return" statement is reached. The below code snippet depicts when the return statement is reached, the ADF orchestration function is terminated.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const df = require("durable-functions");
+
+    module.exports = df.orchestrator(function* (context) {
+        const function1Result = yield context.df.callActivity("function1", context.df.getInput())
+        return function1Result
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -920,11 +1039,18 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+In ADF, a nested workflow pattern is constructed when another durable orchestration function is invoked from the parent orchestration function. The below code snippet shows how the sub orchestration function can be triggered using the <i>callSubOrchestrator</i><sup><a href="#6" id="6">6</a></sup> function call.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const df = require("durable-functions");
+
+    module.exports = df.orchestrator(function* (context) {
+        const result = context.df.callSubOrchestrator("subOrchestration", context.df.getInput())
+        return result
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -971,11 +1097,22 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+The callback pattern can be implemented in ADF using <i>waitForExternalEvent</i><sup><a href="#7" id="7">7</a></sup>, allowing an orchestrator to wait and listen for an external event asynchronously. The below code snippet presents how the pattern is implemented using ADF.
 <br/>
-<div>
-    <img src="./images/adf_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-javascript">
+    const df = require("durable-functions");
+
+    module.exports = df.orchestrator(function* (context) {
+        const token = yield context.df.waitForExternalEvent("externalFunction");
+        if (token) {
+            // token received from external and continue processing
+        } else {
+            // token failed
+        }
+    });
+  </code>
+</pre>
 </details>
 
 <br />
@@ -1022,11 +1159,10 @@ In Zeebe, the Event and Document message constructs invoke the workflow and hand
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions.
+Error handling<sup><a href="#8" id="8">8</a></sup> in ADF is implemented using the programming language's built-in error-handling features (try-catch), as shown in the code snippet. Exceptions thrown in an Activity Function are directed back to the orchestrator function and thrown as a <i>FunctionFailedException</i>.
 <br/>
 <pre>
   <code class="language-javascript">
-
     const df = require("durable-functions");
 
     module.exports = df.orchestrator(function* (context) {
@@ -1125,3 +1261,17 @@ Russell, N., Ter Hofstede, A.H., Edmond, D. and Van der Aalst, W.M., 2005, Octob
 <sup id="1"><a href="https://aws.amazon.com/api-gateway" title="AWS API Gateway">1. https://aws.amazon.com/api-gateway</a></sup>
 
 <sup id="2"><a href="https://en.wikipedia.org/wiki/MapReduce" title="MapReduce">2. https://en.wikipedia.org/wiki/MapReduce</a></sup>
+
+<sup id="20"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=javascript" title="Timers">20. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=javascript</a></sup>
+
+<sup id="3"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-timers?tabs=javascript" title="Timers">3. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-timers?tabs=javascript</a></sup>
+
+<sup id="4"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-orchestrations?tabs=javascript\#orchestration-history" title="MessageHistory">4. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-orchestrations?tabs=javascript\#orchestration-history</a></sup>
+
+<sup id="5"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview?tabs=javascript\#fan-in-out" title="FanInOut">5. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview?tabs=javascript\#fan-in-out</a></sup>
+
+<sup id="6"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sub-orchestrations?tabs=javascript" title="NestedWorkflow">6. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sub-orchestrations?tabs=javascript</a></sup>
+
+<sup id="7"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-external-events?tabs=javascript" title="CallBack">7. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-external-events?tabs=javascript</a></sup>
+
+<sup id="8"><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-error-handling?tabs=javascript" title="ErrorHandling">8. https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-error-handling?tabs=javascript</a></sup>
