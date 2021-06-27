@@ -217,7 +217,7 @@ The Message Endpoint construct, which accepts the messages and processes the mes
 </div>
 <br/>
 <pre>
-  <code class="language-xml">
+  <code>
     <?xml version="1.0" encoding="UTF-8"?>
     <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="Definitions_0dmi4p0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.11.0">
     <bpmn:process id="Zeebe_Process" name="Zeebe Model" isExecutable="true">
