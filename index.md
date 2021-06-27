@@ -188,20 +188,55 @@ In ADF, the Event message construct invokes the orchestration function, and the 
 
 <details>
 <summary><b>AWS Step Functions</b></summary>
-ASF can be triggered using an event message via the API Gateway<sup><a href="#1" id="1">1</a></sup>. The various states in ASF are traversed using a document message that is a JSON structured message.
+In ASF, Message Endpoint are linked to states with the "Task" type. The Task state has the following required fields:<br/>
+- Resource: ARN that uniquely identifies the specific AWS Lambda to execute.
 <br/>
-<div>
-    <img src="./images/aws_mapping_event_document_message.png" alt="Event Document Message">
-</div>
+<pre>
+  <code class="language-json">
+    "State": {
+    "Type": "Task",
+    "Resource": "arn:aws:states:::lambda:invoke",
+    "Parameters": {
+        "FunctionName": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+        "Payload": {
+        "Input.$": "$"
+        }
+    },
+    "Next": "NEXT_STATE"
+    }
+  </code>
+</pre>
 </details>
 
 <details>
 <summary><b>Zeebe</b></summary>
-In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+The Message Endpoint construct, which accepts the messages and processes the message, is mapped to the "Service Task" with Type = "lambda" (Based on the FaaS vendor provider). The below figure illustrates how this construct can be used in the BPMN 2.0 Zeebe modeler.
 <br/>
 <div>
     <img src="./images/zeebe_mapping_event_document_message.png" alt="Event Document Message">
 </div>
+<br/>
+<pre>
+  <code class="language-xml">
+    <?xml version="1.0" encoding="UTF-8"?>
+    <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="Definitions_0dmi4p0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.11.0">
+    <bpmn:process id="Zeebe_Process" name="Zeebe Model" isExecutable="true">
+        <bpmn:serviceTask id="ServiceTask_Lambda" name="Service Task">
+        <bpmn:extensionElements>
+            <zeebe:taskDefinition type="lambda" />
+        </bpmn:extensionElements>
+        </bpmn:serviceTask>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+        <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Zeebe_Process">
+        <bpmndi:BPMNShape id="Activity_079frpn_di" bpmnElement="ServiceTask_Lambda">
+            <dc:Bounds x="160" y="80" width="100" height="80" />
+        </bpmndi:BPMNShape>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+    </bpmn:definitions>
+  </code>
+</pre>
 </details>
 
 <details>
