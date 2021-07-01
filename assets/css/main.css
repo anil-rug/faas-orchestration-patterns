@@ -331,7 +331,7 @@ header figure span {
   overflow-y: scroll;
   top: 0;
   bottom: 0;
-  display:block;
+  /* display:block; */
   /* top: 50%; */
   /* transform: translateY(-50%); */
 }
