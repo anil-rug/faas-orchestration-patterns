@@ -813,7 +813,7 @@ ADF provides durable timers<sup><a href="#3" id="3">3</a></sup> for orchestrator
 
 **Problem**: Business and operational/implementation logic must be as decoupled as possible to allow core business logic to remain simple?
 
-**Decision**:  The ingestion and output logic need to be encapsulated in separate functions with the help of _Message Gateway_ pattern and this pattern also helps in dividing messaging-specific implementation from the business logic code.
+**Decision**: The ingestion and output logic need to be encapsulated in separate functions with the help of _Message Gateway_ pattern and this pattern also helps in dividing messaging-specific implementation from the business logic code.
 
 **Source**: [[Hohpe and Woolf 2004]](#1)
 
@@ -923,7 +923,7 @@ The Content Filter pattern is function-specific, and the pattern mapping is equi
 
 <details>
 <summary><b>Azure Durable Functions</b></summary>
-The Content Filter pattern is function-specific, and the pattern mapping is equivalent to code snippet presented in Section~\ref{subsubsection:aws_content_filter}. This pattern can also be realized in the Orchestration function using the below code snippet by filtering data before sending it as a payload to the subsequent function call.
+The Content Filter pattern is function-specific, and the pattern mapping is equivalent to code snippet presented for ASF. This pattern can also be realized in the Orchestration function using the below code snippet by filtering data before sending it as a payload to the subsequent function call.
 <br/>
 <pre>
   <code class="language-javascript">

@@ -923,7 +923,7 @@ module.exports = df.orchestrator(function* (context) {
  <br/>
  <figure>
   <img
-     src="./images/imagesaws_mapping_while_loop.png"
+     src="./images/aws_mapping_while_loop.png"
      alt="While Loop"
      />
   <figcaption>While Loop</figcaption>
@@ -1033,7 +1033,7 @@ module.exports = df.orchestrator(function* (context) {
     Zeebe Modeler does not provide an out-of-the-box implementation to perform loops even if BPMN 2.0 has a loop task element. However, the below figure shows how the loop pattern can be implemented using a combination of "Service task", "Exclusive Gateway",  and sequence/message flow connector.
   <figure>
      <img
-        src="./images/zeebe_mapping_loop.pn"
+        src="./images/zeebe_mapping_loop.png"
         alt="Loop"
         />
      <figcaption>Loop</figcaption>
@@ -1074,6 +1074,502 @@ module.exports = df.orchestrator(function* (context) {
       </div>
   <br/>
     </div>
+</details>
+</p>
+</p>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<h2 id="delay">8. Delay</h2>
+<p>
+  <figure>
+     <img
+        src="./images/Design_decisions_delay.png"
+        alt="Delay"
+        />
+     <figcaption>Delay</figcaption>
+  </figure>
+<h3>Problem</h3>
+<p> There are situations during a workflow execution when it needs to be paused or delayed to wait for a response/acknowledgment from an external system. How can the workflow incorporate a delay or wait?
+</p>
+<br/>
+<h3>Decision</h3>
+<p> The <i>Delay</i> pattern helps in waiting or delaying a function from executing. The delay/wait can be configured by setting a time/period.
+</p>
+<br/>
+<h3>Source</h3>
+<p> [<a
+  href="#Ibsen_and_Anstey_2010"
+  class="reference"
+  >Ibsen and Anstey 2010</a
+  >]</p>
+<br/>
+<h3>Pattern</h3>
+<p> Enterprise Integration Pattern</p>
+<br/>
+<h3>Type</h3>
+<p> Control Flow</p>
+<br/>
+<h3>Synonyms</h3>
+<p></p>
+<br/>
+<h3>Mapping</h3>
+<p>
+<details>
+  <summary>
+     <h4>AWS Step Functions</h4>
+  </summary>
+  <div>
+  The <i>Delay</i> construct can be mapped to the ASF Wait state as shown by the below figure and code snippet. ASF offers the option to delay/pause the ASF execution using seconds or with a relative date-time value. The Delay pattern is ideal when using ASF Standard execution. Although ASF Express offers a Wait state, the users need to be aware that the whole state execution for express workflow is capped at 5 minutes. Hence, making the Wait state an anti-pattern when implemented for Express workflow.
+ <br/>
+ <figure>
+  <img
+     src="./images/aws_mapping_delay.png"
+     alt="Delay"
+     />
+  <figcaption>Delay</figcaption>
+</figure>
+ <div>
+   <br/>
+   <b>ASF code snippet</b>:
+   <br/>
+   <div class="flex">
+      <pre>
+ <code class="language-json">
+{
+  "Comment":"Wait",
+  "StartAt":"State 1",
+  "States":{
+     "State 1":{
+        "Type":"Task",
+        "Resource":"arn:aws:states:::lambda:invoke",
+        "Parameters":{
+           "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+           "Payload":{
+              "Input.$":"$"
+           }
+        },
+        "Next":"WaitState"
+     },
+     "WaitState":{
+        "Type":"Wait",
+        "Seconds":10,
+        "End":true
+     }
+  }
+}
+ </code>
+</pre>
+   </div>
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Zeebe</h4>
+  </summary>
+  <div>
+    The below figure depicts how the BPMN 2.0 "Timer" event is used to achieve the <i>Delay</i> pattern.
+  <figure>
+     <img
+        src="./images/zeebe_mapping_delay.png"
+        alt="Delay"
+        />
+     <figcaption>Delay</figcaption>
+  </figure>
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Azure Durable Functions</h4>
+  </summary>
+  <div>
+  ADF provides <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-timers?tabs=javascript" class="reference">durable timers</a> for orchestrator functions to implement delays or set up timeouts on async actions. The below code snippet depicts how the <i>Delay</i> pattern is used in ADF.
+    <div>
+      <br/>
+      <b>ADF code snippet</b>:
+      <br/>
+      <div class="flex">
+         <pre>
+    <code class="language-javascript">
+const df = require("durable-functions");
+const moment = require("moment");
+
+module.exports = df.orchestrator(function* (context) {
+
+    const function1Result = yield context.df.callActivity("function1", context.df.getInput())
+
+    // Perform delay operation
+    const delay = moment.utc(context.df.currentUtcDateTime).add(30, "s");
+    yield context.df.createTimer(delay.toDate())
+
+    const function2Result = yield context.df.callActivity("function2", function1Result)
+
+    return function2Result
+});
+    </code>
+  </pre>
+      </div>
+  <br/>
+    </div>
+</details>
+</p>
+</p>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<h2 id="gateway">9. Gateway</h2>
+<p>
+  <figure>
+     <img
+        src="./images/Design_decisions_gateway.png"
+        alt="Gateway"
+        />
+     <figcaption>Gateway</figcaption>
+  </figure>
+<h3>Problem</h3>
+<p> Business and operational/implementation logic must be as decoupled as possible to allow core business logic to remain simple?
+</p>
+<br/>
+<h3>Decision</h3>
+<p> The ingestion and output logic need to be encapsulated in separate functions with the help of <i>Message Gateway</i> pattern and this pattern also helps in dividing messaging-specific implementation from the business logic code.
+</p>
+<br/>
+<h3>Source</h3>
+<p> [<a
+  href="#Hohpe_and_Woolf_2004"
+  class="reference"
+  >Hohpe and Woolf 2004</a
+  >]</p>
+<br/>
+<h3>Pattern</h3>
+<p> Enterprise Integration Pattern</p>
+<br/>
+<h3>Type</h3>
+<p> Function Specific</p>
+<br/>
+<h3>Synonyms</h3>
+<p></p>
+<br/>
+<h3>Mapping</h3>
+<p>
+<details>
+  <summary>
+     <h4>AWS Step Functions</h4>
+  </summary>
+  <div>
+    The Messaging <i>Gateway</i> is a function-specific design pattern. In ASF, this pattern is accomplished by encapsulating input/output messaging-specific method calls as a separate package in AWS Lambda, shown in the below code snippet. This pattern enables the developers to focus on the business logic present in AWS Lambda without worrying about handling the input/output of data.
+ <br/>
+ <div>
+   <br/>
+   <b>ASF code snippet</b>:
+   <br/>
+   <div class="flex">
+      <pre>
+ <code class="language-javascript">
+// Import Gateway Logic
+const lambdaGateway = require("/opt/utility/lambda_gateway.js");
+
+exports.lambdaHandler = async (event, context, callback) => {
+// Input Gateway logic
+const event = lambdaGateway.inputGateway(event, context);
+
+// Start : Business logic
+// End : Business logic
+
+// Output Gateway logic
+lambdaGateway.outputGateway(JSON.stringify(event), callback);
+};
+ </code>
+</pre>
+   </div>
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Zeebe</h4>
+  </summary>
+  <div>
+  The Gateway pattern is function-specific, and the pattern mapping is equivalent to the pattern defined for AWS Step Functions.
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Azure Durable Functions</h4>
+  </summary>
+  <div>
+  The Gateway pattern is function-specific, and the pattern mapping is equivalent to the pattern defined for AWS Step Functions.
+  <br/>
+  </div>
+</details>
+</p>
+</p>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<h2 id="content-filter">10. Content Filter</h2>
+<p>
+  <figure>
+     <img
+        src="./images/Design_decisions_content_filter.png"
+        alt="Content Filter"
+        />
+     <figcaption>Content Filter</figcaption>
+  </figure>
+<h3>Problem</h3>
+<p> How can the workflow simplify dealing with large messages and transmit only the essential data to the required functions?
+</p>
+<br/>
+<h3>Decision</h3>
+<p> The <i>Content Filter</i> pattern simplifies the structure of the messages by removing irrelevant data.
+</p>
+<br/>
+<h3>Source</h3>
+<p> [<a
+  href="#Hohpe_and_Woolf_2004"
+  class="reference"
+  >Hohpe and Woolf 2004</a
+  >]</p>
+<br/>
+<h3>Pattern</h3>
+<p> Enterprise Integration Pattern</p>
+<br/>
+<h3>Type</h3>
+<p> Function Specific</p>
+<br/>
+<h3>Synonyms</h3>
+<p></p>
+<br/>
+<h3>Mapping</h3>
+<p>
+<details>
+  <summary>
+     <h4>AWS Step Functions</h4>
+  </summary>
+  <div>
+    ASF offers <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params" class="reference">InputPath and ResultSelector</a> to limit the input or output passed by filtering the JSON notation using <a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-paths" class="reference">Paths</a> respectively. The below figure shows how the Content Filter pattern can be accomplished using InputPath or using ResultSelector. Additionally, ASF provides user with <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params" class="reference">OutputPath</a> that enables to select a portion of the message output.
+ <br/>
+ <figure>
+  <img
+     src="./images/aws_mapping_content_filter.png"
+     alt="Content Filter"
+     />
+  <figcaption>Content Filter</figcaption>
+</figure>
+<br/>
+Users have the added benefit of performing the entire filtering or code-specific filtering using custom-developed filters through AWS Lambdas, shown by the below code snippet.
+<br/>
+ <div>
+   <br/>
+   <b>ASF code snippet</b>:
+   <br/>
+   <div class="flex">
+      <pre>
+ <code class="language-javascript">
+// Import utils
+const lambdaGateway = require("/opt/utility/utlis.js");
+
+exports.lambdaHandler = async (event, context, callback) => {
+// Input Gateway logic
+const data = lambdaGateway.inputGateway(event, context);
+
+// Start : Business logic
+// Content Filter logic - Users can follow custom logic
+const transformedData = utils.removeField(data, ["field_1", "field_2"]);
+// End : Business logic
+
+// Output Gateway logic
+lambdaGateway.outputGateway(JSON.stringify(transformedData), callback);
+};
+ </code>
+</pre>
+   </div>
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Zeebe</h4>
+  </summary>
+  <div>
+    The Content Filter pattern is function-specific, and the pattern mapping is equivalent to ASF <i>Content Filter</i> pattern. This pattern can also be realized according to the below figure. Here the Input/Output Variable can be used to modify the payload sent to the functions. Furthermore, with the help of Expressions and <a href="https://docs.camunda.io/docs/reference/feel/what-is-feel" class="reference">FEEL (Friendly Enough Expression Language)</a>, variables can be accessed and calculated dynamically.
+  <br/>
+  <figure>
+    <img
+       src="./images/zeebe_mapping_content_filter.png"
+       alt="Content Filter"
+       />
+    <figcaption>Content Filter</figcaption>
+  </figure>
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Azure Durable Functions</h4>
+  </summary>
+  <div>
+    The <i>Content Filter</i> pattern is function-specific, and the pattern mapping is equivalent to code snippet presented for ASF. This pattern can also be realized in the Orchestration function using the below code snippet by filtering data before sending it as a payload to the subsequent function call.
+  <br/>
+  <div>
+    <br/>
+    <b>ADF code snippet</b>:
+    <br/>
+    <div class="flex">
+       <pre>
+  <code class="language-javascript">
+const df = require("durable-functions");
+const utils = require("../utility/utils.js");
+
+module.exports = df.orchestrator(function* (context) {
+    var function1Result = yield context.df.callActivity("function1", context.df.getInput())
+    // Start : Filter result
+    function1Result = utils.removeField(function1Result,'parameter1')
+    // End : Filter result
+    const function2Result = yield context.df.callActivity("function2", function1Result)
+    return function2Result
+});
+  </code>
+ </pre>
+    </div>
+   <br/>
+  </div>
+</details>
+</p>
+</p>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<h2 id="content-enricher">11. Content Enricher</h2>
+<p>
+  <figure>
+     <img
+        src="./images/Design_decisions_content_enricher.png"
+        alt="Content Enricher"
+        />
+     <figcaption>Content Enricher</figcaption>
+  </figure>
+<h3>Problem</h3>
+<p> How can the workflow fetch additional data required by the functions to process the message?
+</p>
+<br/>
+<h3>Decision</h3>
+<p> The <i>Content Enricher</i> pattern accesses external data source and augments the original message with the missing information.
+</p>
+<br/>
+<h3>Source</h3>
+<p> [<a
+  href="#Hohpe_and_Woolf_2004"
+  class="reference"
+  >Hohpe and Woolf 2004</a
+  >]</p>
+<br/>
+<h3>Pattern</h3>
+<p> Enterprise Integration Pattern</p>
+<br/>
+<h3>Type</h3>
+<p> Function Specific</p>
+<br/>
+<h3>Synonyms</h3>
+<p></p>
+<br/>
+<h3>Mapping</h3>
+<p>
+<details>
+  <summary>
+     <h4>AWS Step Functions</h4>
+  </summary>
+  <div>
+    ASF offers a feature called <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params" class="reference">Parameters</a> that facilitates users to augment the message with missing information by using static key-value pairs or use values selected from the input data with <a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-paths" class="reference">Paths</a>.
+ <br/>
+ <figure>
+  <img
+     src="./images/aws_mapping_content_enricher.png"
+     alt="Content Enricher"
+     />
+  <figcaption>Content Enricher</figcaption>
+</figure>
+<br/>
+For complex <i>Content Enricher</i> scenarios, the below code snippet presents how the user can implement custom fetch and enrich message logic through <a href="https://aws.amazon.com/s3" class="reference">AWS S3</a>.
+<br/>
+ <div>
+   <br/>
+   <b>ASF code snippet</b>:
+   <br/>
+   <div class="flex">
+      <pre>
+ <code class="language-javascript">
+// Import required libraries
+const lambdaGateway = require("/opt/utility/utlis.js");
+const s3Operation = require("/opt/utility/aws_s3_service.js");
+
+exports.lambdaHandler = async (event, context, callback) => {
+// Input Gateway logic
+const data = lambdaGateway.inputGateway(event, context);
+
+// Start : Business logic
+
+// Content Enricher logic - Users can follow custom logic
+// Fetch data from data source
+const new_data = await s3Operation.getPayload("key", "bucketName");
+// Append data
+const transformedData = utils.addNewField(data, {
+    new_field: new_data,
+});
+// End : Business logic
+
+// Output Gateway logic
+lambdaGateway.outputGateway(JSON.stringify(transformedData), callback);
+};
+ </code>
+</pre>
+   </div>
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Zeebe</h4>
+  </summary>
+  <div>
+  The <i>Content Enricher</i> pattern is function-specific, and the pattern mapping is equivalent to the ASF <i>Content Enricher</i> pattern. With the help of Expressions and <a href="https://docs.camunda.io/docs/reference/feel/what-is-feel" class="reference">FEEL (Friendly Enough Expression Language)</a>, as shown in the below figure, the Input/Output Variables can be altered and augmented with the necessary information.
+  <br/>
+  <figure>
+    <img
+       src="./images/zeebe_mapping_content_enricher.png"
+       alt="Content Enricher"
+       />
+    <figcaption>Content Enricher</figcaption>
+  </figure>
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Azure Durable Functions</h4>
+  </summary>
+  <div>
+    The <i>Content Enricher</i> pattern is function-specific, and the pattern mapping is equivalent to ASF <i>Content Enricher</i>. The pattern can also be performed in the orchestration function by following the below template. The below code snippet shows how a function's result enriches another function and then is used as a payload to another activity function.
+  <br/>
+  <div>
+    <br/>
+    <b>ADF code snippet</b>:
+    <br/>
+    <div class="flex">
+       <pre>
+  <code class="language-javascript">
+const df = require("durable-functions");
+const utils = require("../utility/utils.js");
+
+module.exports = df.orchestrator(function* (context) {
+    var function1Result = yield context.df.callActivity("function1", context.df.getInput())
+    var function2Result = yield context.df.callActivity("function2", context.df.getInput())
+    // Start : Enrich result
+    function1Result = utils.addNewField(function1Result, function2Result)
+    // End : Enrich result
+    const function3Result = yield context.df.callActivity("function3", function1Result)
+    return function3Result
+});
+  </code>
+ </pre>
+    </div>
+   <br/>
+  </div>
 </details>
 </p>
 </p>
