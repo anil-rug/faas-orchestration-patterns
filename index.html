@@ -110,11 +110,8 @@
             <p>
             <figure>
                <img
-                  src="./images/aws_mapping_process_manager.png"
-                  alt="Process Manager" style="
-                    height: 300px;
-                    width: 200px;
-                "
+                  src="./images/Design_decisions_process_manager.png"
+                  alt="Process Manager"
                   />
                <figcaption>Process Manager</figcaption>
             </figure>
@@ -138,6 +135,16 @@
             <details>
                <summary><b>AWS Step Functions</b></summary>
                <div>
+                <figure>
+               <img
+                  src="./images/aws_mapping_process_manager.png"
+                  alt="Process Manager" style="
+                    height: 300px;
+                    width: 200px;
+                "
+                  />
+               <figcaption>Process Manager</figcaption>
+            </figure>
                States can be orchestrated using ASF State Machine.
                <br/>
                <div>
@@ -164,14 +171,32 @@
             </details>
             <details>
                <summary><b>Zeebe</b></summary>
+               <div>
+                          <figure>
+               <img
+                  src="./images/zeebe_mapping_process_manager.png"
+                  alt="Process Manager"
+                  />
+               <figcaption>Process Manager</figcaption>
+            </figure>
                The "Process Manager" pattern for Zeebe is the broker coordinating the various tasks in the workflow. Here the various tasks are associated with their corresponding hosted function.
                <br/>
                <div>
+            </div>
             </details>
             <details>
                <summary><b>Azure Durable Functions</b></summary>
+               <div>
+                                        <figure>
+               <img
+                  src="./images/adf_mapping_process_manager.png"
+                  alt="Process Manager"
+                  />
+               <figcaption>Process Manager</figcaption>
+            </figure>
                Here the message routing "Process Manager" pattern for ADF is presented. Here the various functions are orchestrated using the primary Orchestration Function.
                <br/>
+               <div>
                <div>
             </details>
             </p>
