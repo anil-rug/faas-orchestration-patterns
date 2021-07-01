@@ -322,13 +322,17 @@ header figure span {
 
 #case-study nav {
   border-right: 1px solid var(--color-light-grey);
-  display: none;
+  /* display: none; */
   left: 1rem;
-  padding-left: 10px;
-  padding-right: 25px;
+  padding-left: 5px;
+  padding-right: 15px;
   position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
+  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+  display:block;
+  /* top: 50%; */
+  /* transform: translateY(-50%); */
 }
 
 #case-study nav li {
