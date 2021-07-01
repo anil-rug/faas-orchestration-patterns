@@ -106,7 +106,7 @@
             <nav>
                <ul></ul>
             </nav>
-{% comment %} ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- {% endcomment %}
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <h2 id="process-manager">1. Process Manager</h2>
             <p>
                <figure>
@@ -217,7 +217,7 @@
             </details>
             </p>
             </p>
-{% comment %} ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- {% endcomment %}
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <h2 id="event-and-document-message">2. Event and Document Message</h2>
             <p>
                <figure>
@@ -305,7 +305,7 @@
             </details>
             </p>
             </p>
-{% comment %} ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- {% endcomment %}
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <h2 id="message-endpoint">3. Message Endpoint</h2>
             <p>
                <figure>
@@ -313,7 +313,7 @@
                      src="./images/Design_decisions_message_endpoint.png"
                      alt="Message Endpoint"
                      />
-                  <figcaption>Event and Document Message</figcaption>
+                  <figcaption>Message Endpoint</figcaption>
                </figure>
             <h3>Problem</h3>
             <p> How are functions represented in a serverless workflow and connected?
@@ -358,19 +358,19 @@
                 <div class="flex">
                    <pre>
               <code class="language-json">
-                {
-                  "State":{
-                     "Type":"Task",
-                     "Resource":"arn:aws:states:::lambda:invoke",
-                     "Parameters":{
-                        "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
-                        "Payload":{
-                           "Input.$":"$"
-                        }
-                     },
-                     "Next":"NEXT_STATE"
-                  }
-               }
+{
+   "State":{
+      "Type":"Task",
+      "Resource":"arn:aws:states:::lambda:invoke",
+      "Parameters":{
+         "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+         "Payload":{
+            "Input.$":"$"
+         }
+      },
+      "Next":"NEXT_STATE"
+   }
+}
               </code>
             </pre>
                 </div>
@@ -397,23 +397,23 @@
                 <div class="flex">
                    <pre>
               <code class="language-xml">
-                &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-                &lt;bpmn:definitions xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:bpmndi=&quot;http://www.omg.org/spec/BPMN/20100524/DI&quot; xmlns:dc=&quot;http://www.omg.org/spec/DD/20100524/DC&quot; xmlns:zeebe=&quot;http://camunda.org/schema/zeebe/1.0&quot; id=&quot;Definitions_0dmi4p0&quot; targetNamespace=&quot;http://bpmn.io/schema/bpmn&quot; exporter=&quot;Zeebe Modeler&quot; exporterVersion=&quot;0.11.0&quot;&gt;
-                &lt;bpmn:process id=&quot;Zeebe_Process&quot; name=&quot;Zeebe Model&quot; isExecutable=&quot;true&quot;&gt;
-                    &lt;bpmn:serviceTask id=&quot;ServiceTask_Lambda&quot; name=&quot;Service Task&quot;&gt;
-                    &lt;bpmn:extensionElements&gt;
-                        &lt;zeebe:taskDefinition type=&quot;lambda&quot; /&gt;
-                    &lt;/bpmn:extensionElements&gt;
-                    &lt;/bpmn:serviceTask&gt;
-                &lt;/bpmn:process&gt;
-                &lt;bpmndi:BPMNDiagram id=&quot;BPMNDiagram_1&quot;&gt;
-                    &lt;bpmndi:BPMNPlane id=&quot;BPMNPlane_1&quot; bpmnElement=&quot;Zeebe_Process&quot;&gt;
-                    &lt;bpmndi:BPMNShape id=&quot;Activity_079frpn_di&quot; bpmnElement=&quot;ServiceTask_Lambda&quot;&gt;
-                        &lt;dc:Bounds x=&quot;160&quot; y=&quot;80&quot; width=&quot;100&quot; height=&quot;80&quot; /&gt;
-                    &lt;/bpmndi:BPMNShape&gt;
-                    &lt;/bpmndi:BPMNPlane&gt;
-                &lt;/bpmndi:BPMNDiagram&gt;
-                &lt;/bpmn:definitions&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;bpmn:definitions xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:bpmndi=&quot;http://www.omg.org/spec/BPMN/20100524/DI&quot; xmlns:dc=&quot;http://www.omg.org/spec/DD/20100524/DC&quot; xmlns:zeebe=&quot;http://camunda.org/schema/zeebe/1.0&quot; id=&quot;Definitions_0dmi4p0&quot; targetNamespace=&quot;http://bpmn.io/schema/bpmn&quot; exporter=&quot;Zeebe Modeler&quot; exporterVersion=&quot;0.11.0&quot;&gt;
+&lt;bpmn:process id=&quot;Zeebe_Process&quot; name=&quot;Zeebe Model&quot; isExecutable=&quot;true&quot;&gt;
+    &lt;bpmn:serviceTask id=&quot;ServiceTask_Lambda&quot; name=&quot;Service Task&quot;&gt;
+    &lt;bpmn:extensionElements&gt;
+        &lt;zeebe:taskDefinition type=&quot;lambda&quot; /&gt;
+    &lt;/bpmn:extensionElements&gt;
+    &lt;/bpmn:serviceTask&gt;
+&lt;/bpmn:process&gt;
+&lt;bpmndi:BPMNDiagram id=&quot;BPMNDiagram_1&quot;&gt;
+    &lt;bpmndi:BPMNPlane id=&quot;BPMNPlane_1&quot; bpmnElement=&quot;Zeebe_Process&quot;&gt;
+    &lt;bpmndi:BPMNShape id=&quot;Activity_079frpn_di&quot; bpmnElement=&quot;ServiceTask_Lambda&quot;&gt;
+        &lt;dc:Bounds x=&quot;160&quot; y=&quot;80&quot; width=&quot;100&quot; height=&quot;80&quot; /&gt;
+    &lt;/bpmndi:BPMNShape&gt;
+    &lt;/bpmndi:BPMNPlane&gt;
+&lt;/bpmndi:BPMNDiagram&gt;
+&lt;/bpmn:definitions&gt;
               </code>
             </pre>
                 </div>
@@ -444,1279 +444,292 @@
             </details>
             </p>
             </p>
-            <h2 id="content-based-router">7. Content-based Router</h2>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="pipes_and_filters">4. Pipes and Filters</h2>
             <p>
-               Maestro is an open-source framework for AWS Step Functions built with
-               ease of use in mind. It offers simple commands that facilitate common
-               operations for applications that are suited for Step Functions,
-               including interactions with AWS.
-            </p>
-            <p>
-               Once Maestro has been installed and configured, deploying a state
-               machine is a simple process. Create a new Maestro project, optionally
-               edit the state machine template, and then type one command to deploy
-               the state machine and any Lambda functions it includes. One could say
-               that it’s as easy as 1, 2, 3.
-            </p>
-            <figure>
-               <img
-                  src="assets/images/step-functions-console/console-diagram-7.gif"
-                  style="max-height: 50vh"
-                  alt="deploying with maestro"
-                  />
-               <figcaption>Steps of deploying with Maestro</figcaption>
-            </figure>
-            <p>
-               To fully demonstrate the power of Maestro, first consider this
-               slideshow that shows in detail the steps required to deploy our
-               example workflow using just the AWS Management Console:
-            </p>
-            <figure id="console-slideshow" class="slideshow">
-               <svg viewBox="0 0 50 70" class="prev-button" sytle="display: none;">
-                  <polygon points="50, 0 0, 35 50, 70" />
-               </svg>
-               <svg viewBox="0 0 50 70" class="next-button" sytle="display: none;">
-                  <polygon points="0, 0 50, 35 0, 70" />
-               </svg>
-               <noscript>
-                  <aside>
-                     <small>
-                     To view an interactive slideshow, you must enable JavaScript.
-                     </small>
-                  </aside>
-               </noscript>
-               <div class="slideshow-items">
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/01.png"
-                        alt="Screenshot of the AWS Management Console and opening the “Services” dropdown"
-                        />
-                     <figcaption>
-                        1: Screenshot of the AWS Management Console and opening the
-                        “Services” dropdown
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/02.png"
-                        alt="Screenshot of the “Services” dropdown menu and clicking the “Step Functions” hyperlink"
-                        />
-                     <figcaption>
-                        2: Screenshot of the “Services” dropdown menu and clicking the
-                        “Step Functions” hyperlink
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/03.png"
-                        alt="Screenshot of opening sidebar"
-                        />
-                     <figcaption>3: Screenshot of opening sidebar</figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/04.png"
-                        alt="Screenshot of selecting “State machines”"
-                        />
-                     <figcaption>
-                        4: Screenshot of selecting “State machines”
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/05.png"
-                        alt="Screenshot of clicking the “Create state machine” button"
-                        />
-                     <figcaption>
-                        5: Screenshot of clicking the “Create state machine” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/06.png"
-                        alt="Screenshot of opening the “Services” dropdown"
-                        />
-                     <figcaption>
-                        6: Screenshot of opening the “Services” dropdown
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/07.png"
-                        alt="Screenshot of opening the “Lambda” page in a new tab (by control-clicking the hyperlink)"
-                        />
-                     <figcaption>
-                        7: Screenshot of opening the “Lambda” page in a new tab (by
-                        control-clicking the hyperlink)
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/08.png"
-                        alt="Screenshot of navigating back to the “Step Functions“ tab"
-                        />
-                     <figcaption>
-                        8: Screenshot of navigating back to the “Step Functions“ tab
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/09.png"
-                        alt="Screenshot of the state machine definition editor"
-                        />
-                     <figcaption>
-                        9: Screenshot of the state machine definition editor
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/10.png"
-                        alt="Screenshot of incremental edit of state machine definition"
-                        />
-                     <figcaption>
-                        10: Screenshot of incremental edit of state machine definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/11.png"
-                        alt="Screenshot of incremental edit of state machine definition"
-                        />
-                     <figcaption>
-                        11: Screenshot of incremental edit of state machine definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/12.png"
-                        alt="Screenshot of incremental edit of state machine definition"
-                        />
-                     <figcaption>
-                        12: Screenshot of incremental edit of state machine definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/13.png"
-                        alt="Screenshot of incremental edit of state machine definition"
-                        />
-                     <figcaption>
-                        13: Screenshot of incremental edit of state machine definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/14.png"
-                        alt="Screenshot of incremental edit of state machine definition"
-                        />
-                     <figcaption>
-                        14: Screenshot of incremental edit of state machine definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/15.png"
-                        alt="Screenshot of incremental edit of state machine definition and clicking the “Next” button"
-                        />
-                     <figcaption>
-                        15: Screenshot of incremental edit of state machine definition
-                        and clicking the “Next” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/16.png"
-                        alt="Screenshot of: 1) error thrown upon attempted save; and 2) navigating to the “Lambda” tab"
-                        />
-                     <figcaption>
-                        16: Screenshot of: 1) error thrown upon attempted save; and 2)
-                        navigating to the “Lambda” tab
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/17.png"
-                        alt="Screenshot of clicking the “Create function” button"
-                        />
-                     <figcaption>
-                        17: Screenshot of clicking the “Create function” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/18.png"
-                        alt="Screenshot of filling out a “Function name” form field"
-                        />
-                     <figcaption>
-                        18: Screenshot of filling out a “Function name” form field
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/19.png"
-                        alt="Screenshot of selecting the runtime by using a select form field"
-                        />
-                     <figcaption>
-                        19: Screenshot of selecting the runtime by using a select form
-                        field
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/20.png"
-                        alt="Screenshot of selecting the runtime by using a select form field"
-                        />
-                     <figcaption>
-                        20: Screenshot of selecting the runtime by using a select form
-                        field
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/21.png"
-                        alt="Screenshot of clicking the “Create function” button"
-                        />
-                     <figcaption>
-                        21: Screenshot of clicking the “Create function” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/22.png"
-                        alt="Screenshot of scrolling down to view the function code"
-                        />
-                     <figcaption>
-                        22: Screenshot of scrolling down to view the function code
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/23.png"
-                        alt="Screenshot of edit to the function code"
-                        />
-                     <figcaption>
-                        23: Screenshot of edit to the function code
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/24.png"
-                        alt="Screenshot of edit to the function code and clicking the “Save” button"
-                        />
-                     <figcaption>
-                        24: Screenshot of edit to the function code and clicking the
-                        “Save” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/25.png"
-                        alt="Screenshot of copying the arn"
-                        />
-                     <figcaption>25: Screenshot of copying the arn</figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/26.png"
-                        alt="Screenshot of: 1) copying the arn; and 2) navigating to the “Step Functions“ tab"
-                        />
-                     <figcaption>
-                        26: Screenshot of: 1) copying the arn; and 2) navigating to the
-                        “Step Functions“ tab
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/27.png"
-                        alt="Screenshot of scrolling the view of the state machine definition"
-                        />
-                     <figcaption>
-                        27: Screenshot of scrolling the view of the state machine
-                        definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/28.png"
-                        alt="Screenshot of pasting the arn into the definition"
-                        />
-                     <figcaption>
-                        28: Screenshot of pasting the arn into the definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/29.png"
-                        alt="Screenshot of navigating to the “Lambda” tab"
-                        />
-                     <figcaption>
-                        29: Screenshot of navigating to the “Lambda” tab
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/30.png"
-                        alt="Screenshot of navigating to the “Functions” page by clicking a hyperlink"
-                        />
-                     <figcaption>
-                        30: Screenshot of navigating to the “Functions” page by clicking
-                        a hyperlink
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/31.png"
-                        alt="Screenshot of: 1) noticing the new function is listed among the existing functions; and 2) clicking the “Create function” button"
-                        />
-                     <figcaption>
-                        31: Screenshot of: 1) noticing the new function is listed among
-                        the existing functions; and 2) clicking the “Create function”
-                        button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/32.png"
-                        alt="Screenshot of filling out all the form fields and clicking the “Create function” button"
-                        />
-                     <figcaption>
-                        32: Screenshot of filling out all the form fields and clicking
-                        the “Create function” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/33.png"
-                        alt="Screenshot of scrolling down to view the function code"
-                        />
-                     <figcaption>
-                        33: Screenshot of scrolling down to view the function code
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/34.png"
-                        alt="Screenshot of edit to the function code and clicking the “Save” button"
-                        />
-                     <figcaption>
-                        34: Screenshot of edit to the function code and clicking the
-                        “Save” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/35.png"
-                        alt="Screenshot of copying the arn"
-                        />
-                     <figcaption>35: Screenshot of copying the arn</figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/36.png"
-                        alt="Screenshot of: 1) copying the arn; and 2) navigating to the “Step Functions“ tab"
-                        />
-                     <figcaption>
-                        36: Screenshot of: 1) copying the arn; and 2) navigating to the
-                        “Step Functions“ tab
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/37.png"
-                        alt="Screenshot of pasting the arn into the definition"
-                        />
-                     <figcaption>
-                        37: Screenshot of pasting the arn into the definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/38.png"
-                        alt="Screenshot of navigating to the “Lambda” tab"
-                        />
-                     <figcaption>
-                        38: Screenshot of navigating to the “Lambda” tab
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/39.png"
-                        alt="Screenshot of navigating to the “Functions” page by clicking a hyperlink"
-                        />
-                     <figcaption>
-                        39: Screenshot of navigating to the “Functions” page by clicking
-                        a hyperlink
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/40.png"
-                        alt="Screenshot of: 1) noticing the new function is listed among the existing functions; and 2) clicking the “Create function” button"
-                        />
-                     <figcaption>
-                        40: Screenshot of: 1) noticing the new function is listed among
-                        the existing functions; and 2) clicking the “Create function”
-                        button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/41.png"
-                        alt="Screenshot of filling out all the form fields and clicking the “Create function” button"
-                        />
-                     <figcaption>
-                        41: Screenshot of filling out all the form fields and clicking
-                        the “Create function” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/42.png"
-                        alt="Screenshot of waiting for the form to submit"
-                        />
-                     <figcaption>
-                        42: Screenshot of waiting for the form to submit
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/43.png"
-                        alt="Screenshot of scrolling down to view the function code"
-                        />
-                     <figcaption>
-                        43: Screenshot of scrolling down to view the function code
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/44.png"
-                        alt="Screenshot of edit to the function code and clicking the “Save” button"
-                        />
-                     <figcaption>
-                        44: Screenshot of edit to the function code and clicking the
-                        “Save” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/45.png"
-                        alt="Screenshot of copying the arn"
-                        />
-                     <figcaption>45: Screenshot of copying the arn</figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/46.png"
-                        alt="Screenshot of: 1) copying the arn; and 2) navigating to the “Step Functions“ tab"
-                        />
-                     <figcaption>
-                        46: Screenshot of: 1) copying the arn; and 2) navigating to the
-                        “Step Functions“ tab
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/47.png"
-                        alt="Screenshot of pasting the arn into the definition"
-                        />
-                     <figcaption>
-                        47: Screenshot of pasting the arn into the definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/48.png"
-                        alt="Screenshot of scrolling the view of the state machine definition"
-                        />
-                     <figcaption>
-                        48: Screenshot of scrolling the view of the state machine
-                        definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/49.png"
-                        alt="Screenshot of: 1) noticing that another arn needs to be provided; and 2) navigating to the “Lambda” tab"
-                        />
-                     <figcaption>
-                        49: Screenshot of: 1) noticing that another arn needs to be
-                        provided; and 2) navigating to the “Lambda” tab
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/50.png"
-                        alt="Screenshot of navigating to the “Functions” page by clicking a hyperlink"
-                        />
-                     <figcaption>
-                        50: Screenshot of navigating to the “Functions” page by clicking
-                        a hyperlink
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/51.png"
-                        alt="Screenshot of: 1) noticing the new function is listed among the existing functions; and 2) clicking the “Create function” button"
-                        />
-                     <figcaption>
-                        51: Screenshot of: 1) noticing the new function is listed among
-                        the existing functions; and 2) clicking the “Create function”
-                        button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/52.png"
-                        alt="Screenshot of filling out all the form fields and clicking the “Create function” button"
-                        />
-                     <figcaption>
-                        52: Screenshot of filling out all the form fields and clicking
-                        the “Create function” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/53.png"
-                        alt="Screenshot of waiting for the form to submit"
-                        />
-                     <figcaption>
-                        53: Screenshot of waiting for the form to submit
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/54.png"
-                        alt="Screenshot of scrolling down to view the function code"
-                        />
-                     <figcaption>
-                        54: Screenshot of scrolling down to view the function code
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/55.png"
-                        alt="Screenshot of edit to the function code and clicking the “Save” button"
-                        />
-                     <figcaption>
-                        55: Screenshot of edit to the function code and clicking the
-                        “Save” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/56.png"
-                        alt="Screenshot of copying the arn"
-                        />
-                     <figcaption>56: Screenshot of copying the arn</figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/57.png"
-                        alt="Screenshot of: 1) copying the arn; and 2) navigating to the “Step Functions“ tab"
-                        />
-                     <figcaption>
-                        57: Screenshot of: 1) copying the arn; and 2) navigating to the
-                        “Step Functions“ tab
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/58.png"
-                        alt="Screenshot of pasting the arn into the definition"
-                        />
-                     <figcaption>
-                        58: Screenshot of pasting the arn into the definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/59.png"
-                        alt="Screenshot of clicking the “Next” button"
-                        />
-                     <figcaption>
-                        59: Screenshot of clicking the “Next” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/60.png"
-                        alt="Screenshot of: 1) filling out a “State machine name” form field; and 2) scrolling the view downwards"
-                        />
-                     <figcaption>
-                        60: Screenshot of: 1) filling out a “State machine name” form
-                        field; and 2) scrolling the view downwards
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/61.png"
-                        alt="Screenshot of clicking the “Create state machine” button and waiting for the form to submit"
-                        />
-                     <figcaption>
-                        61: Screenshot of clicking the “Create state machine” button and
-                        waiting for the form to submit
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/62.png"
-                        alt="Screenshot of clicking the “Definition” tab (webpage UI tab, not browser tab)"
-                        />
-                     <figcaption>
-                        62: Screenshot of clicking the “Definition” tab (webpage UI tab,
-                        not browser tab)
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/63.png"
-                        alt="Screenshot of state machine definition"
-                        />
-                     <figcaption>
-                        63: Screenshot of state machine definition
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/64.png"
-                        alt="Screenshot of clicking the “Executions” tab (webpage UI tab, not browser tab)"
-                        />
-                     <figcaption>
-                        64: Screenshot of clicking the “Executions” tab (webpage UI tab,
-                        not browser tab)
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/65.png"
-                        alt="Screenshot of clicking the “Start execution” button"
-                        />
-                     <figcaption>
-                        65: Screenshot of clicking the “Start execution” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/66.png"
-                        alt="Screenshot of execution input text field"
-                        />
-                     <figcaption>
-                        66: Screenshot of execution input text field
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/67.png"
-                        alt="Screenshot of edit to input text and clicking the “Start execution” button"
-                        />
-                     <figcaption>
-                        67: Screenshot of edit to input text and clicking the “Start
-                        execution” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/68.png"
-                        alt="Screenshot of execution in progress"
-                        />
-                     <figcaption>68: Screenshot of execution in progress</figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/69.png"
-                        alt="Screenshot of execution completed"
-                        />
-                     <figcaption>69: Screenshot of execution completed</figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/70.png"
-                        alt="Screenshot of scrolling view downwards"
-                        />
-                     <figcaption>
-                        70: Screenshot of scrolling view downwards
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/71.png"
-                        alt="Screenshot of expanding an “Execution event history” log row by clicking the triangular expansion button"
-                        />
-                     <figcaption>
-                        71: Screenshot of expanding an “Execution event history” log row
-                        by clicking the triangular expansion button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/72.png"
-                        alt="Screenshot of scrolling view downwards"
-                        />
-                     <figcaption>
-                        72: Screenshot of scrolling view downwards
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/73.png"
-                        alt="Screenshot of more expanded “Execution event history” log rows and scrolling view to top of the web page"
-                        />
-                     <figcaption>
-                        73: Screenshot of more expanded “Execution event history” log
-                        rows and scrolling view to top of the web page
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/74.png"
-                        alt="Screenshot of clicking on a step in the visual workflow"
-                        />
-                     <figcaption>
-                        74: Screenshot of clicking on a step in the visual workflow
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/75.png"
-                        alt="Screenshot of input and output associated with the step and clicking on an additional step in the visual workflow"
-                        />
-                     <figcaption>
-                        75: Screenshot of input and output associated with the step and
-                        clicking on an additional step in the visual workflow
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/76.png"
-                        alt="Screenshot of input and output associated with the step"
-                        />
-                     <figcaption>
-                        76: Screenshot of input and output associated with the step
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/77.png"
-                        alt="Screenshot of clicking on the “State machines” breadcrumb navigation link"
-                        />
-                     <figcaption>
-                        77: Screenshot of clicking on the “State machines” breadcrumb
-                        navigation link
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/78.png"
-                        alt="Screenshot of selecting the state machine and clicking the “Delete” button"
-                        />
-                     <figcaption>
-                        78: Screenshot of selecting the state machine and clicking the
-                        “Delete” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/79.png"
-                        alt="Screenshot of clicking the “Delete state machine” button on a confirmation popup dialog"
-                        />
-                     <figcaption>
-                        79: Screenshot of clicking the “Delete state machine” button on
-                        a confirmation popup dialog
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/80.png"
-                        alt="Screenshot of: 1) noticing that the status of the state machine now says “Deleting”; and 2) navigating to the “Lambda” browser tab"
-                        />
-                     <figcaption>
-                        80: Screenshot of: 1) noticing that the status of the state
-                        machine now says “Deleting”; and 2) navigating to the “Lambda”
-                        browser tab
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/81.png"
-                        alt="Screenshot of: 1) selecting a function resource; and 2) clicking on the “Actions” dropdown menu"
-                        />
-                     <figcaption>
-                        81: Screenshot of: 1) selecting a function resource; and 2)
-                        clicking on the “Actions” dropdown menu
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/82.png"
-                        alt="Screenshot of clicking the “Delete” option from the dropdown menu"
-                        />
-                     <figcaption>
-                        82: Screenshot of clicking the “Delete” option from the dropdown
-                        menu
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/83.png"
-                        alt="Screenshot of clicking the “Delete” button on a confirmation popup dialog"
-                        />
-                     <figcaption>
-                        83: Screenshot of clicking the “Delete” button on a confirmation
-                        popup dialog
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/84.png"
-                        alt="Screenshot of going through all the deletion steps for the next function"
-                        />
-                     <figcaption>
-                        84: Screenshot of going through all the deletion steps for the
-                        next function
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/85.png"
-                        alt="Screenshot of going through all the deletion steps for the next function"
-                        />
-                     <figcaption>
-                        85: Screenshot of going through all the deletion steps for the
-                        next function
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/86.png"
-                        alt="Screenshot of going through all the deletion steps for the next function"
-                        />
-                     <figcaption>
-                        86: Screenshot of going through all the deletion steps for the
-                        next function
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/87.png"
-                        alt="Screenshot of opening the “Services” dropdown"
-                        />
-                     <figcaption>
-                        87: Screenshot of opening the “Services” dropdown
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/88.png"
-                        alt="Screenshot of the “Services” dropdown menu and clicking the “IAM” hyperlink"
-                        />
-                     <figcaption>
-                        88: Screenshot of the “Services” dropdown menu and clicking the
-                        “IAM” hyperlink
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/89.png"
-                        alt="Screenshot of clicking the “Roles” hyperlink on the sidebar"
-                        />
-                     <figcaption>
-                        89: Screenshot of clicking the “Roles” hyperlink on the sidebar
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/90.png"
-                        alt="Screenshot of selecting the roles to be deleted"
-                        />
-                     <figcaption>
-                        90: Screenshot of selecting the roles to be deleted
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/91.png"
-                        alt="Screenshot of clicking the “Delete role” button"
-                        />
-                     <figcaption>
-                        91: Screenshot of clicking the “Delete role” button
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/92.png"
-                        alt="Screenshot of clicking the “Yes, delete” button on a confirmation popup dialog"
-                        />
-                     <figcaption>
-                        92: Screenshot of clicking the “Yes, delete” button on a
-                        confirmation popup dialog
-                     </figcaption>
-                  </figure>
-                  <figure>
-                     <img
-                        src="assets/images/console-slideshow/93.png"
-                        alt="Screenshot of all remaining IAM roles"
-                        />
-                     <figcaption>93: Screenshot of all remaining IAM roles</figcaption>
-                  </figure>
+              <figure>
+                 <img
+                    src="./images/Design_decisions_pipes_and_filters.png"
+                    alt="Pipes and Filters"
+                    />
+                 <figcaption>Pipes and Filters</figcaption>
+              </figure>
+           <h3>Problem</h3>
+           <p> How to decompose a task that performs complex processing into a series of separate elements that can be reused?
+           </p>
+           <br/>
+           <h3>Decision</h3>
+           <p> <i>Pipes and Filters</i> help in implementing complex processing in a granular, independent, resilient and sequential manner. Moreover, the fundamental building blocks of serverless workflows are functions, and each function in the pipeline is generally responsible for small transactions making this pattern style optimum.
+           </p>
+           <br/>
+           <h3>Source</h3>
+           <p> [<a
+              href="#Hohpe_and_Woolf_2004"
+              class="reference"
+              >Hohpe and Woolf 2004</a
+              >]</p>
+           <br/>
+           <h3>Pattern</h3>
+           <p> Enterprise Integration Pattern</p>
+           <br/>
+           <h3>Type</h3>
+           <p> Construct</p>
+           <br/>
+           <h3>Synonyms</h3>
+           <p>Sequence, Sequential routing, Serial Routing</p>
+           <br/>
+           <h3>Mapping</h3>
+           <p>
+           <details>
+              <summary>
+                 <h4>AWS Step Functions</h4>
+              </summary>
+              <div>
+                ASF externalize the Pipes and Filters pattern as represented in the below figure and code snippet by extracting the coordination from the filter implementations into a state machine that orchestrates the sequence of events.
+             <br/>
+             <figure>
+              <img
+                 src="./images/aws_mapping_pipes_and_filters.png"
+                 alt="Pipes and Filter"
+                 />
+              <figcaption>Pipes and Filter</figcaption>
+           </figure>
+             <div>
+               <br/>
+               <b>ASF code snippet</b>:
+               <br/>
+               <div class="flex">
+                  <pre>
+             <code class="language-json">
+{
+  "Comment":"Pipes And Filter Pattern",
+  "StartAt":"State 1",
+  "States":{
+     "State 1":{
+        "Type":"Task",
+        "Resource":"arn:aws:states:::lambda:invoke",
+        "Parameters":{
+           "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME"
+        },
+        "Next":"State 2"
+     },
+     "State 2":{
+        "Type":"Task",
+        "Resource":"arn:aws:states:::lambda:invoke",
+        "Parameters":{
+           "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME"
+        },
+        "End":true
+     }
+  }
+}
+             </code>
+           </pre>
                </div>
-            </figure>
-            <p>To recap those 93 slides, here are the 15 major steps to deploy:</p>
-            <ol>
-               <li>Navigate to the Step Functions console</li>
-               <li>Select “State Machine”</li>
-               <li>Select “Create State Machine”</li>
-               <li>Provide ASL definition</li>
-               <li>Conditionally modify</li>
-               <li>Navigate to Lambda console</li>
-               <li>Configure Lambda (runtime, name, permissions, etc.)</li>
-               <li>Define Lambda</li>
-               <li>Save Lambda</li>
-               <li>Copy Amazon Resource Name (ARN)</li>
-               <li>Paste valid ARN into state machine definition</li>
-               <li>Repeat steps 6-11 for each Lambda</li>
-               <li>Save state machine definition</li>
-               <li>Navigate to and fill out name, tags, logs, etc.</li>
-               <li>Deploy state machine</li>
-            </ol>
-            <p>And here are the 9 major steps to tear down:</p>
-            <ol>
-               <li>Navigate to the Step Functions console</li>
-               <li>Click the “Delete” button, confirming any popup</li>
-               <li>Navigate to Lambda console</li>
-               <li>Select a Lambda</li>
-               <li>Click the “Delete” button from the “Actions” drop-down menu</li>
-               <li>Confirm deletion</li>
-               <li>Repeat steps 4-6 for each Lambda</li>
-               <li>Navigate to the IAM console</li>
-               <li>
-                  Navigate to “roles”, select the roles, then click the “Delete role”
-                  button, confirming any popup
-               </li>
-            </ol>
-            <p>Now, the same process but using Maestro:</p>
-            <figure>
-               <video controls>
-                  <source src="assets/videos/using-maestro.mp4" type="video/mp4" />
-                  A video of using maestro to deploy a workflow.
-               </video>
-               <aside>
-                  <small>
-                  Note that it is not necessary to navigate through the console when
-                  using Maestro. We did so in this video just to demonstrate that
-                  the resources were deployed to AWS and worked as expected.
-                  </small>
-               </aside>
-               <figcaption>Using Maestro</figcaption>
-            </figure>
-            <p>To recap that video, here are the 3 major steps to deploy:</p>
-            <ol>
-               <li>
-                  Open your terminal, execute
-                  <code class="command language-plaintext">maestro&nbsp;new</code>
-               </li>
-               <li>Edit your workflow</li>
-               <li>
-                  Execute
-                  <code class="command language-plaintext">maestro&nbsp;deploy</code>
-               </li>
-            </ol>
-            <p>And here is the 1 major step to tear down:</p>
-            <ol>
-               <li>
-                  Execute
-                  <code class="command language-plaintext"
-                     >maestro&nbsp;teardown</code
-                     >
-               </li>
-            </ol>
-            <p>
-               The difference between using the AWS Management Console vs Maestro is
-               quite a stark one. What took 24 steps across all resources to create
-               the workflow (not to mention deleting) takes just 3 with Maestro, all
-               in the comfort of your own terminal. And when considering the 2-3 min
-               deployment time of AWS SAM, the 3-step, 3-second deployment time and
-               1-step, 2-second teardown time of Maestro is unbeatable and wildly
-               refreshing to work with.
-            </p>
-            <p>
-               In addition to its lightning-fast deploys and teardowns, Maestro has
-               robust manual (man) and inline help (discussed in the table below)
-            </p>
-            <h3>7.1 Commands</h3>
-            <p>Out of the box, Maestro comes with 6 simple commands:</p>
-            <table id="commands-table">
-               <thead>
-                  <tr>
-                     <th>Command</th>
-                     <th>Description</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-                     <td>
-                        <code class="command language-plaintext">
-                           <pre>maestro new</pre>
-                        </code>
-                     </td>
-                     <td>
-                        <p>
-                           This command creates a new Maestro project with the given
-                           project name. When
-                           <code class="command language-plaintext">maestro new</code> is
-                           executed, the user is prompted with a list of all the
-                           templates to base their new project off of.
-                        </p>
-                        <p>
-                           If the user simply presses <code>&lt;return&gt;</code>at the
-                           prompt or enters invalid input, the new project is created
-                           without the influence of a template.
-                        </p>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <code class="command language-plaintext">
-                           <pre>maestro deploy</pre>
-                        </code>
-                     </td>
-                     <td>
-                        <p>
-                           This command must be executed at the root of your Maestro
-                           project. It will deploy both the state machine as defined in
-                           <code>definition.asl.json</code> and all lambda functions
-                           defined in the <code>lambdas/</code> directory. If you do not
-                           have the necessary Maestro IAM roles, running this command
-                           will automatically create them for you as part of the
-                           deployment.
-                        </p>
-                        <p>
-                           Typical deployment time is a lightning-fast
-                           <em>3 seconds</em>.
-                        </p>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <code class="command language-plaintext">
-                           <pre>maestro teardown</pre>
-                        </code>
-                     </td>
-                     <td>
-                        <p>
-                           Executing this command with your working directory being the
-                           root of some Maestro project will tear down the associated
-                           resources from AWS, which are as follows:
-                        </p>
-                        <ul>
-                           <li>
-                              All AWS Lambdas uploaded from the project-local
-                              <code>lambdas/</code> directory.
-                           </li>
-                           <li>
-                              The AWS Step Functions state machine created from the
-                              project-local <code>definition.asl.json</code> definition
-                              file.
-                           </li>
-                           <li>Any AWS IAM roles specified via an optional flag.</li>
-                        </ul>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <code class="command language-plaintext">
-                           <pre>maestro help</pre>
-                        </code>
-                     </td>
-                     <td>
-                        <p>
-                           Display help information about Maestro or a Maestro command.
-                        </p>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <code class="command language-plaintext">
-                           <pre>maestro config</pre>
-                        </code>
-                     </td>
-                     <td>
-                        <p>
-                           The
-                           <code class="command language-plaintext">maestro config</code
-                              >command should be the first command run after installing
-                           Maestro. Any Maestro deployment or teardown depends on the
-                           account information configured by this command.
-                        </p>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <code class="command language-plaintext">
-                           <pre>maestro get-templates</pre>
-                        </code>
-                     </td>
-                     <td>
-                        <p>
-                           Fetches the Maestro default templates from git and installs
-                           them on the user’s local machine.
-                        </p>
-                     </td>
-                  </tr>
-               </tbody>
-            </table>
-            <h3>7.2 Challenges</h3>
-            <p>
-               While we were building the Maestro framework, we came across a few
-               challenges along the way, which we will now discuss.
-            </p>
-            <h4>7.2.1 AWS IAM</h4>
-            <p>
-               One source of difficulty was dealing with AWS IAM [<a
-                  href="#reference_17"
-                  class="reference"
-                  >17</a
-                  >]. IAM is the AWS service that manages the creation of, deletion of,
-               and management of roles, permissions, and policies that dictate what
-               specific AWS services are allowed to do. Authorization is often a
-               challenge in most programming environments, and AWS is no exception.
-            </p>
-            <p>
-               The first challenge that we, the Maestro team, ran into when working
-               with AWS IAM was determining what set of permissions and policies must
-               be provided to allow each component to execute properly. One would
-               imagine that clear documentation regarding which permissions and
-               policies allow execution of a given task would be easy to find, but
-               that was not our experience.
-            </p>
-            <p>
-               To determine which basic capabilities the components in a standard
-               Lambda-centric workflow required, we manually created some mock
-               components and observed which policies AWS attached by default. This
-               gave us a starting point for determining exactly which policies the
-               Lambdas and Step Functions that Maestro deploys needs.
-            </p>
-            <p>
-               The second challenge regarding IAM that we ran into was the
-               propagation of roles. While Maestro creates roles before it attempts
-               to create the Lambdas and Step Functions state machines that depend on
-               those roles, we still ran into problems regarding the roles’
-               availability. This is because, in order to attach a role to an AWS
-               resource, the role must first propagate to every AWS data center,
-               which can take upwards of 15 seconds. If one were to try to attach a
-               role to a Lambda before the role had a chance to fully propagate, the
-               role would not attach and would instead throw a cryptic error message.
-               Unfortunately, there is no simple way to determine whether a role is
-               ready for attachment or not. As of the time of this writing (Fall
-               2020), the best way to determine that is to try to attach the role to
-               a resource (such as a Lambda) and see if the cryptic error message is
-               thrown back.
-            </p>
-            <p>
-               Therefore, to create Lambdas and state machines with associated roles,
-               we resolved to implement retry when attaching a role to a resource.
-               Built-in retry does not exist in the AWS SDK, so we created our own
-               robust and general-purpose retry function that handles the number of
-               attempts and the backoff rate between subsequent attempts. The retry,
-               in combination with an initial sleep period and tuned backoff rate,
-               solved this challenge and made Maestro even more robust than before.
-            </p>
-            <h4>7.2.2 Asynchronicity</h4>
-            <p>
-               Creating multiple AWS resources that depend on one another in
-               deployment touches on an overarching challenge that would need to be
-               reconciled in developing Maestro: asynchronicity. Maestro offers quick
-               deployment thanks to concurrent creation and deployment of resources
-               which requires navigating numerous issues related to synchronicity.
-            </p>
-            <p>
-               A helpful pattern that allowed us to work with asynchronous functions
-               and Promises was the ‘async/await’ pattern. This allowed certain
-               actions to be treated synchronously in an asynchronous context.
-               However, the Maestro philosophy was not to completely remove Promise
-               chains by dogmatically applying the ‘async/await’ pattern everywhere
-               possible. Overuse of the pattern can cause code to be slow by
-               essentially making every step synchronous [<a
-                  href="#reference_18"
-                  class="reference"
-                  >18</a
-                  >]. To achieve relevant concurrency in creating resources, a mixture
-               of ‘Promise chains’, ‘async/await’, and
-               <code class="command language-plaintext">Promise.all</code> was
-               implemented. The result is a lightning-fast framework.
-            </p>
-            <h4>7.2.3 Domain</h4>
-            <p>
-               Serverless orchestration is a very niche topic. Although AWS Lambda is
-               a popular service, orchestration is often done company-by-company
-               without adhering to a common set of shared best practices. Navigating
-               common approaches required extensive, in-depth inquiry. Further, AWS
-               Step Functions offers many benefits but is not broadly used; as a
-               result, few frameworks or solutions exist to provide insight into
-               development. Therefore, we had to be quite innovative to provide a
-               framework in this space.
-            </p>
-            <h3>7.3 Future Work</h3>
-            <p>
-               As with most endeavors, not all that was desired could be accomplished
-               from the outset. Here are a few aspirations that are left for future
-               work.
-            </p>
-            <h4>7.3.1 ASL Wrapper</h4>
-            <p>
-               Ultimately, a framework that works with ASL could be benefited by
-               abstracting away the awkward language. As was previously described,
-               the objective of Maestro is to facilitate working with ASL through
-               templates. However, no set of templates can be comprehensive, and any
-               developer working extensively with Step Functions will eventually
-               require writing ASL. Having an ASL ‘wrapper’ to imperatively write ASL
-               in native JavaScript would be helpful.
-            </p>
-            <h4>7.3.2 Logging</h4>
-            <p>
-               Another possible future addition would be integration with the host
-               logging system. More robust logging is helpful in the event something
-               goes wrong with the deployment of an individual component or an entire
-               workflow.
-            </p>
-            <h4>7.3.3 Versioning</h4>
-            <p>
-               Because the premise of Maestro is to allow rapid iteration on
-               workflows, versioning comes into view. Much consideration must go into
-               determining the point at which a workflow is ready for production, and
-               due to innumerable circumstances, a team may resolve to look back at
-               some previous version of their application. Ideally, a version of the
-               workflow would be persisted and easily accessible every time a
-               workflow was deployed.
-            </p>
-            <h4>7.3.4 Redeploy Command</h4>
-            <p>
-               Which brings to mind another consideration left for the future: a
-               <code class="command language-plaintext">maestro redeploy</code>
-               command. It would be helpful, especially for complex workflows, to
-               intelligently re-deploy only elements of the workflow that have
-               changed since the last version. If versioning were clearly outlined,
-               then re-deploying could look back at a snapshot of the workflow to
-               determine what changed and then re-deploy accordingly. This would help
-               preserve artifacts in AWS that provide auditability of long-standing
-               components as well as reduce the load on the network.
-            </p>
-            <h4>7.3.5 Multiple AWS Services</h4>
-            <p>
-               The focus of Maestro is AWS Lambdas, but that doesn’t have to be the
-               case. While much can be achieved, and often is, strictly using
-               Lambdas, other services offer a broader range of development
-               possibilities. Integrating further AWS services into Maestro would
-               amplify its potential.
-            </p>
-            <h4>7.3.6. Per-Project Configuration</h4>
-            <p>
-               Currently, Maestro only uses a single global configuration file. It
-               would be beneficial to have a unique config file for each project
-               allowing deployment in various regions and even to different AWS
-               accounts. On a similar note, a developer may wish to use different
-               Node.js&reg; runtimes, so support for various versions could be added.
-            </p>
-            <section id="references">
+              <br/>
+              </div>
+           </details>
+           <details>
+              <summary>
+                 <h4>Zeebe</h4>
+              </summary>
+              <div>
+                The below figure shows how each Service task (filter) performs only one distinct operation, and the pipes that are the sequence/message flow coordinate the various tasks.
+              <figure>
+                 <img
+                    src="./images/zeebe_mapping_pipes_and_filters.png"
+                    alt="Pipes and Filters"
+                    />
+                 <figcaption>Pipes and Filters</figcaption>
+              </figure>
+              <br/>
+              <div>
+              </div>
+           </details>
+           <details>
+              <summary>
+                 <h4>Azure Durable Functions</h4>
+              </summary>
+              <div>
+                <i>Pipes and Filters</i> play an essential aspect in standardizing a workflow execution and this is referred to as <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=javascript" class="reference">Function Chaining</a> pattern in ADF. The below code snippet shows how each Activity Function (filter) performs only one distinct operation and the pipes that are the JSON message that coordinate the various functions.
+                <div>
+                  <br/>
+                  <b>ASF snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
+                <code class="language-javascript">
+import * as df from "durable-functions"
+
+module.exports = df.orchestrator(function* (context) {
+    try {
+        const function1Result = yield context.df.callActivity("function1", context.df.getInput())
+        const function2Result = yield context.df.callActivity("function2", function1Result)
+        const function3Result = yield context.df.callActivity("function3", function2Result)
+        return function3Result;
+    }
+    catch (error) {
+        console.error(error)
+    }
+});
+                </code>
+              </pre>
+                  </div>
+              <br/>
+              <div>
+              <div>
+           </details>
+           </p>
+           </p>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<h2 id="multicast">5. Multicast</h2>
+<p>
+  <figure>
+     <img
+        src="./images/Design_decisions_multicast.png"
+        alt="Multicast"
+        />
+     <figcaption>Multicast</figcaption>
+  </figure>
+<h3>Problem</h3>
+<p> How will the serverless workflow route the same message to several endpoints and process them differently?
+</p>
+<br/>
+<h3>Decision</h3>
+<p> A <i>Multicast</i> pattern is used to model the execution of parallel flows/concurrency by sending a copy of the same message to multiple recipients without checking any conditions. Here all outgoing flows are executed at the same time.
+</p>
+<br/>
+<h3>Source</h3>
+<p> [<a
+  href="#Ibsen_and_Anstey_2010"
+  class="reference"
+  >Ibsen and Anstey 2010</a
+  >]</p>
+<br/>
+<h3>Pattern</h3>
+<p> Enterprise Integration Pattern</p>
+<br/>
+<h3>Type</h3>
+<p> Control Flow</p>
+<br/>
+<h3>Synonyms</h3>
+<p>Parallel Split, AND-Split, Parallel Routing, Fork</p>
+<br/>
+<h3>Mapping</h3>
+<p>
+<details>
+  <summary>
+     <h4>AWS Step Functions</h4>
+  </summary>
+  <div>
+    The depicted figure and code snippet shows how the <i>Multicast</i> pattern can be mapped to the Parallel state offered by ASF. Here the mandatory field while configuring this state is Branches. Branches support one to multiple possible paths, with each route consisting of one or many state transitions. In the Parallel state, each branch is provided with a copy of the input data. This pattern does not require the output of each branch to produce outputs that have a homogenous structure. However, for a data processing pipeline's simplicity and ease of operations, each branch should produce outputs complying with a uniform format.
+ <br/>
+ <figure>
+  <img
+     src="./images/aws_mapping_multicast.png"
+     alt="Multicast"
+     />
+  <figcaption>Multicast</figcaption>
+</figure>
+ <div>
+   <br/>
+   <b>ASF code snippet</b>:
+   <br/>
+   <div class="flex">
+      <pre>
+ <code class="language-json">
+{
+  "Comment":"Multicast Pattern",
+  "StartAt":"MulticastState",
+  "States":{
+     "MulticastState":{
+        "Type":"Parallel",
+        "Branches":[
+           {
+              "StartAt":"Function 1",
+              "States":{
+                 "Function 1":{
+                    "Type":"Pass",
+                    "End":true
+                 }
+              }
+           },
+           {
+              "StartAt":"Function 2",
+              "States":{
+                 "Function 2":{
+                    "Type":"Pass",
+                    "End":true
+                 }
+              }
+           }
+        ],
+        "End":true
+     }
+  }
+}
+ </code>
+</pre>
+   </div>
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Zeebe</h4>
+  </summary>
+  <div>
+  With the "Parallel Gateway", the <i>Multicast</i> pattern can be implemented using BPMN 2.0 Zeebe Modeler. The below figure shows how the same message is transferred to two functions parallelly.
+  <figure>
+     <img
+        src="./images/zeebe_mapping_multicast.png"
+        alt="Multicast"
+        />
+     <figcaption>Multicast</figcaption>
+  </figure>
+  <br/>
+  <div>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Azure Durable Functions</h4>
+  </summary>
+  <div>
+  The <i>Multicast</i> pattern is implemented in ADF by following the below code snippet. In this implementation, the same data is sent to multiple Activity Functions and executed simultaneously.
+    <div>
+      <br/>
+      <b>ADF code snippet</b>:
+      <br/>
+      <div class="flex">
+         <pre>
+    <code class="language-javascript">
+const df = require("durable-functions");
+
+module.exports = df.orchestrator(function* (context) {
+    const parallelTasks = [];
+
+    // Get input
+    const data = context.df.getInput()
+
+    // Perform parallel processing
+    parallelTasks.push(context.df.callActivity("function1", data));
+    parallelTasks.push(context.df.callActivity("function2", data));
+
+    const arrayParallelTasksResult = yield context.df.Task.all(parallelTasks);
+
+    return arrayParallelTasksResult
+});
+    </code>
+  </pre>
+      </div>
+  <br/>
+  <div>
+  <div>
+</details>
+</p>
+</p>   
+           <section id="references">
                <h2>8. References</h2>
                <ol>
                   <li id="reference_1">
