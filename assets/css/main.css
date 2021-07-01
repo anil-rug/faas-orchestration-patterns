@@ -589,9 +589,8 @@ td {
 #contributors li,
 #contributors .social-icons li {
   display: inline-block;
-  margin: 0 3%;
-  width: 20%;
-  vertical-align: top;
+  margin: 0 10%;
+  vertical-align: middle;
 }
 
 #contributors h3 {
@@ -601,14 +600,6 @@ td {
 #contributors a {
   color: var(--color-faasify-red);
   text-decoration: none;
-}
-
-#contributors li a img {
-  /* border-radius: 100%; */
-  border: 2px solid var(--color-faasify-red);
-  /* margin: 0 auto 20px; */
-  /* width: 15vw;
-  max-width: 250px; */
 }
 
 #contributors .individual ul {
