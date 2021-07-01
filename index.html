@@ -195,7 +195,6 @@
                </figure>
                The "Process Manager" pattern for Zeebe is the broker coordinating the various tasks in the workflow. Here the various tasks are associated with their corresponding hosted function.
                <br/>
-               <div>
                </div>
             </details>
             <details>
@@ -212,8 +211,7 @@
                </figure>
                Here the message routing "Process Manager" pattern for ADF is presented. Here the various functions are orchestrated using the primary Orchestration Function.
                <br/>
-               <div>
-               <div>
+               </div>
             </details>
             </p>
             </p>
@@ -283,7 +281,6 @@
                </figure>
                In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
                <br/>
-               <div>
                </div>
             </details>
             <details>
@@ -300,8 +297,7 @@
                </figure>
                In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions, as depicted by the figure.
                <br/>
-               <div>
-               <div>
+               </div>
             </details>
             </p>
             </p>
@@ -418,7 +414,6 @@
             </pre>
                 </div>
                <br/>
-               <div>
                </div>
             </details>
             <details>
@@ -439,8 +434,7 @@
             </pre>
                 </div>
                <br/>
-               <div>
-               <div>
+              </div>
             </details>
             </p>
             </p>
@@ -543,7 +537,6 @@
                  <figcaption>Pipes and Filters</figcaption>
               </figure>
               <br/>
-              <div>
               </div>
            </details>
            <details>
@@ -576,8 +569,7 @@ module.exports = df.orchestrator(function* (context) {
               </pre>
                   </div>
               <br/>
-              <div>
-              <div>
+                </div>
            </details>
            </p>
            </p>
@@ -688,7 +680,6 @@ module.exports = df.orchestrator(function* (context) {
      <figcaption>Multicast</figcaption>
   </figure>
   <br/>
-  <div>
   </div>
 </details>
 <details>
@@ -724,11 +715,368 @@ module.exports = df.orchestrator(function* (context) {
   </pre>
       </div>
   <br/>
-  <div>
-  <div>
+    </div>
 </details>
 </p>
-</p>   
+</p>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<h2 id="content-based-router">6. Content-based Router</h2>
+<p>
+  <figure>
+     <img
+        src="./images/Design_decisions_content_based_router.png"
+        alt="Content-based Router"
+        />
+     <figcaption>Content-based Router</figcaption>
+  </figure>
+<h3>Problem</h3>
+<p> Functions must be orchestrated to adhere to a process flow to generate an error-free/desired output. How can the messages be routed to the correct workflow execution path within the workflow based on the message content?
+</p>
+<br/>
+<h3>Decision</h3>
+<p> A <i>Content-based Router</i> helps in controlling the workflow based on the message content. Each outgoing flow connected from the router corresponds to a condition, and the flow with the satisfied condition is traversed. Based on the condition, one or many flows can be traversed. In this pattern, the router examines the message content using numerous criteria like fields, values, and conditions before routing to the appropriate path.
+</p>
+<br/>
+<h3>Source</h3>
+<p> [<a
+  href="#Hohpe_and_Woolf_2004"
+  class="reference"
+  >Hohpe and Woolf 2004</a
+  >]</p>
+<br/>
+<h3>Pattern</h3>
+<p> Enterprise Integration Pattern</p>
+<br/>
+<h3>Type</h3>
+<p> Control Flow</p>
+<br/>
+<h3>Synonyms</h3>
+<p>Exclusive Choice, XOR-Split, Conditional Routing, Switch, Decision, Selection and OR-Split</p>
+<br/>
+<h3>Mapping</h3>
+<p>
+<details>
+  <summary>
+     <h4>AWS Step Functions</h4>
+  </summary>
+  <div>
+    ASF offers a Choice state as shown in the below figure and code snippet which is equivalent to the Content-based Router. Here ASF allows users to parse the document message, and based on the defined rules, one or multiple paths are chosen. Additionally, if none of the criteria are met, the Choice state offers a Default path.
+ <br/>
+ <figure>
+  <img
+     src="./images/aws_mapping_content_based_router.png"
+     alt="Content-based Router"
+     />
+  <figcaption>Content-based Router</figcaption>
+</figure>
+ <div>
+   <br/>
+   <b>ASF code snippet</b>:
+   <br/>
+   <div class="flex">
+      <pre>
+ <code class="language-json">
+  {
+    "Comment":"Content-based Router",
+    "StartAt":"ChoiceState",
+    "States":{
+       "ChoiceState":{
+          "Type":"Choice",
+          "Choices":[
+             {
+                "Variable":"$.variable",
+                "BooleanEquals":true,
+                "Next":"Choice 1"
+             },
+             {
+                "Variable":"$.variable",
+                "BooleanEquals":false,
+                "Next":"Choice 2"
+             }
+          ]
+       },
+       "Choice 1":{
+          "Type":"Task",
+          "Resource":"arn:aws:states:::lambda:invoke",
+          "Parameters":{
+             "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+             "Payload":{
+                "Input.$":"$"
+             }
+          },
+          "End":true
+       },
+       "Choice 2":{
+          "Type":"Task",
+          "Resource":"arn:aws:states:::lambda:invoke",
+          "Parameters":{
+             "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+             "Payload":{
+                "Input.$":"$"
+             }
+          },
+          "End":true
+       }
+    }
+ }
+ </code>
+</pre>
+   </div>
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Zeebe</h4>
+  </summary>
+  <div>
+    "Exclusive Gateway" simulates the <i>Content-based Router</i> operations by controlling the message flow between the various branches. This gateway can also deliver the message to one or multiple branches based on the condition expression, as shown in the below figure.
+  <figure>
+     <img
+        src="./images/zeebe_mapping_content_based_router.png"
+        alt="Content-based Router"
+        />
+     <figcaption>Content-based Router</figcaption>
+  </figure>
+  <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Azure Durable Functions</h4>
+  </summary>
+  <div>
+  With the below code snippet, a Content-based Router is realized in ADF by using conditionals to control the orchestration flow.
+    <div>
+      <br/>
+      <b>ADF code snippet</b>:
+      <br/>
+      <div class="flex">
+         <pre>
+    <code class="language-javascript">
+const df = require("durable-functions");
+
+module.exports = df.orchestrator(function* (context) {
+    var result
+    // Get input
+    const data = context.df.getInput()
+
+    // Perform parallel processing
+    if (data.isFunction1) {
+        result = yield context.df.callActivity("function1", data)
+    } else {
+        result = yield context.df.callActivity("function2", data)
+    }
+
+    return result
+});
+    </code>
+  </pre>
+      </div>
+  <br/>
+    </div>
+</details>
+</p>
+</p>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<h2 id="loop">7. Loop</h2>
+<p>
+  <figure>
+     <img
+        src="./images/Design_decisions_loop.png"
+        alt="Loop"
+        />
+     <figcaption>Loop</figcaption>
+  </figure>
+<h3>Problem</h3>
+<p> In a serverless workflow, certain functions have to be executed multiple times to produce the desired outcome. How can the workflow orchestrate a function to be reused when it needs to be triggered recursively?
+</p>
+<br/>
+<h3>Decision</h3>
+<p> The <i>Loop</i> pattern is used to loop through the function multiple times
+</p>
+<br/>
+<h3>Source</h3>
+<p> [<a
+  href="#Ibsen_and_Anstey_2010"
+  class="reference"
+  >Ibsen and Anstey 2010</a
+  >]</p>
+<br/>
+<h3>Pattern</h3>
+<p> Enterprise Integration Pattern</p>
+<br/>
+<h3>Type</h3>
+<p> Control Flow</p>
+<br/>
+<h3>Synonyms</h3>
+<p>Arbitrary Cycles, Iteration, Cycle</p>
+<br/>
+<h3>Mapping</h3>
+<p>
+<details>
+  <summary>
+     <h4>AWS Step Functions</h4>
+  </summary>
+  <div>
+    ASF does not natively support the Loop construct. However, the Loop construct can be achieved by orchestrating multiple states. The below figure and code snippet represents the pattern assembled using the "While" loop logic.
+ <br/>
+ <figure>
+  <img
+     src="./images/imagesaws_mapping_while_loop.png"
+     alt="While Loop"
+     />
+  <figcaption>While Loop</figcaption>
+</figure>
+ <div>
+   <br/>
+   <b>ASF code snippet</b>:
+   <br/>
+   <div class="flex">
+      <pre>
+ <code class="language-json">
+{
+  "Comment":"Loop",
+  "StartAt":"ChoiceState",
+  "States":{
+     "State 1":{
+        "Type":"Task",
+        "Resource":"arn:aws:states:::lambda:invoke",
+        "Parameters":{
+           "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+           "Payload":{
+              "Input.$":"$"
+           }
+        },
+        "Next":"ChoiceState"
+     },
+     "ChoiceState":{
+        "Type":"Choice",
+        "Choices":[
+           {
+              "Variable":"$.variable",
+              "BooleanEquals":true,
+              "Next":"CompletedState"
+           }
+        ],
+        "Default":"State 1"
+     },
+     "CompletedState":{
+        "Type":"Pass",
+        "End":true
+     }
+  }
+}
+ </code>
+</pre>
+   </div>
+  <br/>
+  While, the below figure and code snippet shows how the same Loop construct has been realized using a "Do-While" logic.
+  <br/>
+  <figure>
+    <img
+       src="./images/aws_mapping_do_while_loop.png"
+       alt="Do-While Loop"
+       />
+    <figcaption>Do-While Loop</figcaption>
+  </figure>
+   <div>
+     <br/>
+     <b>ASF code snippet</b>:
+     <br/>
+     <div class="flex">
+        <pre>
+   <code class="language-json">
+{
+  "Comment":"Loop",
+  "StartAt":"State 1",
+  "States":{
+     "State 1":{
+        "Type":"Task",
+        "Resource":"arn:aws:states:::lambda:invoke",
+        "Parameters":{
+           "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+           "Payload":{
+              "Input.$":"$"
+           }
+        },
+        "Next":"ChoiceState"
+     },
+     "ChoiceState":{
+        "Type":"Choice",
+        "Choices":[
+           {
+              "Variable":"$.variable",
+              "BooleanEquals":true,
+              "Next":"PassState"
+           }
+        ],
+        "Default":"State 1"
+     },
+     "PassState":{
+        "Type":"Pass",
+        "End":true
+     }
+  }
+}
+   </code>
+  </pre>
+     </div>
+     <br/>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Zeebe</h4>
+  </summary>
+  <div>
+    Zeebe Modeler does not provide an out-of-the-box implementation to perform loops even if BPMN 2.0 has a loop task element. However, the below figure shows how the loop pattern can be implemented using a combination of "Service task", "Exclusive Gateway",  and sequence/message flow connector.
+  <figure>
+     <img
+        src="./images/zeebe_mapping_loop.pn"
+        alt="Loop"
+        />
+     <figcaption>Loop</figcaption>
+  </figure>
+  <br/>
+  <div>
+  </div>
+</details>
+<details>
+  <summary>
+     <h4>Azure Durable Functions</h4>
+  </summary>
+  <div>
+    In ADF, looping of the functions can be implemented using entry/exit controlled loops. The below code snippet shows how Loop pattern is implemented using a <i>While</i> loop. 
+    <div>
+      <br/>
+      <b>ADF code snippet</b>:
+      <br/>
+      <div class="flex">
+         <pre>
+    <code class="language-javascript">
+const df = require("durable-functions");
+
+module.exports = df.orchestrator(function* (context) {
+    var result
+    // Get input
+    const data = context.df.getInput()
+
+    // Loop till condition is false
+    while (data.loopCondition) {
+        result = yield context.df.callActivity("function1", data)
+    }
+
+    return result
+});  
+    </code>
+  </pre>
+      </div>
+  <br/>
+    </div>
+</details>
+</p>
+</p>
            <section id="references">
                <h2>8. References</h2>
                <ol>
