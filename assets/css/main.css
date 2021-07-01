@@ -12,7 +12,7 @@
   --color-grey: #696a6e;
   --color-light-grey: #9d9ea3;
   --color-white: #f5f7ff;
-  --color-maestro-red: #900c3f;
+  --color-faasify-red: #900c3f;
 
   /* aliases */
   --color-dark-gray: var(--color-dark-grey);
@@ -66,7 +66,7 @@ main > section {
 
 blockquote {
   background: var(--color-dark-grey);
-  border-left: 1rem solid var(--color-maestro-red);
+  border-left: 1rem solid var(--color-faasify-red);
   color: var(--color-light-grey);
   line-height: 2rem;
   margin: 1.5rem 1rem;
@@ -104,7 +104,7 @@ sup a {
 }
 
 sup a:hover {
-  color: var(--color-maestro-red);
+  color: var(--color-faasify-red);
 }
 
 /* ---------------------------------
@@ -158,8 +158,8 @@ img {
   margin: 0;
 }
 
-.maestro-border {
-  border: 3px solid var(--color-maestro-red);
+.faasify-border {
+  border: 3px solid var(--color-faasify-red);
   border-radius: 25px;
 }
 
@@ -232,7 +232,7 @@ code {
 }
 
 code.dark {
-  border: 2px solid var(--color-maestro-red);
+  border: 2px solid var(--color-faasify-red);
   border-radius: 1rem;
   padding: 0.5vh 1vw;
 }
@@ -279,7 +279,7 @@ nav#site-navigation a {
 
 header {
   /* background-color: var(--color-white); */
-  background-image: url('../images/logos/maestro/background.png');
+  background-image: url('../images/logos/faasify/background.png');
   color: var(--color-dark-grey);
   height: 100vh;
 }
@@ -312,7 +312,7 @@ header figure img {
 }
 
 header figure span {
-  color: var(--color-maestro-red);
+  color: var(--color-faasify-red);
 }
 
 /* ---------------------------------
@@ -372,7 +372,7 @@ header figure span {
 
 
 #patterns h1 {
-  color: var(--color-maestro-red);
+  color: var(--color-faasify-red);
 }
 
 #patterns h2 {
@@ -457,7 +457,7 @@ h3 {
 .highlight {
   font-style: italic;
   font-weight: 500;
-  color: var(--color-maestro-red);
+  color: var(--color-faasify-red);
 }
 
 table {
@@ -491,7 +491,7 @@ td {
 ------------------------------------ */
 
 .command {
-  color: var(--color-maestro-red);
+  color: var(--color-faasify-red);
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -504,7 +504,7 @@ td {
   color: #98971a;
 }
 
-#list-command .maestro-resource {
+#list-command .faasify-resource {
   color: #b8bb26;
 }
 
@@ -520,7 +520,7 @@ td {
 }
 
 .reference:hover {
-  color: var(--color-maestro-red);
+  color: var(--color-faasify-red);
 }
 
 #references h2 {
@@ -545,7 +545,7 @@ td {
 }
 
 #references a:hover {
-  color: var(--color-maestro-red);
+  color: var(--color-faasify-red);
 }
 
 /* ---------------------------------
@@ -599,13 +599,13 @@ td {
 }
 
 #our-team a {
-  color: var(--color-maestro-red);
+  color: var(--color-faasify-red);
   text-decoration: none;
 }
 
 #our-team li a img {
   border-radius: 100%;
-  border: 2px solid var(--color-maestro-red);
+  border: 2px solid var(--color-faasify-red);
   margin: 0 auto 20px;
   width: 15vw;
   max-width: 250px;
@@ -625,7 +625,7 @@ td {
 }
 
 #our-team .individual li img:hover {
-  background-color: var(--color-maestro-red);
+  background-color: var(--color-faasify-red);
 }
 
 #our-team .individual li {
@@ -644,7 +644,7 @@ small {
 }
 
 #our-team small a {
-  color: var(--color-maestro-red);
+  color: var(--color-faasify-red);
 }
 
 /* ---------------------------------
