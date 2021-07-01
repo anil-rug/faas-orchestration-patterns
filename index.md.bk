@@ -1046,7 +1046,7 @@ For complex Content Enricher scenarios, the below code snippet presents how the 
 
 **Problem**: Functions that pass large payloads of data within the workflow can be terminated due to size limitations. How will the communication between functions be handled when large messages need to be passed within the workflow?
 
-**Decision**:  Large fields are temporarily filtered in the source function and enriched in the destination function using the _Claim Check_ pattern. The payload is stored in a persistent store, and a _Claim Check_ is passed to the target component. Internally, _Claim Check_ uses the _Content Filter_ and _Content Enricher_ pattern. The _Content Filter_ pattern removes insignificant data from an output message leaving only essential information, thus simplifying its structure. The target function then uses the _Content Enricher_ pattern to augment the received message with the missing information, usually with the help of an external data source.
+**Decision**: Large fields are temporarily filtered in the source function and enriched in the destination function using the _Claim Check_ pattern. The payload is stored in a persistent store, and a _Claim Check_ is passed to the target component. Internally, _Claim Check_ uses the _Content Filter_ and _Content Enricher_ pattern. The _Content Filter_ pattern removes insignificant data from an output message leaving only essential information, thus simplifying its structure. The target function then uses the _Content Enricher_ pattern to augment the received message with the missing information, usually with the help of an external data source.
 
 **Source**: [[Hohpe and Woolf 2004]](#1)
 
@@ -1129,7 +1129,7 @@ The Normalizer pattern is function-specific, and the pattern can be achieved usi
 
 **Problem**: How can we effectively analyze and debug the flow of messages in a loosely coupled and granular system?
 
-**Decision**:  The primary purpose of employing a serverless paradigm is to build loosely coupled and granular systems. However, building such systems induces the complexity of debugging and traceability as it is not intuitively possible to comprehend the flow of the message. This problem can be solved using the _Message History_ pattern, in which the system maintains the history of the message. Thus when a message fails to be processed in the system, the developer can trace back the steps and provide instant feedback and solution.
+**Decision**: The primary purpose of employing a serverless paradigm is to build loosely coupled and granular systems. However, building such systems induces the complexity of debugging and traceability as it is not intuitively possible to comprehend the flow of the message. This problem can be solved using the _Message History_ pattern, in which the system maintains the history of the message. Thus when a message fails to be processed in the system, the developer can trace back the steps and provide instant feedback and solution.
 
 **Source**: [[Hohpe and Woolf 2004]](#1)
 
@@ -1200,7 +1200,7 @@ ASF supports Splitter and Aggregator with the help of dynamic parallelism Map st
 </div>
 <br/>
 <pre>
-  <code class="language-javascript">
+  <code class="language-json">
     {
     "Comment": "Callback",
     "StartAt": "MapState",

@@ -106,7 +106,7 @@
             <nav>
                <ul></ul>
             </nav>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <h2 id="process-manager">1. Process Manager</h2>
             <p>
                <figure>
@@ -186,15 +186,15 @@
                   <h4>Zeebe</h4>
                </summary>
                <div>
-               <figure>
-                  <img
-                     src="./images/zeebe_mapping_process_manager.png"
-                     alt="Process Manager"
-                     />
-                  <figcaption>Process Manager</figcaption>
-               </figure>
-               The "Process Manager" pattern for Zeebe is the broker coordinating the various tasks in the workflow. Here the various tasks are associated with their corresponding hosted function.
-               <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_process_manager.png"
+                        alt="Process Manager"
+                        />
+                     <figcaption>Process Manager</figcaption>
+                  </figure>
+                  The "Process Manager" pattern for Zeebe is the broker coordinating the various tasks in the workflow. Here the various tasks are associated with their corresponding hosted function.
+                  <br/>
                </div>
             </details>
             <details>
@@ -202,20 +202,20 @@
                   <h4>Azure Durable Functions</h4>
                </summary>
                <div>
-               <figure>
-                  <img
-                     src="./images/adf_mapping_process_manager.png"
-                     alt="Process Manager"
-                     />
-                  <figcaption>Process Manager</figcaption>
-               </figure>
-               Here the message routing "Process Manager" pattern for ADF is presented. Here the various functions are orchestrated using the primary Orchestration Function.
-               <br/>
+                  <figure>
+                     <img
+                        src="./images/adf_mapping_process_manager.png"
+                        alt="Process Manager"
+                        />
+                     <figcaption>Process Manager</figcaption>
+                  </figure>
+                  Here the message routing "Process Manager" pattern for ADF is presented. Here the various functions are orchestrated using the primary Orchestration Function.
+                  <br/>
                </div>
             </details>
             </p>
             </p>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <h2 id="event-and-document-message">2. Event and Document Message</h2>
             <p>
                <figure>
@@ -256,15 +256,15 @@
                   <h4>AWS Step Functions</h4>
                </summary>
                <div>
-               <figure>
-                  <img
-                     src="./images/aws_mapping_event_document_message.png"
-                     alt="Event Document Message"
-                     />
-                  <figcaption>Event Document Message</figcaption>
-               </figure>
-               ASF can be triggered using an event message via the <a href="https://aws.amazon.com/api-gateway" class="reference">API Gateway</a>. The various states in ASF are traversed using a document message that is a JSON structured message.
-               <br/>
+                  <figure>
+                     <img
+                        src="./images/aws_mapping_event_document_message.png"
+                        alt="Event Document Message"
+                        />
+                     <figcaption>Event Document Message</figcaption>
+                  </figure>
+                  ASF can be triggered using an event message via the <a href="https://aws.amazon.com/api-gateway" class="reference">API Gateway</a>. The various states in ASF are traversed using a document message that is a JSON structured message.
+                  <br/>
                </div>
             </details>
             <details>
@@ -272,15 +272,15 @@
                   <h4>Zeebe</h4>
                </summary>
                <div>
-               <figure>
-                  <img
-                     src="./images/zeebe_mapping_event_document_message.png"
-                     alt="Event Document Message"
-                     />
-                  <figcaption>Event Document Message</figcaption>
-               </figure>
-               In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
-               <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_event_document_message.png"
+                        alt="Event Document Message"
+                        />
+                     <figcaption>Event Document Message</figcaption>
+                  </figure>
+                  In Zeebe, the Event and Document message constructs invoke the workflow and handle the internal communication between elements, respectively. A client can invoke the intermediatory Zeebe client, which in turn invokes the BPMN 2.0 Zeebe workflow via gRPC. Internally, the workflow uses variables and JSON messages to interact with the states.
+                  <br/>
                </div>
             </details>
             <details>
@@ -288,20 +288,20 @@
                   <h4>Azure Durable Functions</h4>
                </summary>
                <div>
-               <figure>
-                  <img
-                     src="./images/adf_mapping_event_document_message.png"
-                     alt="Event Document Message"
-                     />
-                  <figcaption>Event Document Message</figcaption>
-               </figure>
-               In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions, as depicted by the figure.
-               <br/>
+                  <figure>
+                     <img
+                        src="./images/adf_mapping_event_document_message.png"
+                        alt="Event Document Message"
+                        />
+                     <figcaption>Event Document Message</figcaption>
+                  </figure>
+                  In ADF, the Event message construct invokes the orchestration function, and the Document message handles the internal message communication between the functions, as depicted by the figure.
+                  <br/>
                </div>
             </details>
             </p>
             </p>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <h2 id="message-endpoint">3. Message Endpoint</h2>
             <p>
                <figure>
@@ -345,14 +345,14 @@
                In ASF, Message Endpoint are linked to states with the "Task" type. The Task state has the following required fields:
                <ul>
                   <li><b>Resource</b>: ARN that uniquely identifies the specific AWS Lambda to execute.</li>
-                </ul>
-              <br/>
-              <div>
-                <br/>
-                <b>ASF snippet</b>:
-                <br/>
-                <div class="flex">
-                   <pre>
+               </ul>
+               <br/>
+               <div>
+                  <br/>
+                  <b>ASF snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
               <code class="language-json">
 {
    "State":{
@@ -369,8 +369,8 @@
 }
               </code>
             </pre>
-                </div>
-               <br/>
+                  </div>
+                  <br/>
                </div>
             </details>
             <details>
@@ -387,11 +387,11 @@
                   <figcaption>Message Endpoint</figcaption>
                </figure>
                <div>
-                <br/>
-                <b>ASF snippet</b>:
-                <br/>
-                <div class="flex">
-                   <pre>
+                  <br/>
+                  <b>ASF snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
               <code class="language-xml">
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;bpmn:definitions xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot; xmlns:bpmndi=&quot;http://www.omg.org/spec/BPMN/20100524/DI&quot; xmlns:dc=&quot;http://www.omg.org/spec/DD/20100524/DC&quot; xmlns:zeebe=&quot;http://camunda.org/schema/zeebe/1.0&quot; id=&quot;Definitions_0dmi4p0&quot; targetNamespace=&quot;http://bpmn.io/schema/bpmn&quot; exporter=&quot;Zeebe Modeler&quot; exporterVersion=&quot;0.11.0&quot;&gt;
@@ -412,8 +412,8 @@
 &lt;/bpmn:definitions&gt;
               </code>
             </pre>
-                </div>
-               <br/>
+                  </div>
+                  <br/>
                </div>
             </details>
             <details>
@@ -421,79 +421,79 @@
                   <h4>Azure Durable Functions</h4>
                </summary>
                <div>
-              The Message Endpoint construct, which receives the messages and processes the message, is realized by the Activity Function. The functions must be idempotent as it follows the at-least-once execution strategy. The below code snippet illustrates how this construct can be used in ADF.
-              <div>
-                <br/>
-                <b>ASF snippet</b>:
-                <br/>
-                <div class="flex">
-                   <pre>
+               The Message Endpoint construct, which receives the messages and processes the message, is realized by the Activity Function. The functions must be idempotent as it follows the at-least-once execution strategy. The below code snippet illustrates how this construct can be used in ADF.
+               <div>
+                  <br/>
+                  <b>ASF snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
               <code class="language-javascript">
                 const function = yield context.df.callActivity("Activity Function", "Payload")
               </code>
             </pre>
-                </div>
-               <br/>
-              </div>
+                  </div>
+                  <br/>
+               </div>
             </details>
             </p>
             </p>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <h2 id="pipes-and-filters">4. Pipes and Filters</h2>
             <p>
-              <figure>
-                 <img
-                    src="./images/Design_decisions_pipes_and_filters.png"
-                    alt="Pipes and Filters"
-                    />
-                 <figcaption>Pipes and Filters</figcaption>
-              </figure>
-           <h3>Problem</h3>
-           <p> How to decompose a task that performs complex processing into a series of separate elements that can be reused?
-           </p>
-           <br/>
-           <h3>Decision</h3>
-           <p> <i>Pipes and Filters</i> help in implementing complex processing in a granular, independent, resilient and sequential manner. Moreover, the fundamental building blocks of serverless workflows are functions, and each function in the pipeline is generally responsible for small transactions making this pattern style optimum.
-           </p>
-           <br/>
-           <h3>Source</h3>
-           <p> [<a
-              href="#Hohpe_and_Woolf_2004"
-              class="reference"
-              >Hohpe and Woolf 2004</a
-              >]</p>
-           <br/>
-           <h3>Pattern</h3>
-           <p> Enterprise Integration Pattern</p>
-           <br/>
-           <h3>Type</h3>
-           <p> Construct</p>
-           <br/>
-           <h3>Synonyms</h3>
-           <p>Sequence, Sequential routing, Serial Routing</p>
-           <br/>
-           <h3>Mapping</h3>
-           <p>
-           <details>
-              <summary>
-                 <h4>AWS Step Functions</h4>
-              </summary>
-              <div>
-                ASF externalize the Pipes and Filters pattern as represented in the below figure and code snippet by extracting the coordination from the filter implementations into a state machine that orchestrates the sequence of events.
-             <br/>
-             <figure>
-              <img
-                 src="./images/aws_mapping_pipes_and_filters.png"
-                 alt="Pipes and Filter"
-                 />
-              <figcaption>Pipes and Filter</figcaption>
-           </figure>
-             <div>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_pipes_and_filters.png"
+                     alt="Pipes and Filters"
+                     />
+                  <figcaption>Pipes and Filters</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> How to decompose a task that performs complex processing into a series of separate elements that can be reused?
+            </p>
+            <br/>
+            <h3>Decision</h3>
+            <p> <i>Pipes and Filters</i> help in implementing complex processing in a granular, independent, resilient and sequential manner. Moreover, the fundamental building blocks of serverless workflows are functions, and each function in the pipeline is generally responsible for small transactions making this pattern style optimum.
+            </p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Hohpe_and_Woolf_2004"
+               class="reference"
+               >Hohpe and Woolf 2004</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Construct</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p>Sequence, Sequential routing, Serial Routing</p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               ASF externalize the Pipes and Filters pattern as represented in the below figure and code snippet by extracting the coordination from the filter implementations into a state machine that orchestrates the sequence of events.
                <br/>
-               <b>ASF code snippet</b>:
-               <br/>
-               <div class="flex">
-                  <pre>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_pipes_and_filters.png"
+                     alt="Pipes and Filter"
+                     />
+                  <figcaption>Pipes and Filter</figcaption>
+               </figure>
+               <div>
+                  <br/>
+                  <b>ASF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
              <code class="language-json">
 {
   "Comment":"Pipes And Filter Pattern",
@@ -519,33 +519,33 @@
 }
              </code>
            </pre>
+                  </div>
+                  <br/>
                </div>
-              <br/>
-              </div>
-           </details>
-           <details>
-              <summary>
-                 <h4>Zeebe</h4>
-              </summary>
-              <div>
-                The below figure shows how each Service task (filter) performs only one distinct operation, and the pipes that are the sequence/message flow coordinate the various tasks.
-              <figure>
-                 <img
-                    src="./images/zeebe_mapping_pipes_and_filters.png"
-                    alt="Pipes and Filters"
-                    />
-                 <figcaption>Pipes and Filters</figcaption>
-              </figure>
-              <br/>
-              </div>
-           </details>
-           <details>
-              <summary>
-                 <h4>Azure Durable Functions</h4>
-              </summary>
-              <div>
-                <i>Pipes and Filters</i> play an essential aspect in standardizing a workflow execution and this is referred to as <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=javascript" class="reference">Function Chaining</a> pattern in ADF. The below code snippet shows how each Activity Function (filter) performs only one distinct operation and the pipes that are the JSON message that coordinate the various functions.
-                <div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The below figure shows how each Service task (filter) performs only one distinct operation, and the pipes that are the sequence/message flow coordinate the various tasks.
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_pipes_and_filters.png"
+                        alt="Pipes and Filters"
+                        />
+                     <figcaption>Pipes and Filters</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               <i>Pipes and Filters</i> play an essential aspect in standardizing a workflow execution and this is referred to as <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=javascript" class="reference">Function Chaining</a> pattern in ADF. The below code snippet shows how each Activity Function (filter) performs only one distinct operation and the pipes that are the JSON message that coordinate the various functions.
+               <div>
                   <br/>
                   <b>ASF snippet</b>:
                   <br/>
@@ -568,67 +568,65 @@ module.exports = df.orchestrator(function* (context) {
                 </code>
               </pre>
                   </div>
-              <br/>
-                </div>
-           </details>
-           </p>
-           </p>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<h2 id="multicast">5. Multicast</h2>
-<p>
-  <figure>
-     <img
-        src="./images/Design_decisions_multicast.png"
-        alt="Multicast"
-        />
-     <figcaption>Multicast</figcaption>
-  </figure>
-<h3>Problem</h3>
-<p> How will the serverless workflow route the same message to several endpoints and process them differently?
-</p>
-<br/>
-<h3>Decision</h3>
-<p> A <i>Multicast</i> pattern is used to model the execution of parallel flows/concurrency by sending a copy of the same message to multiple recipients without checking any conditions. Here all outgoing flows are executed at the same time.
-</p>
-<br/>
-<h3>Source</h3>
-<p> [<a
-  href="#Ibsen_and_Anstey_2010"
-  class="reference"
-  >Ibsen and Anstey 2010</a
-  >]</p>
-<br/>
-<h3>Pattern</h3>
-<p> Enterprise Integration Pattern</p>
-<br/>
-<h3>Type</h3>
-<p> Control Flow</p>
-<br/>
-<h3>Synonyms</h3>
-<p>Parallel Split, AND-Split, Parallel Routing, Fork</p>
-<br/>
-<h3>Mapping</h3>
-<p>
-<details>
-  <summary>
-     <h4>AWS Step Functions</h4>
-  </summary>
-  <div>
-    The depicted figure and code snippet shows how the <i>Multicast</i> pattern can be mapped to the Parallel state offered by ASF. Here the mandatory field while configuring this state is Branches. Branches support one to multiple possible paths, with each route consisting of one or many state transitions. In the Parallel state, each branch is provided with a copy of the input data. This pattern does not require the output of each branch to produce outputs that have a homogenous structure. However, for a data processing pipeline's simplicity and ease of operations, each branch should produce outputs complying with a uniform format.
- <br/>
- <figure>
-  <img
-     src="./images/aws_mapping_multicast.png"
-     alt="Multicast"
-     />
-  <figcaption>Multicast</figcaption>
-</figure>
- <div>
-   <br/>
-   <b>ASF code snippet</b>:
-   <br/>
-   <div class="flex">
-      <pre>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="multicast">5. Multicast</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_multicast.png"
+                     alt="Multicast"
+                     />
+                  <figcaption>Multicast</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> How will the serverless workflow route the same message to several endpoints and process them differently?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> A <i>Multicast</i> pattern is used to model the execution of parallel flows/concurrency by sending a copy of the same message to multiple recipients without checking any conditions. Here all outgoing flows are executed at the same time.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Ibsen_and_Anstey_2010"
+               class="reference"
+               >Ibsen and Anstey 2010</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Control Flow</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p>Parallel Split, AND-Split, Parallel Routing, Fork</p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               The depicted figure and code snippet shows how the <i>Multicast</i> pattern can be mapped to the Parallel state offered by ASF. Here the mandatory field while configuring this state is Branches. Branches support one to multiple possible paths, with each route consisting of one or many state transitions. In the Parallel state, each branch is provided with a copy of the input data. This pattern does not require the output of each branch to produce outputs that have a homogenous structure. However, for a data processing pipeline's simplicity and ease of operations, each branch should produce outputs complying with a uniform format.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_multicast.png"
+                     alt="Multicast"
+                     />
+                  <figcaption>Multicast</figcaption>
+               </figure>
+               <div>
+                  <br/>
+                  <b>ASF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
  <code class="language-json">
 {
   "Comment":"Multicast Pattern",
@@ -662,38 +660,38 @@ module.exports = df.orchestrator(function* (context) {
 }
  </code>
 </pre>
-   </div>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Zeebe</h4>
-  </summary>
-  <div>
-  With the "Parallel Gateway", the <i>Multicast</i> pattern can be implemented using BPMN 2.0 Zeebe Modeler. The below figure shows how the same message is transferred to two functions parallelly.
-  <figure>
-     <img
-        src="./images/zeebe_mapping_multicast.png"
-        alt="Multicast"
-        />
-     <figcaption>Multicast</figcaption>
-  </figure>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Azure Durable Functions</h4>
-  </summary>
-  <div>
-  The <i>Multicast</i> pattern is implemented in ADF by following the below code snippet. In this implementation, the same data is sent to multiple Activity Functions and executed simultaneously.
-    <div>
-      <br/>
-      <b>ADF code snippet</b>:
-      <br/>
-      <div class="flex">
-         <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  With the "Parallel Gateway", the <i>Multicast</i> pattern can be implemented using BPMN 2.0 Zeebe Modeler. The below figure shows how the same message is transferred to two functions parallelly.
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_multicast.png"
+                        alt="Multicast"
+                        />
+                     <figcaption>Multicast</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               The <i>Multicast</i> pattern is implemented in ADF by following the below code snippet. In this implementation, the same data is sent to multiple Activity Functions and executed simultaneously.
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
     <code class="language-javascript">
 const df = require("durable-functions");
 
@@ -713,68 +711,66 @@ module.exports = df.orchestrator(function* (context) {
 });
     </code>
   </pre>
-      </div>
-  <br/>
-    </div>
-</details>
-</p>
-</p>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<h2 id="content-based-router">6. Content-based Router</h2>
-<p>
-  <figure>
-     <img
-        src="./images/Design_decisions_content_based_router.png"
-        alt="Content-based Router"
-        />
-     <figcaption>Content-based Router</figcaption>
-  </figure>
-<h3>Problem</h3>
-<p> Functions must be orchestrated to adhere to a process flow to generate an error-free/desired output. How can the messages be routed to the correct workflow execution path within the workflow based on the message content?
-</p>
-<br/>
-<h3>Decision</h3>
-<p> A <i>Content-based Router</i> helps in controlling the workflow based on the message content. Each outgoing flow connected from the router corresponds to a condition, and the flow with the satisfied condition is traversed. Based on the condition, one or many flows can be traversed. In this pattern, the router examines the message content using numerous criteria like fields, values, and conditions before routing to the appropriate path.
-</p>
-<br/>
-<h3>Source</h3>
-<p> [<a
-  href="#Hohpe_and_Woolf_2004"
-  class="reference"
-  >Hohpe and Woolf 2004</a
-  >]</p>
-<br/>
-<h3>Pattern</h3>
-<p> Enterprise Integration Pattern</p>
-<br/>
-<h3>Type</h3>
-<p> Control Flow</p>
-<br/>
-<h3>Synonyms</h3>
-<p>Exclusive Choice, XOR-Split, Conditional Routing, Switch, Decision, Selection and OR-Split</p>
-<br/>
-<h3>Mapping</h3>
-<p>
-<details>
-  <summary>
-     <h4>AWS Step Functions</h4>
-  </summary>
-  <div>
-    ASF offers a Choice state as shown in the below figure and code snippet which is equivalent to the Content-based Router. Here ASF allows users to parse the document message, and based on the defined rules, one or multiple paths are chosen. Additionally, if none of the criteria are met, the Choice state offers a Default path.
- <br/>
- <figure>
-  <img
-     src="./images/aws_mapping_content_based_router.png"
-     alt="Content-based Router"
-     />
-  <figcaption>Content-based Router</figcaption>
-</figure>
- <div>
-   <br/>
-   <b>ASF code snippet</b>:
-   <br/>
-   <div class="flex">
-      <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="content-based-router">6. Content-based Router</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_content_based_router.png"
+                     alt="Content-based Router"
+                     />
+                  <figcaption>Content-based Router</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> Functions must be orchestrated to adhere to a process flow to generate an error-free/desired output. How can the messages be routed to the correct workflow execution path within the workflow based on the message content?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> A <i>Content-based Router</i> helps in controlling the workflow based on the message content. Each outgoing flow connected from the router corresponds to a condition, and the flow with the satisfied condition is traversed. Based on the condition, one or many flows can be traversed. In this pattern, the router examines the message content using numerous criteria like fields, values, and conditions before routing to the appropriate path.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Hohpe_and_Woolf_2004"
+               class="reference"
+               >Hohpe and Woolf 2004</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Control Flow</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p>Exclusive Choice, XOR-Split, Conditional Routing, Switch, Decision, Selection and OR-Split</p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               ASF offers a Choice state as shown in the below figure and code snippet which is equivalent to the Content-based Router. Here ASF allows users to parse the document message, and based on the defined rules, one or multiple paths are chosen. Additionally, if none of the criteria are met, the Choice state offers a Default path.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_content_based_router.png"
+                     alt="Content-based Router"
+                     />
+                  <figcaption>Content-based Router</figcaption>
+               </figure>
+               <div>
+                  <br/>
+                  <b>ASF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
  <code class="language-json">
   {
     "Comment":"Content-based Router",
@@ -821,38 +817,38 @@ module.exports = df.orchestrator(function* (context) {
  }
  </code>
 </pre>
-   </div>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Zeebe</h4>
-  </summary>
-  <div>
-    "Exclusive Gateway" simulates the <i>Content-based Router</i> operations by controlling the message flow between the various branches. This gateway can also deliver the message to one or multiple branches based on the condition expression, as shown in the below figure.
-  <figure>
-     <img
-        src="./images/zeebe_mapping_content_based_router.png"
-        alt="Content-based Router"
-        />
-     <figcaption>Content-based Router</figcaption>
-  </figure>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Azure Durable Functions</h4>
-  </summary>
-  <div>
-  With the below code snippet, a Content-based Router is realized in ADF by using conditionals to control the orchestration flow.
-    <div>
-      <br/>
-      <b>ADF code snippet</b>:
-      <br/>
-      <div class="flex">
-         <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  "Exclusive Gateway" simulates the <i>Content-based Router</i> operations by controlling the message flow between the various branches. This gateway can also deliver the message to one or multiple branches based on the condition expression, as shown in the below figure.
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_content_based_router.png"
+                        alt="Content-based Router"
+                        />
+                     <figcaption>Content-based Router</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               With the below code snippet, a Content-based Router is realized in ADF by using conditionals to control the orchestration flow.
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
     <code class="language-javascript">
 const df = require("durable-functions");
 
@@ -872,68 +868,66 @@ module.exports = df.orchestrator(function* (context) {
 });
     </code>
   </pre>
-      </div>
-  <br/>
-    </div>
-</details>
-</p>
-</p>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<h2 id="loop">7. Loop</h2>
-<p>
-  <figure>
-     <img
-        src="./images/Design_decisions_loop.png"
-        alt="Loop"
-        />
-     <figcaption>Loop</figcaption>
-  </figure>
-<h3>Problem</h3>
-<p> In a serverless workflow, certain functions have to be executed multiple times to produce the desired outcome. How can the workflow orchestrate a function to be reused when it needs to be triggered recursively?
-</p>
-<br/>
-<h3>Decision</h3>
-<p> The <i>Loop</i> pattern is used to loop through the function multiple times
-</p>
-<br/>
-<h3>Source</h3>
-<p> [<a
-  href="#Ibsen_and_Anstey_2010"
-  class="reference"
-  >Ibsen and Anstey 2010</a
-  >]</p>
-<br/>
-<h3>Pattern</h3>
-<p> Enterprise Integration Pattern</p>
-<br/>
-<h3>Type</h3>
-<p> Control Flow</p>
-<br/>
-<h3>Synonyms</h3>
-<p>Arbitrary Cycles, Iteration, Cycle</p>
-<br/>
-<h3>Mapping</h3>
-<p>
-<details>
-  <summary>
-     <h4>AWS Step Functions</h4>
-  </summary>
-  <div>
-    ASF does not natively support the Loop construct. However, the Loop construct can be achieved by orchestrating multiple states. The below figure and code snippet represents the pattern assembled using the "While" loop logic.
- <br/>
- <figure>
-  <img
-     src="./images/aws_mapping_while_loop.png"
-     alt="While Loop"
-     />
-  <figcaption>While Loop</figcaption>
-</figure>
- <div>
-   <br/>
-   <b>ASF code snippet</b>:
-   <br/>
-   <div class="flex">
-      <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="loop">7. Loop</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_loop.png"
+                     alt="Loop"
+                     />
+                  <figcaption>Loop</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> In a serverless workflow, certain functions have to be executed multiple times to produce the desired outcome. How can the workflow orchestrate a function to be reused when it needs to be triggered recursively?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> The <i>Loop</i> pattern is used to loop through the function multiple times</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Ibsen_and_Anstey_2010"
+               class="reference"
+               >Ibsen and Anstey 2010</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Control Flow</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p>Arbitrary Cycles, Iteration, Cycle</p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               ASF does not natively support the Loop construct. However, the Loop construct can be achieved by orchestrating multiple states. The below figure and code snippet represents the pattern assembled using the "While" loop logic.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_while_loop.png"
+                     alt="While Loop"
+                     />
+                  <figcaption>While Loop</figcaption>
+               </figure>
+               <div>
+               <br/>
+               <b>ASF code snippet</b>:
+               <br/>
+               <div class="flex">
+                  <pre>
  <code class="language-json">
 {
   "Comment":"Loop",
@@ -969,23 +963,23 @@ module.exports = df.orchestrator(function* (context) {
 }
  </code>
 </pre>
-   </div>
-  <br/>
-  While, the below figure and code snippet shows how the same Loop construct has been realized using a "Do-While" logic.
-  <br/>
-  <figure>
-    <img
-       src="./images/aws_mapping_do_while_loop.png"
-       alt="Do-While Loop"
-       />
-    <figcaption>Do-While Loop</figcaption>
-  </figure>
-   <div>
-     <br/>
-     <b>ASF code snippet</b>:
-     <br/>
-     <div class="flex">
-        <pre>
+               </div>
+               <br/>
+               While, the below figure and code snippet shows how the same Loop construct has been realized using a "Do-While" logic.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_do_while_loop.png"
+                     alt="Do-While Loop"
+                     />
+                  <figcaption>Do-While Loop</figcaption>
+               </figure>
+               <div>
+                  <br/>
+                  <b>ASF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
    <code class="language-json">
 {
   "Comment":"Loop",
@@ -1021,39 +1015,39 @@ module.exports = df.orchestrator(function* (context) {
 }
    </code>
   </pre>
-     </div>
-     <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Zeebe</h4>
-  </summary>
-  <div>
-    Zeebe Modeler does not provide an out-of-the-box implementation to perform loops even if BPMN 2.0 has a loop task element. However, the below figure shows how the loop pattern can be implemented using a combination of "Service task", "Exclusive Gateway",  and sequence/message flow connector.
-  <figure>
-     <img
-        src="./images/zeebe_mapping_loop.png"
-        alt="Loop"
-        />
-     <figcaption>Loop</figcaption>
-  </figure>
-  <br/>
-  <div>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Azure Durable Functions</h4>
-  </summary>
-  <div>
-    In ADF, looping of the functions can be implemented using entry/exit controlled loops. The below code snippet shows how Loop pattern is implemented using a <i>While</i> loop. 
-    <div>
-      <br/>
-      <b>ADF code snippet</b>:
-      <br/>
-      <div class="flex">
-         <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+               Zeebe Modeler does not provide an out-of-the-box implementation to perform loops even if BPMN 2.0 has a loop task element. However, the below figure shows how the loop pattern can be implemented using a combination of "Service task", "Exclusive Gateway",  and sequence/message flow connector.
+               <figure>
+                  <img
+                     src="./images/zeebe_mapping_loop.png"
+                     alt="Loop"
+                     />
+                  <figcaption>Loop</figcaption>
+               </figure>
+               <br/>
+               <div>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               In ADF, looping of the functions can be implemented using entry/exit controlled loops. The below code snippet shows how Loop pattern is implemented using a <i>While</i> loop. 
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
     <code class="language-javascript">
 const df = require("durable-functions");
 
@@ -1071,68 +1065,66 @@ module.exports = df.orchestrator(function* (context) {
 });  
     </code>
   </pre>
-      </div>
-  <br/>
-    </div>
-</details>
-</p>
-</p>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<h2 id="delay">8. Delay</h2>
-<p>
-  <figure>
-     <img
-        src="./images/Design_decisions_delay.png"
-        alt="Delay"
-        />
-     <figcaption>Delay</figcaption>
-  </figure>
-<h3>Problem</h3>
-<p> There are situations during a workflow execution when it needs to be paused or delayed to wait for a response/acknowledgment from an external system. How can the workflow incorporate a delay or wait?
-</p>
-<br/>
-<h3>Decision</h3>
-<p> The <i>Delay</i> pattern helps in waiting or delaying a function from executing. The delay/wait can be configured by setting a time/period.
-</p>
-<br/>
-<h3>Source</h3>
-<p> [<a
-  href="#Ibsen_and_Anstey_2010"
-  class="reference"
-  >Ibsen and Anstey 2010</a
-  >]</p>
-<br/>
-<h3>Pattern</h3>
-<p> Enterprise Integration Pattern</p>
-<br/>
-<h3>Type</h3>
-<p> Control Flow</p>
-<br/>
-<h3>Synonyms</h3>
-<p></p>
-<br/>
-<h3>Mapping</h3>
-<p>
-<details>
-  <summary>
-     <h4>AWS Step Functions</h4>
-  </summary>
-  <div>
-  The <i>Delay</i> construct can be mapped to the ASF Wait state as shown by the below figure and code snippet. ASF offers the option to delay/pause the ASF execution using seconds or with a relative date-time value. The Delay pattern is ideal when using ASF Standard execution. Although ASF Express offers a Wait state, the users need to be aware that the whole state execution for express workflow is capped at 5 minutes. Hence, making the Wait state an anti-pattern when implemented for Express workflow.
- <br/>
- <figure>
-  <img
-     src="./images/aws_mapping_delay.png"
-     alt="Delay"
-     />
-  <figcaption>Delay</figcaption>
-</figure>
- <div>
-   <br/>
-   <b>ASF code snippet</b>:
-   <br/>
-   <div class="flex">
-      <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="delay">8. Delay</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_delay.png"
+                     alt="Delay"
+                     />
+                  <figcaption>Delay</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> There are situations during a workflow execution when it needs to be paused or delayed to wait for a response/acknowledgment from an external system. How can the workflow incorporate a delay or wait?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> The <i>Delay</i> pattern helps in waiting or delaying a function from executing. The delay/wait can be configured by setting a time/period.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Ibsen_and_Anstey_2010"
+               class="reference"
+               >Ibsen and Anstey 2010</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Control Flow</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               The <i>Delay</i> construct can be mapped to the ASF Wait state as shown by the below figure and code snippet. ASF offers the option to delay/pause the ASF execution using seconds or with a relative date-time value. The Delay pattern is ideal when using ASF Standard execution. Although ASF Express offers a Wait state, the users need to be aware that the whole state execution for express workflow is capped at 5 minutes. Hence, making the Wait state an anti-pattern when implemented for Express workflow.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_delay.png"
+                     alt="Delay"
+                     />
+                  <figcaption>Delay</figcaption>
+               </figure>
+               <div>
+                  <br/>
+                  <b>ASF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
  <code class="language-json">
 {
   "Comment":"Wait",
@@ -1158,38 +1150,38 @@ module.exports = df.orchestrator(function* (context) {
 }
  </code>
 </pre>
-   </div>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Zeebe</h4>
-  </summary>
-  <div>
-    The below figure depicts how the BPMN 2.0 "Timer" event is used to achieve the <i>Delay</i> pattern.
-  <figure>
-     <img
-        src="./images/zeebe_mapping_delay.png"
-        alt="Delay"
-        />
-     <figcaption>Delay</figcaption>
-  </figure>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Azure Durable Functions</h4>
-  </summary>
-  <div>
-  ADF provides <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-timers?tabs=javascript" class="reference">durable timers</a> for orchestrator functions to implement delays or set up timeouts on async actions. The below code snippet depicts how the <i>Delay</i> pattern is used in ADF.
-    <div>
-      <br/>
-      <b>ADF code snippet</b>:
-      <br/>
-      <div class="flex">
-         <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The below figure depicts how the BPMN 2.0 "Timer" event is used to achieve the <i>Delay</i> pattern.
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_delay.png"
+                        alt="Delay"
+                        />
+                     <figcaption>Delay</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               ADF provides <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-timers?tabs=javascript" class="reference">durable timers</a> for orchestrator functions to implement delays or set up timeouts on async actions. The below code snippet depicts how the <i>Delay</i> pattern is used in ADF.
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
     <code class="language-javascript">
 const df = require("durable-functions");
 const moment = require("moment");
@@ -1208,61 +1200,59 @@ module.exports = df.orchestrator(function* (context) {
 });
     </code>
   </pre>
-      </div>
-  <br/>
-    </div>
-</details>
-</p>
-</p>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<h2 id="gateway">9. Gateway</h2>
-<p>
-  <figure>
-     <img
-        src="./images/Design_decisions_gateway.png"
-        alt="Gateway"
-        />
-     <figcaption>Gateway</figcaption>
-  </figure>
-<h3>Problem</h3>
-<p> Business and operational/implementation logic must be as decoupled as possible to allow core business logic to remain simple?
-</p>
-<br/>
-<h3>Decision</h3>
-<p> The ingestion and output logic need to be encapsulated in separate functions with the help of <i>Message Gateway</i> pattern and this pattern also helps in dividing messaging-specific implementation from the business logic code.
-</p>
-<br/>
-<h3>Source</h3>
-<p> [<a
-  href="#Hohpe_and_Woolf_2004"
-  class="reference"
-  >Hohpe and Woolf 2004</a
-  >]</p>
-<br/>
-<h3>Pattern</h3>
-<p> Enterprise Integration Pattern</p>
-<br/>
-<h3>Type</h3>
-<p> Function Specific</p>
-<br/>
-<h3>Synonyms</h3>
-<p></p>
-<br/>
-<h3>Mapping</h3>
-<p>
-<details>
-  <summary>
-     <h4>AWS Step Functions</h4>
-  </summary>
-  <div>
-    The Messaging <i>Gateway</i> is a function-specific design pattern. In ASF, this pattern is accomplished by encapsulating input/output messaging-specific method calls as a separate package in AWS Lambda, shown in the below code snippet. This pattern enables the developers to focus on the business logic present in AWS Lambda without worrying about handling the input/output of data.
- <br/>
- <div>
-   <br/>
-   <b>ASF code snippet</b>:
-   <br/>
-   <div class="flex">
-      <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="gateway">9. Gateway</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_gateway.png"
+                     alt="Gateway"
+                     />
+                  <figcaption>Gateway</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> Business and operational/implementation logic must be as decoupled as possible to allow core business logic to remain simple?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> The ingestion and output logic need to be encapsulated in separate functions with the help of <i>Message Gateway</i> pattern and this pattern also helps in dividing messaging-specific implementation from the business logic code.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Hohpe_and_Woolf_2004"
+               class="reference"
+               >Hohpe and Woolf 2004</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Function Specific</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               The Messaging <i>Gateway</i> is a function-specific design pattern. In ASF, this pattern is accomplished by encapsulating input/output messaging-specific method calls as a separate package in AWS Lambda, shown in the below code snippet. This pattern enables the developers to focus on the business logic present in AWS Lambda without worrying about handling the input/output of data.
+               <br/>
+               <div>
+                  <br/>
+                  <b>ASF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
  <code class="language-javascript">
 // Import Gateway Logic
 const lambdaGateway = require("/opt/utility/lambda_gateway.js");
@@ -1279,89 +1269,87 @@ lambdaGateway.outputGateway(JSON.stringify(event), callback);
 };
  </code>
 </pre>
-   </div>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Zeebe</h4>
-  </summary>
-  <div>
-  The Gateway pattern is function-specific, and the pattern mapping is equivalent to the pattern defined for AWS Step Functions.
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Azure Durable Functions</h4>
-  </summary>
-  <div>
-  The Gateway pattern is function-specific, and the pattern mapping is equivalent to the pattern defined for AWS Step Functions.
-  <br/>
-  </div>
-</details>
-</p>
-</p>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<h2 id="content-filter">10. Content Filter</h2>
-<p>
-  <figure>
-     <img
-        src="./images/Design_decisions_content_filter.png"
-        alt="Content Filter"
-        />
-     <figcaption>Content Filter</figcaption>
-  </figure>
-<h3>Problem</h3>
-<p> How can the workflow simplify dealing with large messages and transmit only the essential data to the required functions?
-</p>
-<br/>
-<h3>Decision</h3>
-<p> The <i>Content Filter</i> pattern simplifies the structure of the messages by removing irrelevant data.
-</p>
-<br/>
-<h3>Source</h3>
-<p> [<a
-  href="#Hohpe_and_Woolf_2004"
-  class="reference"
-  >Hohpe and Woolf 2004</a
-  >]</p>
-<br/>
-<h3>Pattern</h3>
-<p> Enterprise Integration Pattern</p>
-<br/>
-<h3>Type</h3>
-<p> Function Specific</p>
-<br/>
-<h3>Synonyms</h3>
-<p></p>
-<br/>
-<h3>Mapping</h3>
-<p>
-<details>
-  <summary>
-     <h4>AWS Step Functions</h4>
-  </summary>
-  <div>
-    ASF offers <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params" class="reference">InputPath and ResultSelector</a> to limit the input or output passed by filtering the JSON notation using <a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-paths" class="reference">Paths</a> respectively. The below figure shows how the Content Filter pattern can be accomplished using InputPath or using ResultSelector. Additionally, ASF provides user with <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params" class="reference">OutputPath</a> that enables to select a portion of the message output.
- <br/>
- <figure>
-  <img
-     src="./images/aws_mapping_content_filter.png"
-     alt="Content Filter"
-     />
-  <figcaption>Content Filter</figcaption>
-</figure>
-<br/>
-Users have the added benefit of performing the entire filtering or code-specific filtering using custom-developed filters through AWS Lambdas, shown by the below code snippet.
-<br/>
- <div>
-   <br/>
-   <b>ASF code snippet</b>:
-   <br/>
-   <div class="flex">
-      <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The Gateway pattern is function-specific, and the pattern mapping is equivalent to the pattern defined for AWS Step Functions.
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+                  The Gateway pattern is function-specific, and the pattern mapping is equivalent to the pattern defined for AWS Step Functions.
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="content-filter">10. Content Filter</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_content_filter.png"
+                     alt="Content Filter"
+                     />
+                  <figcaption>Content Filter</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> How can the workflow simplify dealing with large messages and transmit only the essential data to the required functions?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> The <i>Content Filter</i> pattern simplifies the structure of the messages by removing irrelevant data.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Hohpe_and_Woolf_2004"
+               class="reference"
+               >Hohpe and Woolf 2004</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Function Specific</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               ASF offers <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params" class="reference">InputPath and ResultSelector</a> to limit the input or output passed by filtering the JSON notation using <a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-paths" class="reference">Paths</a> respectively. The below figure shows how the Content Filter pattern can be accomplished using InputPath or using ResultSelector. Additionally, ASF provides user with <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params" class="reference">OutputPath</a> that enables to select a portion of the message output.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_content_filter.png"
+                     alt="Content Filter"
+                     />
+                  <figcaption>Content Filter</figcaption>
+               </figure>
+               <br/>
+               Users have the added benefit of performing the entire filtering or code-specific filtering using custom-developed filters through AWS Lambdas, shown by the below code snippet.
+               <br/>
+               <div>
+                  <br/>
+                  <b>ASF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
  <code class="language-javascript">
 // Import utils
 const lambdaGateway = require("/opt/utility/utlis.js");
@@ -1380,40 +1368,40 @@ lambdaGateway.outputGateway(JSON.stringify(transformedData), callback);
 };
  </code>
 </pre>
-   </div>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Zeebe</h4>
-  </summary>
-  <div>
-    The Content Filter pattern is function-specific, and the pattern mapping is equivalent to ASF <i>Content Filter</i> pattern. This pattern can also be realized according to the below figure. Here the Input/Output Variable can be used to modify the payload sent to the functions. Furthermore, with the help of Expressions and <a href="https://docs.camunda.io/docs/reference/feel/what-is-feel" class="reference">FEEL (Friendly Enough Expression Language)</a>, variables can be accessed and calculated dynamically.
-  <br/>
-  <figure>
-    <img
-       src="./images/zeebe_mapping_content_filter.png"
-       alt="Content Filter"
-       />
-    <figcaption>Content Filter</figcaption>
-  </figure>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Azure Durable Functions</h4>
-  </summary>
-  <div>
-    The <i>Content Filter</i> pattern is function-specific, and the pattern mapping is equivalent to code snippet presented for ASF. This pattern can also be realized in the Orchestration function using the below code snippet by filtering data before sending it as a payload to the subsequent function call.
-  <br/>
-  <div>
-    <br/>
-    <b>ADF code snippet</b>:
-    <br/>
-    <div class="flex">
-       <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The Content Filter pattern is function-specific, and the pattern mapping is equivalent to ASF <i>Content Filter</i> pattern. This pattern can also be realized according to the below figure. Here the Input/Output Variable can be used to modify the payload sent to the functions. Furthermore, with the help of Expressions and <a href="https://docs.camunda.io/docs/reference/feel/what-is-feel" class="reference">FEEL (Friendly Enough Expression Language)</a>, variables can be accessed and calculated dynamically.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_content_filter.png"
+                        alt="Content Filter"
+                        />
+                     <figcaption>Content Filter</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               The <i>Content Filter</i> pattern is function-specific, and the pattern mapping is equivalent to code snippet presented for ASF. This pattern can also be realized in the Orchestration function using the below code snippet by filtering data before sending it as a payload to the subsequent function call.
+               <br/>
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
   <code class="language-javascript">
 const df = require("durable-functions");
 const utils = require("../utility/utils.js");
@@ -1428,71 +1416,69 @@ module.exports = df.orchestrator(function* (context) {
 });
   </code>
  </pre>
-    </div>
-   <br/>
-  </div>
-</details>
-</p>
-</p>
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<h2 id="content-enricher">11. Content Enricher</h2>
-<p>
-  <figure>
-     <img
-        src="./images/Design_decisions_content_enricher.png"
-        alt="Content Enricher"
-        />
-     <figcaption>Content Enricher</figcaption>
-  </figure>
-<h3>Problem</h3>
-<p> How can the workflow fetch additional data required by the functions to process the message?
-</p>
-<br/>
-<h3>Decision</h3>
-<p> The <i>Content Enricher</i> pattern accesses external data source and augments the original message with the missing information.
-</p>
-<br/>
-<h3>Source</h3>
-<p> [<a
-  href="#Hohpe_and_Woolf_2004"
-  class="reference"
-  >Hohpe and Woolf 2004</a
-  >]</p>
-<br/>
-<h3>Pattern</h3>
-<p> Enterprise Integration Pattern</p>
-<br/>
-<h3>Type</h3>
-<p> Function Specific</p>
-<br/>
-<h3>Synonyms</h3>
-<p></p>
-<br/>
-<h3>Mapping</h3>
-<p>
-<details>
-  <summary>
-     <h4>AWS Step Functions</h4>
-  </summary>
-  <div>
-    ASF offers a feature called <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params" class="reference">Parameters</a> that facilitates users to augment the message with missing information by using static key-value pairs or use values selected from the input data with <a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-paths" class="reference">Paths</a>.
- <br/>
- <figure>
-  <img
-     src="./images/aws_mapping_content_enricher.png"
-     alt="Content Enricher"
-     />
-  <figcaption>Content Enricher</figcaption>
-</figure>
-<br/>
-For complex <i>Content Enricher</i> scenarios, the below code snippet presents how the user can implement custom fetch and enrich message logic through <a href="https://aws.amazon.com/s3" class="reference">AWS S3</a>.
-<br/>
- <div>
-   <br/>
-   <b>ASF code snippet</b>:
-   <br/>
-   <div class="flex">
-      <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="content-enricher">11. Content Enricher</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_content_enricher.png"
+                     alt="Content Enricher"
+                     />
+                  <figcaption>Content Enricher</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> How can the workflow fetch additional data required by the functions to process the message?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> The <i>Content Enricher</i> pattern accesses external data source and augments the original message with the missing information.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Hohpe_and_Woolf_2004"
+               class="reference"
+               >Hohpe and Woolf 2004</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Function Specific</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               ASF offers a feature called <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params" class="reference">Parameters</a> that facilitates users to augment the message with missing information by using static key-value pairs or use values selected from the input data with <a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-paths" class="reference">Paths</a>.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_content_enricher.png"
+                     alt="Content Enricher"
+                     />
+                  <figcaption>Content Enricher</figcaption>
+               </figure>
+               <br/>
+               For complex <i>Content Enricher</i> scenarios, the below code snippet presents how the user can implement custom fetch and enrich message logic through <a href="https://aws.amazon.com/s3" class="reference">AWS S3</a>.
+               <br/>
+               <div>
+                  <br/>
+                  <b>ASF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
  <code class="language-javascript">
 // Import required libraries
 const lambdaGateway = require("/opt/utility/utlis.js");
@@ -1518,40 +1504,40 @@ lambdaGateway.outputGateway(JSON.stringify(transformedData), callback);
 };
  </code>
 </pre>
-   </div>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Zeebe</h4>
-  </summary>
-  <div>
-  The <i>Content Enricher</i> pattern is function-specific, and the pattern mapping is equivalent to the ASF <i>Content Enricher</i> pattern. With the help of Expressions and <a href="https://docs.camunda.io/docs/reference/feel/what-is-feel" class="reference">FEEL (Friendly Enough Expression Language)</a>, as shown in the below figure, the Input/Output Variables can be altered and augmented with the necessary information.
-  <br/>
-  <figure>
-    <img
-       src="./images/zeebe_mapping_content_enricher.png"
-       alt="Content Enricher"
-       />
-    <figcaption>Content Enricher</figcaption>
-  </figure>
-  <br/>
-  </div>
-</details>
-<details>
-  <summary>
-     <h4>Azure Durable Functions</h4>
-  </summary>
-  <div>
-    The <i>Content Enricher</i> pattern is function-specific, and the pattern mapping is equivalent to ASF <i>Content Enricher</i>. The pattern can also be performed in the orchestration function by following the below template. The below code snippet shows how a function's result enriches another function and then is used as a payload to another activity function.
-  <br/>
-  <div>
-    <br/>
-    <b>ADF code snippet</b>:
-    <br/>
-    <div class="flex">
-       <pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The <i>Content Enricher</i> pattern is function-specific, and the pattern mapping is equivalent to the ASF <i>Content Enricher</i> pattern. With the help of Expressions and <a href="https://docs.camunda.io/docs/reference/feel/what-is-feel" class="reference">FEEL (Friendly Enough Expression Language)</a>, as shown in the below figure, the Input/Output Variables can be altered and augmented with the necessary information.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_content_enricher.png"
+                        alt="Content Enricher"
+                        />
+                     <figcaption>Content Enricher</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               The <i>Content Enricher</i> pattern is function-specific, and the pattern mapping is equivalent to ASF <i>Content Enricher</i>. The pattern can also be performed in the orchestration function by following the below template. The below code snippet shows how a function's result enriches another function and then is used as a payload to another activity function.
+               <br/>
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
   <code class="language-javascript">
 const df = require("durable-functions");
 const utils = require("../utility/utils.js");
@@ -1567,27 +1553,1088 @@ module.exports = df.orchestrator(function* (context) {
 });
   </code>
  </pre>
-    </div>
-   <br/>
-  </div>
-</details>
-</p>
-</p>
-           <section id="references">
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="claim-check">12. Claim Check</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_claim_check.png"
+                     alt="Claim Check"
+                     />
+                  <figcaption>Claim Check</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> Functions that pass large payloads of data within the workflow can be terminated due to size limitations. How will the communication between functions be handled when large messages need to be passed within the workflow?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> Large fields are temporarily filtered in the source function and enriched in the destination function using the <i>Claim Check</i> pattern. The payload is stored in a persistent store, and a <i>Claim Check</i> is passed to the target component. Internally, <i>Claim Check</i> uses the <i>Content Filter</i> and <i>Content Enricher</i> pattern. The <i>Content Filter</i> pattern removes insignificant data from an output message leaving only essential information, thus simplifying its structure. The target function then uses the <i>Content Enricher</i> pattern to augment the received message with the missing information, usually with the help of an external data source.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Hohpe_and_Woolf_2004"
+               class="reference"
+               >Hohpe and Woolf 2004</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Function Specific</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+                  ASF limits the payload size that can be passed to the workflow and between states to <a href="https://aws.amazon.com/about-aws/whats-new/2020/09/aws-step-functions-increases-payload-size-to-256kb" class="reference">256KB</a>, and any executions that pass large payloads can be terminated. The payload restriction barrier can be solved by employing the Claim Check pattern as shown by the below figure. In ASF, this pattern is implemented in AWS Lambdas using the <i>Content Filter</i> that first ensures that the large payload is stored in Amazon Simple Storage Service (Amazon S3) persistent storage and replaced by the Amazon Resource Name (ARN) bucket name and key value. Then the filtered message is sent to the following states, and any state that needs this data uses the <i>Content Enricher</i> pattern to recover the saved data again.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/aws_mapping_claim_check.png"
+                        alt="Claim Check"
+                        />
+                     <figcaption>Claim Check</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The <i>Claim Check</i> pattern internally uses the <i>Content Filter</i> and <i>Enricher</i> pattern. Hence, the mapping is similar to AWS Step Functions <i>Claim Check</i> pattern.
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+                  The <i>Claim Check</i> pattern internally uses the <i>Content Filter</i> and <i>Enricher</i> pattern. Hence, the mapping is similar to AWS Step Functions <i>Claim Check</i> pattern.
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="normalizer">13. Normalizer</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_normalizer.png"
+                     alt="Normalizer"
+                     />
+                  <figcaption>Normalizer</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> How can the output from each terminal function in the workflow branches be normalized, which otherwise would require having an additional normalization function?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> The <i>Normalizer</i> pattern helps solve this problem by ensuring that the messages produced from any branch confirm with a standard format that is understandable by the recipient component. In this pattern, each message is passed through a custom message translator so that the resulting messages match a standard format. Hence this pattern helps in preventing the creation and invoking of additional functions to handle this scenario.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Hohpe_and_Woolf_2004"
+               class="reference"
+               >Hohpe and Woolf 2004</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Function Specific</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+                  In ASF, the <i>Normalizer</i> pattern is achieved using either the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params" class="reference">ResultSelector</a>, <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultpath" class="reference">ResultPath</a>, or <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-outputpath" class="reference">OutputPath</a> Output processing constructs. These output processing constructs also can be combined to achieve complex normalization of the message. The transformation can also be performed inside AWS Lambdas using <i>Content Filter</i> or <i>Content Enricher</i> patterns.
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The <i>Normalizer</i> pattern is function-specific, and the pattern can be achieved using the <i>Content Filter</i> or <i>Content Enricher</i> patterns.
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+                  The <i>Normalizer</i> pattern is function-specific, and the pattern can be achieved using the <i>Content Filter</i> or <i>Content Enricher</i> patterns.
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="message-history">14. Message History</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_message_history.png"
+                     alt="Message History"
+                     />
+                  <figcaption>Message History</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> How can we effectively analyze and debug the flow of messages in a loosely coupled and granular system?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> The primary purpose of employing a serverless paradigm is to build loosely coupled and granular systems. However, building such systems induces the complexity of debugging and traceability as it is not intuitively possible to comprehend the flow of the message. This problem can be solved using the _Message History_ pattern, in which the system maintains the history of the message. Thus when a message fails to be processed in the system, the developer can trace back the steps and provide instant feedback and solution.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Hohpe_and_Woolf_2004"
+               class="reference"
+               >Hohpe and Woolf 2004</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p> Construct/Function Specific</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+                  The <i>Message History</i> pattern is available only for ASF Standard Executions, as the states are persisted on disk, while the Express Execution lacks this pattern due to its processing strategy of utilizing the memory. Furthermore, ASF Standard Executions provide the developers with a visual representation of the path that the message has traversed and information like input/output payload, response, execution time, and execution status.
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The message history of the Zeebe workflow is maintained using variables as shown in the below figure.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_message_history.png"
+                        alt="Message History"
+                        />
+                     <figcaption>Message History</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+                  The <i>Message History</i> of the Azure Durable Orchestration function is maintained using the execution <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-orchestrations?tabs=javascript\#orchestration-history" class="reference">history table</a> as shown in the below figure. When <i>yield</i> is invoked the Activity function result is stored in the History Table. In a Azure Durable Orchestration function execution, the Activity Functions have an at-least-once policy making the History Table crucial to check if the function has been executed or not. The <i>History Table</i> provides the input and result for each function.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/adf_mapping_message_history.png"
+                        alt="Message History"
+                        />
+                     <figcaption>Message History</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="splitter-and-aggregator">15. Splitter and Aggregator</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_splitter_and_aggregator.png"
+                     alt="Splitter and Aggregator"
+                     />
+                  <figcaption>Splitter and Aggregator</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> How can the serverless workflow process multiple homogeneous records concurrently that are part of a single payload?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> A <i>Splitter</i> pattern helps split a single message into a sequence of sub-messages that can be processed individually. Likewise, the <i>Aggregator</i> pattern performs the contrary by collecting a complete set of related messages. Combining the two patterns simulates the <a href="https://en.wikipedia.org/wiki/MapReduce" class="reference">MapReduce</a><sup><a href="#2" id="2">2</a></sup> implementation, which can be used to split the array payload into smaller chunks that be processed in a parallel fashion and, more importantly, avoid payload limit issues.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Hohpe_and_Woolf_2004"
+               class="reference"
+               >Hohpe and Woolf 2004</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Enterprise Integration Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p>Function Specific</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p>Fan-out, Fan-in</p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               ASF supports <i>Splitter and Aggregator</i> with the help of dynamic parallelism Map state type as shown by the below figure and code snippet. The Map state will execute the same steps for multiple entries of an array in the state input. The below are the mandatory fields for Map state:<br/>
+               <ul>
+                  <li><b>Iterator</b>: The object that defines a state machine that will process each element of the array</li>
+                  <li><b>ItemsPath</b>: Path of the array where the input is located</li>
+                  <li><b>MaxConcurrency</b>: Upper bound on how many invocations of the Iterator may run in parallel</li>
+               </ul>
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_splitter_and_aggregator.png"
+                     alt="Splitter and Aggregator"
+                     />
+                  <figcaption>Splitter and Aggregator</figcaption>
+               </figure>
+               <br/>
+               <div>
+                  <br/>
+                  <b>ASF snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
+<code class="language-json">
+{
+  "Comment":"Callback",
+  "StartAt":"MapState",
+  "States":{
+     "MapState":{
+        "Type":"Map",
+        "ItemsPath":"$.array",
+        "MaxConcurrency":0,
+        "Iterator":{
+           "StartAt":"State 1",
+           "States":{
+              "State 1":{
+                 "Type":"Pass",
+                 "Result":"Done!",
+                 "End":true
+              }
+           }
+        },
+        "ResultPath":"$.output",
+        "End":true
+     }
+  }
+}
+</code>
+</pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The below figure presents how the <i>Splitter and Aggregator</i> pattern is implemented using BPMN 2.0. Here "Function 2" is configured with Parallel Multi Instance which takes an input collection and performs dynamic parallelism to process the data.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_splitter_and_aggregator.png"
+                        alt="Splitter and Aggregator"
+                        />
+                     <figcaption>Splitter and Aggregator</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               The presented code snippet shows how the Splitter and Aggregator pattern is implemented using ADF and is also referred to as <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview?tabs=javascript\#fan-in-out" class="reference">Fan-out/Fan-in</a> pattern. Similar to <i>Multicast</i>, in this pattern, the data is processed using a parallel construct. In ADF, the <i>Splitter and Aggregator</i> pattern is implemented by first splitting the data into batches, and then each batch is processed using the same function parallelly. The result of each branch is aggregated using another Activity Function.
+               <br/>
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
+  <code class="language-javascript">
+const df = require("durable-functions");
+
+module.exports = df.orchestrator(function* (context) {
+    const mapTasks = [];
+
+    // Get a list of batches to process in parallel
+    const batch = yield context.df.callActivity("function1");
+
+    // Perform parallel processing of the batches (Map)
+    for (let i = 0; i < batch.length; i++) {
+        mapTasks.push(context.df.callActivity("function2", batch[i]));
+    }
+    const arrayParallelTasksResult = yield context.df.Task.all(mapTasks);
+
+    // Aggregate the results (Reduce)
+    yield context.df.callActivity("function3", arrayParallelTasksResult);
+});
+  </code>
+</pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="implicit-termination">16. Implicit Termination</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_implicit_termination.png"
+                     alt="Implicit Termination"
+                     />
+                  <figcaption>Implicit Termination</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> How to terminate the workflow when no execution steps are remaining?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> The <i>Implicit Termination</i> pattern states that if there is no task to be performed, stop the workflow.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Russell_2006"
+               class="reference"
+               >Russell et al. 2006a</a
+               >], [<a
+               href="#Van_Aalst_2003"
+               class="reference"
+               >van der Aalst et al. 2003</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Workflow Control-Flow Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p>Control Flow</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               ASF provides three options to terminate an execution. If the user wants a stop the workflow the below terminal states can be used:
+               <br/>
+               <ul>
+                  <li><b>Succeeded</b>: Terminate Workflow execution with Succeeded status</li>
+                  <li><b>End</b>: Stop the workflow with the normal flow</li>
+                  <li><b>Fail</b>: Terminate Workflow execution with Failed status</li>
+               </ul>
+               <br/>
+               The below figure and code snippet presents an example how the <i>Implicit Termination</i> pattern is achieved by ASF.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_event_document_message.png"
+                     alt="Implicit Termination"
+                     />
+                  <figcaption>Implicit Termination</figcaption>
+               </figure>
+               <br/>
+               <div>
+                  <br/>
+                  <b>ASF snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
+<code class="language-json">
+{
+  "Comment":"Implicit Termination",
+  "StartAt":"State 1",
+  "States":{
+     "State 1":{
+        "Type":"Task",
+        "Resource":"arn:aws:states:::lambda:invoke",
+        "Parameters":{
+           "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+           "Payload":{
+              "Input.$":"$"
+           }
+        },
+        "Next":"ChoiceState"
+     },
+     "ChoiceState":{
+        "Type":"Choice",
+        "Choices":[
+           {
+              "Variable":"$.variable",
+              "BooleanEquals":true,
+              "Next":"SuccessState"
+           },
+           {
+              "Variable":"$.variable",
+              "BooleanEquals":false,
+              "Next":"OtherState"
+           }
+        ]
+     },
+     "SuccessState":{
+        "Type":"Succeed"
+     },
+     "OtherState":{
+        "Type":"Task",
+        "Resource":"arn:aws:states:::lambda:invoke",
+        "Parameters":{
+           "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+           "Payload":{
+              "Input.$":"$"
+           }
+        },
+        "End":true
+     }
+  }
+}
+</code>
+</pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The <i>Implicit Termination</i> pattern in BPMN 2.0 is implemented using the End Event. The below figure illustrates how the End Event can stop the execution of the workflow. Here, the functions have been terminated in both branches, with the first branch ends after one function's execution, while the other branch has two.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_implicit_termination.png"
+                        alt="Implicit Termination"
+                        />
+                     <figcaption>Implicit Termination</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               <i>Implicit termination</i> pattern in ADF occurs when the Orchestration function reaches the last execution statement or when a "return" statement is reached. The below code snippet depicts when the return statement is reached, the ADF orchestration function is terminated.
+               <br/>
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
+  <code class="language-javascript">
+const df = require("durable-functions");
+
+module.exports = df.orchestrator(function* (context) {
+    const function1Result = yield context.df.callActivity("function1", context.df.getInput())
+    return function1Result
+});
+  </code>
+</pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="nested-workflows">17. Nested Workflows</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_nested_workflows.png"
+                     alt="Nested Workflows"
+                     />
+                  <figcaption>Nested Workflows</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> If some tasks are alike, how do we abstract and represent them as a hierarchical and reusable model?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> <i>Nested Workflows</i> patterns help facilitate reusable workflows, abstracting complex logic, effective communication, and hierarchical and modular modeling.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Russell_2006"
+               class="reference"
+               >Russell et al. 2006a</a
+               >], [<a
+               href="#Van_Aalst_2003"
+               class="reference"
+               >van der Aalst et al. 2003</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Workflow Control-Flow Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p>Control Flow</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               ASF can execute another ASF workflow by utilizing the state with Task type and its ARN identifier, shown by the below figure and code snippet. ASF additionally allows the user to pass a payload when executing another ASF workflow.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_nested_workflow.png"
+                     alt="Nested Workflow"
+                     />
+                  <figcaption>Nested Workflow</figcaption>
+               </figure>
+               <br/>
+               <div>
+                  <br/>
+                  <b>ASF snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
+<code class="language-json">
+{
+  "Comment":"Nested Workflow",
+  "StartAt":"Start state machine execution",
+  "States":{
+     "Start state machine execution":{
+        "Type":"Task",
+        "Resource":"arn:aws:states:::states:startExecution",
+        "Parameters":{
+           "StateMachineArn":"arn:aws:states:REGION:ACCOUNT_ID:stateMachine:STATE_MACHINE_NAME",
+           "Input":{
+              "StatePayload":"Hello from Step Functions!",
+              "AWS_STEP_FUNCTIONS_STARTED_BY_EXECUTION_ID.$":"$$.Execution.Id"
+           }
+        },
+        "End":true
+     }
+  }
+}
+</code>
+</pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  Using BPMN 2.0 with Zeebe Modeler, a <i>Nested Workflow</i> pattern is constructed using the SubProcess element. The below figure presents how another workflow that consist of "Function 2" can be invoked from the parent workflow.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_nested_workflow.png"
+                        alt="Nested Workflow"
+                        />
+                     <figcaption>Nested Workflow</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               In ADF, a nested workflow pattern is constructed when another durable orchestration function is invoked from the parent orchestration function. The below code snippet shows how the sub orchestration function can be triggered using the 
+               <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sub-orchestrations?tabs=javascript" class="reference">
+                  <i>callSubOrchestrator</i> function call.
+                  <br/>
+                  <div>
+                     <br/>
+                     <b>ADF code snippet</b>:
+                     <br/>
+                     <div class="flex">
+                        <pre>
+  <code class="language-javascript">
+const df = require("durable-functions");
+
+module.exports = df.orchestrator(function* (context) {
+    const result = context.df.callSubOrchestrator("subOrchestration", context.df.getInput())
+    return result
+});
+  </code>
+</pre>
+                     </div>
+                     <br/>
+                  </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="callback">18. Callback</h2>
+            <p>
+            <figure>
+            <img
+               src="./images/Design_decisions_callback.png"
+               alt="Callback"
+               />
+            <figcaption>Callback</figcaption>
+            </figure>
+            <h3>Problem</h3>
+            <p> How can the serverless workflow handle external invocations from a service or a human-performed activity?
+            </p>
+            <br/>
+            <h3>Decision</h3>
+            <p> In the <i>Callback</i> pattern, the workflow pauses execution and waits until an appropriate response is received to proceed with the execution. These tasks can be human, service, or some response from an external process.
+            </p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Russell_2006"
+               class="reference"
+               >Russell et al. 2006a</a
+               >], [<a
+               href="#Van_Aalst_2003"
+               class="reference"
+               >van der Aalst et al. 2003</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Workflow Control-Flow Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p>Control Flow / Function Specific</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               ASF provides a means to suspend a workflow until a task token is returned. A task might need to wait for human approval, integrate with a third party, or call legacy systems that can pause ASF indefinitely and wait for an external process or workflow to complete. For these situations, ASF with Callback task as shown in the below figure and code snippet allows passing a task token to the target integrated services, and it will wait until the task token is returned.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_callback.png"
+                     alt="Callback"
+                     />
+                  <figcaption>Callback</figcaption>
+               </figure>
+               <br/>
+               <div>
+                  <br/>
+                  <b>ASF snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
+<code class="language-json">
+{
+  "Comment":"Callback",
+  "StartAt":"Step 1",
+  "States":{
+     "Step 1":{
+        "Type":"Task",
+        "Resource":"arn:aws:states:::lambda:invoke.waitForTaskToken",
+        "Parameters":{
+           "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+           "Payload":{
+              "Input.$":"$",
+              "TaskToken.$":"$$.Task.Token"
+           }
+        },
+        "End":true
+     }
+  }
+}
+</code>
+</pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The below figures present two ways how the Callback pattern can be invoked. The former method shows how using variables, expression conditions, and Service tasks; the callback can be invoked. In the latter method, the User needs to perform the operation and manually accept the workflow's task to progress until the end.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_callback.png"
+                        alt="Callback"
+                        />
+                     <figcaption>Callback</figcaption>
+                  </figure>
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_user_callback.png"
+                        alt="User Callback"
+                        />
+                     <figcaption>User Callback</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               The callback pattern can be implemented in ADF using <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-external-events?tabs=javascript" class="reference"><i>waitForExternalEvent</i></a>, allowing an orchestrator to wait and listen for an external event asynchronously. The below code snippet presents how the pattern is implemented using ADF.
+               <br/>
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
+  <code class="language-javascript">
+const df = require("durable-functions");
+
+module.exports = df.orchestrator(function* (context) {
+    const token = yield context.df.waitForExternalEvent("externalFunction");
+    if (token) {
+        // token received from external and continue processing
+    } else {
+        // token failed
+    }
+});
+  </code>
+</pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="error-handling">19. Error Handling</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_error_handling.png"
+                     alt="Error Handling"
+                     />
+                  <figcaption>Error Handling</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> How can the system handle error exceptions that might occur in the workflow and manage them gracefully?</p>
+            <br/>
+            <h3>Decision</h3>
+            <p> The <i>Error Handling</i> pattern helps handle exceptions due to abnormal input or conditions and can retry the processing when needed.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Russell_2006"
+               class="reference"
+               >Russell et al. 2006a</a
+               >], [<a
+               href="#Van_Aalst_2003"
+               class="reference"
+               >van der Aalst et al. 2003</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Workflow Control-Flow Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p>Control Flow / Function Specific</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+               The Error handling pattern is crucial for any system, and ASF provides the Error handling feature to handle various errors like state machine definition issues, task failures, and transient issues. Apart from handling errors, ASF offers the Catch and Retry fields that help reprocess the state in case of failures. The below figure and code snippet shows how ASF handles exceptions with a retry option.
+               <br/>
+               <figure>
+                  <img
+                     src="./images/aws_mapping_error_handling.png"
+                     alt="Error Handling"
+                     />
+                  <figcaption>Error Handling</figcaption>
+               </figure>
+               <br/>
+               <div>
+                  <br/>
+                  <b>ASF snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
+<code class="language-json">
+{
+  "Comment":"Nested Workflow",
+  "StartAt":"Step 1",
+  "States":{
+     "Step 1":{
+        "Type":"Task",
+        "Resource":"arn:aws:states:::lambda:invoke",
+        "Parameters":{
+           "FunctionName":"arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+           "Payload":{
+              "Input.$":"$"
+           }
+        },
+        "Catch":[
+           {
+              "ErrorEquals":[
+                 "States.TaskFailed"
+              ],
+              "Next":"NotifyError"
+           }
+        ],
+        "Retry":[
+           {
+              "ErrorEquals":[
+                 "States.Timeout"
+              ],
+              "IntervalSeconds":3,
+              "MaxAttempts":2,
+              "BackoffRate":1.5
+           }
+        ],
+        "End":true
+     },
+     "NotifyError":{
+        "Type":"Fail",
+        "Cause":"Invalid response.",
+        "Error":"ErrorA"
+     }
+  }
+}
+</code>
+</pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The below figure presents how error handling can be implemented using Zeebe. Here the Error boundary event is placed on the Service task, and in case an error happens in the function, the error handling function is triggered. Furthermore, Service tasks have a retries feature that will reinvoke the task in case of a failure.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/zeebe_mapping_error_handling.png"
+                        alt="Error Handling"
+                        />
+                     <figcaption>Error Handling</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-error-handling?tabs=javascript" class="reference"><i>Error handling</i></a> in ADF is implemented using the programming language's built-in error-handling features (try-catch), as shown in the code snippet. Exceptions thrown in an Activity Function are directed back to the orchestrator function and thrown as a <i>FunctionFailedException</i>.
+               <br/>
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <div class="flex">
+                     <pre>
+  <code class="language-javascript">
+const df = require("durable-functions");
+
+module.exports = df.orchestrator(function* (context) {
+    try {
+        const function1 = yield context.df.callActivity("function1", context.df.getInput())
+        return function1;
+    }
+    catch (error) {
+        console.error(error)
+    }
+});
+  </code>
+</pre>
+                  </div>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <h2 id="workflow-data">20. Workflow Data</h2>
+            <p>
+               <figure>
+                  <img
+                     src="./images/Design_decisions_workflow_data.png"
+                     alt="Workflow Data"
+                     />
+                  <figcaption>Workflow Data</figcaption>
+               </figure>
+            <h3>Problem</h3>
+            <p> 
+            <ul>
+               <li>Sharing external and internal dependencies so that code duplication can be kept to the bare minimum and prevent maintainability issues.</li>
+               <li>Reduce the size of your deployment package.</li>
+               <li>Ensure the usage of common versions of dependencies/data between various components.</li>
+            </ul>
+            </p>
+            <br/>
+            <h3>Decision</h3>
+            <p> The <i>Workflow Data</i> pattern states that the data required for the whole workflow will be available to all functions. In this pattern, the shared libraries and packages are placed under the appropriate directory or vendor-specific offerings.</p>
+            <br/>
+            <h3>Source</h3>
+            <p> [<a
+               href="#Russell_2005"
+               class="reference"
+               >Russell et al. 2005</a
+               >]</p>
+            <br/>
+            <h3>Pattern</h3>
+            <p> Workflow Data Pattern</p>
+            <br/>
+            <h3>Type</h3>
+            <p>Function Specific</p>
+            <br/>
+            <h3>Synonyms</h3>
+            <p></p>
+            <br/>
+            <h3>Mapping</h3>
+            <p>
+            <details>
+               <summary>
+                  <h4>AWS Step Functions</h4>
+               </summary>
+               <div>
+                  AWS <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers" class="reference">Lambda Layers</a> help keep the deployment package granular and making development more manageable, which can help avoid errors when installing package dependencies. Here all the utility functions like accessing AWS <a href="hhttps://aws.amazon.com/secrets-manager" class="reference">Secret Manager</a>, AWS <a href="https://aws.amazon.com/s3" class="reference">S3</a> operations, and accessing external services can be deployed on the layer, and attaching this layer to the Lambdas offer all the functionalities.
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/aws_mapping_error_handling.png"
+                        alt="Error Handling"
+                        />
+                     <figcaption>Error Handling</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Zeebe</h4>
+               </summary>
+               <div>
+                  The <i>Workflow Data</i> pattern is function-specific, and the pattern mapping is equivalent to AWS Step Functions.
+                  <br/>
+               </div>
+            </details>
+            <details>
+               <summary>
+                  <h4>Azure Durable Functions</h4>
+               </summary>
+               <div>
+               The <i>Workflow Data</i> pattern is function-specific, and sharing utilities, libraries, and helper code can be done by placing all these compiled files in a folder at the root level of the functions.
+               <br/>
+               <div>
+                  <br/>
+                  <b>ADF code snippet</b>:
+                  <br/>
+                  <figure>
+                     <img
+                        src="./images/azure_mapping_workflow_data.png"
+                        alt="Workflow Data" style="
+                        height: 200px;
+                        width: 150px;"
+                        />
+                     <figcaption>Workflow Data</figcaption>
+                  </figure>
+                  <br/>
+               </div>
+            </details>
+            </p>
+            </p>
+            <section id="references">
                <h2>8. References</h2>
                <ol>
-                  <li id="reference_1">
-                     <a
-                        target="_blank"
-                        href="https://research.chalmers.se/publication/508147/file/508147_Fulltext.pdf"
-                        >A mixed-method empirical study of Function-as-a-Service
-                     software development in industrial practice</a
-                        >
-                  </li>
                   <li id="Hohpe_and_Woolf_2004">
                      <a target="_blank"
                         >
                      Hohpe, G. and Woolf, B., 2004. Enterprise integration patterns: Designing, building, and deploying messaging solutions. Addison-Wesley Professional.</a
+                        >
+                  </li>
+                  <li id="Ibsen_and_Anstey_2010">
+                     <a target="_blank"
+                        >
+                     Ibsen, C. and Anstey, J., 2018. Camel in action. Simon and Schuster.</a
+                        >
+                  </li>
+                  <li id="Russell_2006">
+                     <a target="_blank"
+                        >
+                     Russell, N., Ter Hofstede, A.H., Van Der Aalst, W.M. and Mulyar, N., 2006. Workflow control-flow patterns: A revised view. BPM Center Report BPM-06-22, BPMcenter. org, pp.06-22.</a
+                        >
+                  </li>
+                  <li id="Van_Aalst_2003">
+                     <a target="_blank"
+                        >
+                     van Der Aalst, W.M., Ter Hofstede, A.H., Kiepuszewski, B. and Barros, A.P., 2003. Workflow patterns. Distributed and parallel databases, 14(1), pp.5-51.</a
+                        >
+                  </li>
+                  <li id="Russell_2005">
+                     <a target="_blank"
+                        >
+                     Russell, N., Ter Hofstede, A.H., Edmond, D. and Van der Aalst, W.M., 2005, October. Workflow data patterns: Identification, representation and tool support. In International Conference on Conceptual Modeling (pp. 353-368). Springer, Berlin, Heidelberg.</a
                         >
                   </li>
                </ol>
