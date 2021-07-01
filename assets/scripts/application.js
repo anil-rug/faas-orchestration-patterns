@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const caseStudyLink = document.querySelector("#case-study-link");
   const ourTeamLink = document.querySelector("#our-team-link");
   const caseStudyNavUl = document.querySelector("#case-study nav ul");
+  const caseStudyNavUlH3 = document.querySelector("#case-study nav ul nav ul");
   const mobileCaseStudyNavUl = document.querySelector("#case-study-mobile ul");
 
   let topNavVisible = false;
@@ -32,6 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
     h2.textContent.split(" ").slice(1).join(" ")
   );
 
+  const h3Text = [...document.querySelectorAll("h3")].map((h3) =>
+    h3.textContent.split(" ").slice(1).join(" ")
+  );
+
   const getCaseStudyHeadingPositions = () =>
     h2Text.reduce((obj, h2Str) => {
       const selector = `#${snakeCaseify(h2Str.replace("!", ""))}`;
@@ -40,6 +45,16 @@ document.addEventListener("DOMContentLoaded", () => {
       obj[`${selector}-nav`] = position;
       return obj;
     }, {});
+
+  const getCaseStudyHeadingPositionsH3 = () =>
+    h3Text.reduce((obj, h3Str) => {
+      const selector = `#${snakeCaseify(h3Str.replace("!", ""))}`;
+      const h3 = document.querySelector(selector);
+      const position = getScrollPosition() + h3.getBoundingClientRect().top;
+      obj[`${selector}-nav`] = position;
+      return obj;
+    }, {});
+
 
   const highlightSection = (li, a) => {
     li.style.listStyle =
@@ -73,6 +88,30 @@ document.addEventListener("DOMContentLoaded", () => {
     mobileCaseStudyLinks.push(a2);
     li2.appendChild(a2);
     mobileCaseStudyNavUl.appendChild(li2);
+  });
+
+  h3Text.forEach((h2TextStr) => {
+    const li = document.createElement("li");
+    li.id = snakeCaseify(`${h2TextStr.replace("!", "").toLowerCase()}-nav`);
+    const a = document.createElement("a");
+    a.href = snakeCaseify(`#${h2TextStr.replace("!", "")}`);
+    a.textContent = h2TextStr.toUpperCase();
+    a.className = "case-study-anchor";
+
+    const li2 = document.createElement("li");
+    li2.id = snakeCaseify(
+      `mobile-${h2TextStr.replace("!", "").toLowerCase()}-nav`
+    );
+    const a2 = document.createElement("a");
+    a2.href = snakeCaseify(`#${h2TextStr.replace("!", "")}`);
+    a2.textContent = h2TextStr.toUpperCase();
+
+    li.appendChild(a);
+    caseStudyNavUlH3.appendChild(li);
+
+    mobileCaseStudyLinks.push(a2);
+    li2.appendChild(a2);
+    mobileCaseStudyNavUlH3.appendChild(li2);
   });
 
   const changeImgSrc = (tag, url) => {
