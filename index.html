@@ -57,8 +57,8 @@
                <a href="#home" id="home-link">HOME</a>
             </li>
             <li>
-               <a href="#patterns" id="case-study-link">PATTERNS</a>
-               <nav id="case-study-mobile">
+               <a href="#patterns" id="patterns-link">PATTERNS</a>
+               <nav id="patterns-mobile">
                   <ul></ul>
                </nav>
             </li>
@@ -76,30 +76,33 @@
          </figure>
       </header>
       <main>
-         <!-- for linkedin featured section -->
-         <img
-            style="display: none"
-            src="assets/images/logos/maestro/mark-on-light.png"
-            />
          <!-- normal content now resumes -->
          <section id="introduction">
             <h1 id="introduction">Introduction</h1>
             <p>
-              Enterprise systems rely more and more on data-driven processes and have numerous connected systems to fulfill its goal. 
-              These systems ingest data from different sources, making the job of data collection, transformation, and processing complicated 
-              due to the explosion of new cloud and big data technologies that contribute to the high velocity, variety, and data inflow. 
-              Hence, enterprises employ data pipelines to unlock their data's power, quality, and finally, ensuring that demands are met quicker.
+              Function-as-a-Service (FaaS) is a novel and compelling cloud computing concept that aids in achieving the 
+              "serverless" dream by just deploying, running, and managing granular code fragments and services without worrying 
+              about the infrastructure details and is charged per usage. If applications can be assembled using serverless architecture, 
+              they would experience numerous advantages over the traditional architectures, such as scalability, fine-grained billing, 
+              and low operational costs. However, adopting serverless is sometimes slow due to the complexity of orchestrating FaaS 
+              and the risk of "vendor lock-in" as application porting between vendors becomes challenging without considerable effort and cost.
             </p>
+            <br/>
             <p>
-              Function-as-a-Service (FaaS) is a novel and compelling cloud computing concept that aids in achieving the "serverless" dream by 
-              just deploying, running, and managing granular code fragments and services without worrying about the infrastructure details and is 
-              charged per usage. If data pipelines can be assembled using serverless architecture, they would experience numerous advantages over 
-              the traditional architectures, such as scalability, fine-grained billing, and low operational costs. However, adopting serverless is 
-              sometimes slow due to the complexity of orchestrating FaaS and the risk of "vendor lock-in" as application porting between vendors becomes 
-              challenging without considerable effort and cost.
+              A study performed by the authors ("Pattern-based Serverless Data Processing Pipeline using Function-as-a-Service (FaaS) Orchestration Systems") 
+              proposes a methodology for composing serverless applications using FaaS orchestrating systems with the help of enterprise integration and 
+              workflow patterns to produce reusable software design solutions that standardize the integration process, reduce development costs and improve 
+              code quality. A detailed description of 20 identified patterns using the problem first approach has been listed on this website. These patterns 
+              were then classified into three categories. The construct patterns define the essential components necessary for constructing the workflow. 
+              The control flow is responsible for workflow traversal, and finally, the function-specific are patterns that are implemented in the function.
+            </p>
+            <br/>
+            <p>
+              We encourage users to evaluate the proposed methodology and contribute to the list of patterns. Currently, we have listed the corresponding patterns for 
+              three diverse state-of-the-art FaaS orchestration systems: AWS Step Functions (ASF), Zeebe, and Azure Durable Functions (ADF).
             </p>
          </section>
-         <section id="case-study">
+         <section id="patterns">
             <h1>Patterns</h1>
             <nav>
                <ul></ul>

@@ -8,11 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
   const ourTeam = document.querySelector("#our-team");
   const homeLink = document.querySelector("#home-link");
-  const caseStudyNav = document.querySelector("#case-study nav");
-  const caseStudyLink = document.querySelector("#case-study-link");
+  const caseStudyNav = document.querySelector("#patterns nav");
+  const caseStudyLink = document.querySelector("#patterns-link");
   const ourTeamLink = document.querySelector("#our-team-link");
-  const caseStudyNavUl = document.querySelector("#case-study nav ul");
-  const mobileCaseStudyNavUl = document.querySelector("#case-study-mobile ul");
+  const caseStudyNavUl = document.querySelector("#patterns nav ul");
+  const mobileCaseStudyNavUl = document.querySelector("#patterns-mobile ul");
 
   let topNavVisible = false;
   let smallNavVisible = false;
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const a = document.createElement("a");
     a.href = snakeCaseify(`#${h2TextStr.replace("!", "")}`);
     a.textContent = h2TextStr.toUpperCase();
-    a.className = "case-study-anchor";
+    a.className = "patterns-anchor";
 
     const li2 = document.createElement("li");
     li2.id = snakeCaseify(
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const positions = getCaseStudyHeadingPositions();
     const positionValues = Object.values(positions);
     const positionSelectors = Object.keys(positions);
-    const mobileCaseStudyNav = document.querySelector("#case-study-mobile");
+    const mobileCaseStudyNav = document.querySelector("#patterns-mobile");
     const position = getScrollPosition();
 
     positionValues.forEach((_, i) => {

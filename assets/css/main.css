@@ -136,12 +136,12 @@ img {
   right: 35px;
 }
 
-#case-study img {
+#patterns img {
   max-width: 80%;
   height: auto;
 }
 
-#case-study video {
+#patterns video {
   max-width: 100%;
   height: auto;
 }
@@ -321,7 +321,7 @@ header figure span {
 
 ------------------------------------ */
 
-#case-study nav {
+#patterns nav {
   border-right: 1px solid var(--color-light-grey);
   /* display: none; */
   left: 1rem;
@@ -336,7 +336,7 @@ header figure span {
   /* transform: translateY(-50%); */
 }
 
-#case-study nav li {
+#patterns nav li {
   color: var(--color-light-grey);
   font-size: 2rem;
   list-style: none;
@@ -344,11 +344,11 @@ header figure span {
   padding-left: 10px;
 }
 
-#case-study nav li:last-of-type {
+#patterns nav li:last-of-type {
   margin-bottom: 0;
 }
 
-#case-study nav a {
+#patterns nav a {
   color: var(--color-light-grey);
   font-family: Rift, sans-serif;
   font-size: 1.3rem;
@@ -357,84 +357,84 @@ header figure span {
   vertical-align: 0.05rem;
 }
 
-#case-study nav a:hover {
+#patterns nav a:hover {
   color: var(--color-white);
 }
 
-#case-study h3,
-#case-study h4,
-#case-study h5,
-#case-study p,
-#case-study ul,
-#case-study ol {
+#patterns h3,
+#patterns h4,
+#patterns h5,
+#patterns p,
+#patterns ul,
+#patterns ol {
   margin-bottom: 20px;
 }
 
 
-#case-study h1 {
+#patterns h1 {
   color: var(--color-maestro-red);
 }
 
-#case-study h2 {
+#patterns h2 {
   color: var(--color-white);
   margin: 75px auto 20px auto;
 }
 
-#case-study h2:first-of-type {
+#patterns h2:first-of-type {
   margin-top: 50px;
 }
 
-#case-study h2,
+#patterns h2,
 h3 {
   letter-spacing: 0.02rem;
 }
 
-#case-study h3 {
+#patterns h3 {
   color: var(--color-light-grey);
 }
 
-#case-study h4,
-#case-study h5 {
+#patterns h4,
+#patterns h5 {
   color: var(--color-grey);
 }
 
-#case-study p {
+#patterns p {
   font-size: 1.2rem;
   font-weight: 300;
   line-height: 2rem;
 }
 
-#case-study blockquote p {
+#patterns blockquote p {
   font-size: 1.3rem;
 }
 
-#case-study blockquote p:first-of-type {
+#patterns blockquote p:first-of-type {
   font-style: italic;
 }
 
-#case-study li {
+#patterns li {
   font-size: 1rem;
   line-height: 1.6rem;
   margin-left: 2rem;
 }
 
-#case-study ul {
+#patterns ul {
   list-style-type: disc;
 }
 
-#case-study ol {
+#patterns ol {
   list-style-type: decimal;
 }
 
-#case-study li code {
+#patterns li code {
   font-size: 0.8rem;
 }
 
-#case-study figure {
+#patterns figure {
   margin: 50px auto;
 }
 
-#case-study figcaption::before {
+#patterns figcaption::before {
   border-top: 1px solid var(--color-light-grey);
   content: "";
   display: block;
@@ -442,7 +442,7 @@ h3 {
   width: 50%;
 }
 
-#case-study figcaption {
+#patterns figcaption {
   color: var(--color-light-grey);
   font-style: italic;
   margin-top: 25px;
@@ -654,19 +654,19 @@ small {
 ------------------------------------ */
 
 @media (max-width: 1100px) {
-  #case-study nav {
+  #patterns nav {
     display: none;
   }
 
-  nav#case-study-mobile ul {
+  nav#patterns-mobile ul {
     margin: 0;
   }
 
-  nav#site-navigation #case-study-mobile li {
+  nav#site-navigation #patterns-mobile li {
     margin-left: 0;
   }
 
-  nav#site-navigation #case-study-mobile li:last-child {
+  nav#site-navigation #patterns-mobile li:last-child {
     margin-bottom: 0;
   }
 
@@ -674,11 +674,11 @@ small {
     padding: 0 75px;
   }
 
-  section#case-study {
+  section#patterns {
     margin: 70px auto;
   }
 
-  #case-study h2:first-of-type {
+  #patterns h2:first-of-type {
     margin-top: 20px;
   }
 
@@ -687,7 +687,7 @@ small {
     height: auto;
   }
 
-  #case-study img {
+  #patterns img {
     max-width: 100%;
   }
 
@@ -717,7 +717,7 @@ small {
     padding: 0 90px;
   }
 
-  #case-study img {
+  #patterns img {
     max-width: 70vw;
   }
 }
@@ -741,13 +741,13 @@ small {
     width: 30px;
   }
 
-  #case-study img {
+  #patterns img {
     max-width: 60vw;
   }
 }
 
 @media (min-width: 1100px) {
-  nav#case-study-mobile {
+  nav#patterns-mobile {
     display: none;
   }
 }
@@ -799,16 +799,16 @@ small {
     font-size: 2.5rem;
   }
 
-  section#case-study {
+  section#patterns {
     width: 100%;
   }
 
-  #case-study p {
+  #patterns p {
     font-size: 1rem;
     line-height: 1.5rem;
   }
 
-  #case-study blockquote p {
+  #patterns blockquote p {
     font-size: 1.1rem;
     line-height: 1.6rem;
   }
@@ -863,7 +863,7 @@ small {
     padding: 0 60px;
   }
 
-  section#case-study {
+  section#patterns {
     margin: 40px auto;
   }
 
@@ -1039,7 +1039,7 @@ small {
     margin-bottom: 3.5vh;
   }
 
-  nav#case-study-mobile {
+  nav#patterns-mobile {
     margin-top: 1.75vh;
   }
 
@@ -1052,11 +1052,11 @@ small {
   }
 }
 
-@media (max-height: 750px) {
+/* @media (max-height: 750px) {
   header figure img {
     max-width: min(95vh, 95vw);
   }
-}
+} */
 
 details > summary {
   background-color: #574863;
