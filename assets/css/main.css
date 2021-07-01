@@ -1054,7 +1054,7 @@ small {
 }
 
 details > summary {
-  background-color: #fdb;
+  background-color: #574863;
   cursor: pointer;
   padding: .5rem 1rem;
 }
@@ -1064,7 +1064,21 @@ details > summary > * {
 }
 
 details > div {
-  border: 2px solid #fdb;
+  border: 2px solid #0f7ec0;
   margin-top: 0;
   padding: 1rem;
+}
+
+details > summary::before {
+  content: '▶️';
+}
+
+details[open] > summary::before {
+  content: '🔽';
+}
+
+details {
+  border: 1px solid gray;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
 }
