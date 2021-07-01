@@ -1052,3 +1052,19 @@ small {
     max-width: min(95vh, 95vw);
   }
 }
+
+details > summary {
+  background-color: #fdb;
+  cursor: pointer;
+  padding: .5rem 1rem;
+}
+
+details > summary > * {
+  display: inline;
+}
+
+details > div {
+  border: 2px solid #fdb;
+  margin-top: 0;
+  padding: 1rem;
+}
