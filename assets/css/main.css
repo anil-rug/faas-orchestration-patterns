@@ -323,7 +323,7 @@ header figure span {
 
 #patterns nav {
   border-right: 1px solid var(--color-light-grey);
-  /* display: none; */
+  display: none;
   left: 1rem;
   padding-left: 5px;
   padding-right: 15px;
