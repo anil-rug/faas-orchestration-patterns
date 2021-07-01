@@ -15,7 +15,7 @@
          />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="author" content="Torrel Moseley, Zac Klammer, John Isom" />
-      <title>FaaSify</title>
+      <title>FaaSify - Pattern-based approach for FaaS Orchestration</title>
       <link rel="stylesheet" href="assets/css/fonts.css" />
       <link rel="stylesheet" href="assets/css/main.css" />
       <link
@@ -108,6 +108,16 @@
             </nav>
             <h2 id="process-manager">1. Process Manager</h2>
             <p>
+            <figure>
+               <img
+                  src="./images/aws_mapping_process_manager.png"
+                  alt="Process Manager" style="
+                    height: 300px;
+                    width: 200px;
+                "
+                  />
+               <figcaption>Process Manager</figcaption>
+            </figure>
                <b>Problem</b>: How does the serverless workflow determine the path in which the message needs to flow if it consists of multiple functions and conditions?
                <br/>
                <b>Decision</b>: The <i>Process Manager</i> acts as a central processing component for the system. As workflows are influenced by each step's output message, execution states need to be maintained, and based on the result; the succeeding component is invoked.
