@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const caseStudyNavUl = document.querySelector("#case-study nav ul");
   const caseStudyNavUlH3 = document.querySelector("#case-study nav ul nav ul");
   const mobileCaseStudyNavUl = document.querySelector("#case-study-mobile ul");
+  const mobileCaseStudyNavUlH3 = document.querySelector("#case-study-mobile ul nav ul");
 
   let topNavVisible = false;
   let smallNavVisible = false;
@@ -109,9 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
     li.appendChild(a);
     caseStudyNavUlH3.appendChild(li);
 
-    // mobileCaseStudyLinks.push(a2);
-    // li2.appendChild(a2);
-    // mobileCaseStudyNavUlH3.appendChild(li2);
+    mobileCaseStudyLinks.push(a2);
+    li2.appendChild(a2);
+    mobileCaseStudyNavUlH3.appendChild(li2);
   });
 
   const changeImgSrc = (tag, url) => {
