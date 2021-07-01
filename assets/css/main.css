@@ -279,7 +279,7 @@ nav#site-navigation a {
 
 header {
   /* background-color: var(--color-white); */
-  background-image: url('./images/logos/maestro/background.png');
+  background-image: url('../images/logos/maestro/background.png');
   color: var(--color-dark-grey);
   height: 100vh;
 }
