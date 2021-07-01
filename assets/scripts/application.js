@@ -109,9 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
     li.appendChild(a);
     caseStudyNavUlH3.appendChild(li);
 
-    mobileCaseStudyLinks.push(a2);
-    li2.appendChild(a2);
-    mobileCaseStudyNavUlH3.appendChild(li2);
+    // mobileCaseStudyLinks.push(a2);
+    // li2.appendChild(a2);
+    // mobileCaseStudyNavUlH3.appendChild(li2);
   });
 
   const changeImgSrc = (tag, url) => {
