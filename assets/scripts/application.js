@@ -6,11 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelectorAll("#site-navigation a");
   const main = document.querySelector("main");
   const header = document.querySelector("header");
-  const ourTeam = document.querySelector("#our-team");
+  const ourTeam = document.querySelector("#contributors");
   const homeLink = document.querySelector("#home-link");
   const caseStudyNav = document.querySelector("#patterns nav");
   const caseStudyLink = document.querySelector("#patterns-link");
-  const ourTeamLink = document.querySelector("#our-team-link");
+  const ourTeamLink = document.querySelector("#contributors-link");
   const caseStudyNavUl = document.querySelector("#patterns nav ul");
   const mobileCaseStudyNavUl = document.querySelector("#patterns-mobile ul");
 
