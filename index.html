@@ -29,12 +29,11 @@
          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/dark.min.css"
          charset="utf-8"
          />
-      <link href="prism.css" rel="stylesheet" />
-      <script src="prism.js"></script>
+      <link href="assets/css/prism.css" rel="stylesheet" />
+      <script src="assets/scripts/prism.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="assets/scripts/application.js"></script>
-      <!-- <script src="assets/scripts/slideshow.js"></script> -->
    </head>
    <body>
       <div class="logo-links">
@@ -112,7 +111,7 @@
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_process_manager.png"
+                     src="assets/images/patterns/Design_decisions_process_manager.png"
                      alt="Process Manager"
                      />
                   <figcaption>Process Manager</figcaption>
@@ -150,7 +149,7 @@
                <div>
                <figure>
                   <img
-                     src="./images/aws_mapping_process_manager.png"
+                     src="assets/images/patterns/aws_mapping_process_manager.png"
                      alt="Process Manager" style="
                      height: 300px;
                      width: 200px;
@@ -189,7 +188,7 @@
                <div>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_process_manager.png"
+                        src="assets/images/patterns/zeebe_mapping_process_manager.png"
                         alt="Process Manager"
                         />
                      <figcaption>Process Manager</figcaption>
@@ -205,7 +204,7 @@
                <div>
                   <figure>
                      <img
-                        src="./images/adf_mapping_process_manager.png"
+                        src="assets/images/patterns/adf_mapping_process_manager.png"
                         alt="Process Manager"
                         />
                      <figcaption>Process Manager</figcaption>
@@ -221,7 +220,7 @@
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_event_document_message.png"
+                     src="assets/images/patterns/Design_decisions_event_document_message.png"
                      alt="Event and Document Message"
                      />
                   <figcaption>Event and Document Message</figcaption>
@@ -259,7 +258,7 @@
                <div>
                   <figure>
                      <img
-                        src="./images/aws_mapping_event_document_message.png"
+                        src="assets/images/patterns/aws_mapping_event_document_message.png"
                         alt="Event Document Message"
                         />
                      <figcaption>Event Document Message</figcaption>
@@ -275,7 +274,7 @@
                <div>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_event_document_message.png"
+                        src="assets/images/patterns/zeebe_mapping_event_document_message.png"
                         alt="Event Document Message"
                         />
                      <figcaption>Event Document Message</figcaption>
@@ -291,7 +290,7 @@
                <div>
                   <figure>
                      <img
-                        src="./images/adf_mapping_event_document_message.png"
+                        src="assets/images/patterns/adf_mapping_event_document_message.png"
                         alt="Event Document Message"
                         />
                      <figcaption>Event Document Message</figcaption>
@@ -307,7 +306,7 @@
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_message_endpoint.png"
+                     src="assets/images/patterns/Design_decisions_message_endpoint.png"
                      alt="Message Endpoint"
                      />
                   <figcaption>Message Endpoint</figcaption>
@@ -382,7 +381,7 @@
                The Message Endpoint construct, which accepts the messages and processes the message, is mapped to the "Service Task" with Type = "lambda" (Based on the FaaS vendor provider). The below figure illustrates how this construct can be used in the BPMN 2.0 Zeebe modeler.
                <figure>
                   <img
-                     src="./images/zeebe_mapping_message_endpoint.png"
+                     src="assets/images/patterns/zeebe_mapping_message_endpoint.png"
                      alt="Message Endpoint"
                      />
                   <figcaption>Message Endpoint</figcaption>
@@ -444,7 +443,7 @@
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_pipes_and_filters.png"
+                     src="assets/images/patterns/Design_decisions_pipes_and_filters.png"
                      alt="Pipes and Filters"
                      />
                   <figcaption>Pipes and Filters</figcaption>
@@ -484,7 +483,7 @@
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_pipes_and_filters.png"
+                     src="assets/images/patterns/aws_mapping_pipes_and_filters.png"
                      alt="Pipes and Filter"
                      />
                   <figcaption>Pipes and Filter</figcaption>
@@ -532,7 +531,7 @@
                   The below figure shows how each Service task (filter) performs only one distinct operation, and the pipes that are the sequence/message flow coordinate the various tasks.
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_pipes_and_filters.png"
+                        src="assets/images/patterns/zeebe_mapping_pipes_and_filters.png"
                         alt="Pipes and Filters"
                         />
                      <figcaption>Pipes and Filters</figcaption>
@@ -579,7 +578,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_multicast.png"
+                     src="assets/images/patterns/Design_decisions_multicast.png"
                      alt="Multicast"
                      />
                   <figcaption>Multicast</figcaption>
@@ -617,7 +616,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_multicast.png"
+                     src="assets/images/patterns/aws_mapping_multicast.png"
                      alt="Multicast"
                      />
                   <figcaption>Multicast</figcaption>
@@ -673,7 +672,7 @@ module.exports = df.orchestrator(function* (context) {
                   With the "Parallel Gateway", the <i>Multicast</i> pattern can be implemented using BPMN 2.0 Zeebe Modeler. The below figure shows how the same message is transferred to two functions parallelly.
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_multicast.png"
+                        src="assets/images/patterns/zeebe_mapping_multicast.png"
                         alt="Multicast"
                         />
                      <figcaption>Multicast</figcaption>
@@ -723,7 +722,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_content_based_router.png"
+                     src="assets/images/patterns/Design_decisions_content_based_router.png"
                      alt="Content-based Router"
                      />
                   <figcaption>Content-based Router</figcaption>
@@ -761,7 +760,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_content_based_router.png"
+                     src="assets/images/patterns/aws_mapping_content_based_router.png"
                      alt="Content-based Router"
                      />
                   <figcaption>Content-based Router</figcaption>
@@ -830,7 +829,7 @@ module.exports = df.orchestrator(function* (context) {
                   "Exclusive Gateway" simulates the <i>Content-based Router</i> operations by controlling the message flow between the various branches. This gateway can also deliver the message to one or multiple branches based on the condition expression, as shown in the below figure.
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_content_based_router.png"
+                        src="assets/images/patterns/zeebe_mapping_content_based_router.png"
                         alt="Content-based Router"
                         />
                      <figcaption>Content-based Router</figcaption>
@@ -880,7 +879,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_loop.png"
+                     src="assets/images/patterns/Design_decisions_loop.png"
                      alt="Loop"
                      />
                   <figcaption>Loop</figcaption>
@@ -918,7 +917,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_while_loop.png"
+                     src="assets/images/patterns/aws_mapping_while_loop.png"
                      alt="While Loop"
                      />
                   <figcaption>While Loop</figcaption>
@@ -970,7 +969,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_do_while_loop.png"
+                     src="assets/images/patterns/aws_mapping_do_while_loop.png"
                      alt="Do-While Loop"
                      />
                   <figcaption>Do-While Loop</figcaption>
@@ -1028,7 +1027,7 @@ module.exports = df.orchestrator(function* (context) {
                Zeebe Modeler does not provide an out-of-the-box implementation to perform loops even if BPMN 2.0 has a loop task element. However, the below figure shows how the loop pattern can be implemented using a combination of "Service task", "Exclusive Gateway",  and sequence/message flow connector.
                <figure>
                   <img
-                     src="./images/zeebe_mapping_loop.png"
+                     src="assets/images/patterns/zeebe_mapping_loop.png"
                      alt="Loop"
                      />
                   <figcaption>Loop</figcaption>
@@ -1077,7 +1076,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_delay.png"
+                     src="assets/images/patterns/Design_decisions_delay.png"
                      alt="Delay"
                      />
                   <figcaption>Delay</figcaption>
@@ -1115,7 +1114,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_delay.png"
+                     src="assets/images/patterns/aws_mapping_delay.png"
                      alt="Delay"
                      />
                   <figcaption>Delay</figcaption>
@@ -1163,7 +1162,7 @@ module.exports = df.orchestrator(function* (context) {
                   The below figure depicts how the BPMN 2.0 "Timer" event is used to achieve the <i>Delay</i> pattern.
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_delay.png"
+                        src="assets/images/patterns/zeebe_mapping_delay.png"
                         alt="Delay"
                         />
                      <figcaption>Delay</figcaption>
@@ -1212,7 +1211,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_gateway.png"
+                     src="assets/images/patterns/Design_decisions_gateway.png"
                      alt="Gateway"
                      />
                   <figcaption>Gateway</figcaption>
@@ -1299,7 +1298,7 @@ lambdaGateway.outputGateway(JSON.stringify(event), callback);
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_content_filter.png"
+                     src="assets/images/patterns/Design_decisions_content_filter.png"
                      alt="Content Filter"
                      />
                   <figcaption>Content Filter</figcaption>
@@ -1337,7 +1336,7 @@ lambdaGateway.outputGateway(JSON.stringify(event), callback);
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_content_filter.png"
+                     src="assets/images/patterns/aws_mapping_content_filter.png"
                      alt="Content Filter"
                      />
                   <figcaption>Content Filter</figcaption>
@@ -1382,7 +1381,7 @@ lambdaGateway.outputGateway(JSON.stringify(transformedData), callback);
                   <br/>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_content_filter.png"
+                        src="assets/images/patterns/zeebe_mapping_content_filter.png"
                         alt="Content Filter"
                         />
                      <figcaption>Content Filter</figcaption>
@@ -1428,7 +1427,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_content_enricher.png"
+                     src="assets/images/patterns/Design_decisions_content_enricher.png"
                      alt="Content Enricher"
                      />
                   <figcaption>Content Enricher</figcaption>
@@ -1466,7 +1465,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_content_enricher.png"
+                     src="assets/images/patterns/aws_mapping_content_enricher.png"
                      alt="Content Enricher"
                      />
                   <figcaption>Content Enricher</figcaption>
@@ -1518,7 +1517,7 @@ lambdaGateway.outputGateway(JSON.stringify(transformedData), callback);
                   <br/>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_content_enricher.png"
+                        src="assets/images/patterns/zeebe_mapping_content_enricher.png"
                         alt="Content Enricher"
                         />
                      <figcaption>Content Enricher</figcaption>
@@ -1565,7 +1564,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_claim_check.png"
+                     src="assets/images/patterns/Design_decisions_claim_check.png"
                      alt="Claim Check"
                      />
                   <figcaption>Claim Check</figcaption>
@@ -1603,7 +1602,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/aws_mapping_claim_check.png"
+                        src="assets/images/patterns/aws_mapping_claim_check.png"
                         alt="Claim Check"
                         />
                      <figcaption>Claim Check</figcaption>
@@ -1636,7 +1635,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_normalizer.png"
+                     src="assets/images/patterns/Design_decisions_normalizer.png"
                      alt="Normalizer"
                      />
                   <figcaption>Normalizer</figcaption>
@@ -1699,7 +1698,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_message_history.png"
+                     src="assets/images/patterns/Design_decisions_message_history.png"
                      alt="Message History"
                      />
                   <figcaption>Message History</figcaption>
@@ -1746,7 +1745,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_message_history.png"
+                        src="assets/images/patterns/zeebe_mapping_message_history.png"
                         alt="Message History"
                         />
                      <figcaption>Message History</figcaption>
@@ -1763,7 +1762,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/adf_mapping_message_history.png"
+                        src="assets/images/patterns/adf_mapping_message_history.png"
                         alt="Message History"
                         />
                      <figcaption>Message History</figcaption>
@@ -1778,7 +1777,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_splitter_and_aggregator.png"
+                     src="assets/images/patterns/Design_decisions_splitter_and_aggregator.png"
                      alt="Splitter and Aggregator"
                      />
                   <figcaption>Splitter and Aggregator</figcaption>
@@ -1821,7 +1820,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_splitter_and_aggregator.png"
+                     src="assets/images/patterns/aws_mapping_splitter_and_aggregator.png"
                      alt="Splitter and Aggregator"
                      />
                   <figcaption>Splitter and Aggregator</figcaption>
@@ -1872,7 +1871,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_splitter_and_aggregator.png"
+                        src="assets/images/patterns/zeebe_mapping_splitter_and_aggregator.png"
                         alt="Splitter and Aggregator"
                         />
                      <figcaption>Splitter and Aggregator</figcaption>
@@ -1924,7 +1923,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_implicit_termination.png"
+                     src="assets/images/patterns/Design_decisions_implicit_termination.png"
                      alt="Implicit Termination"
                      />
                   <figcaption>Implicit Termination</figcaption>
@@ -1974,7 +1973,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_event_document_message.png"
+                     src="assets/images/patterns/aws_mapping_event_document_message.png"
                      alt="Implicit Termination"
                      />
                   <figcaption>Implicit Termination</figcaption>
@@ -2048,7 +2047,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_implicit_termination.png"
+                        src="assets/images/patterns/zeebe_mapping_implicit_termination.png"
                         alt="Implicit Termination"
                         />
                      <figcaption>Implicit Termination</figcaption>
@@ -2089,7 +2088,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_nested_workflows.png"
+                     src="assets/images/patterns/Design_decisions_nested_workflows.png"
                      alt="Nested Workflows"
                      />
                   <figcaption>Nested Workflows</figcaption>
@@ -2131,7 +2130,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_nested_workflow.png"
+                     src="assets/images/patterns/aws_mapping_nested_workflow.png"
                      alt="Nested Workflow"
                      />
                   <figcaption>Nested Workflow</figcaption>
@@ -2177,7 +2176,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_nested_workflow.png"
+                        src="assets/images/patterns/zeebe_mapping_nested_workflow.png"
                         alt="Nested Workflow"
                         />
                      <figcaption>Nested Workflow</figcaption>
@@ -2220,7 +2219,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
             <figure>
             <img
-               src="./images/Design_decisions_callback.png"
+               src="assets/images/patterns/Design_decisions_callback.png"
                alt="Callback"
                />
             <figcaption>Callback</figcaption>
@@ -2264,7 +2263,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_callback.png"
+                     src="assets/images/patterns/aws_mapping_callback.png"
                      alt="Callback"
                      />
                   <figcaption>Callback</figcaption>
@@ -2310,7 +2309,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_callback.png"
+                        src="assets/images/patterns/zeebe_mapping_callback.png"
                         alt="Callback"
                         />
                      <figcaption>Callback</figcaption>
@@ -2318,7 +2317,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_user_callback.png"
+                        src="assets/images/patterns/zeebe_mapping_user_callback.png"
                         alt="User Callback"
                         />
                      <figcaption>User Callback</figcaption>
@@ -2363,7 +2362,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_error_handling.png"
+                     src="assets/images/patterns/Design_decisions_error_handling.png"
                      alt="Error Handling"
                      />
                   <figcaption>Error Handling</figcaption>
@@ -2405,7 +2404,7 @@ module.exports = df.orchestrator(function* (context) {
                <br/>
                <figure>
                   <img
-                     src="./images/aws_mapping_error_handling.png"
+                     src="assets/images/patterns/aws_mapping_error_handling.png"
                      alt="Error Handling"
                      />
                   <figcaption>Error Handling</figcaption>
@@ -2473,7 +2472,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/zeebe_mapping_error_handling.png"
+                        src="assets/images/patterns/zeebe_mapping_error_handling.png"
                         alt="Error Handling"
                         />
                      <figcaption>Error Handling</figcaption>
@@ -2519,7 +2518,7 @@ module.exports = df.orchestrator(function* (context) {
             <p>
                <figure>
                   <img
-                     src="./images/Design_decisions_workflow_data.png"
+                     src="assets/images/patterns/Design_decisions_workflow_data.png"
                      alt="Workflow Data"
                      />
                   <figcaption>Workflow Data</figcaption>
@@ -2563,7 +2562,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/aws_mapping_error_handling.png"
+                        src="assets/images/patterns/aws_mapping_error_handling.png"
                         alt="Error Handling"
                         />
                      <figcaption>Error Handling</figcaption>
@@ -2593,7 +2592,7 @@ module.exports = df.orchestrator(function* (context) {
                   <br/>
                   <figure>
                      <img
-                        src="./images/azure_mapping_workflow_data.png"
+                        src="assets/images/patterns/azure_mapping_workflow_data.png"
                         alt="Workflow Data" style="
                         height: 200px;
                         width: 150px;"
