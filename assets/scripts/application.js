@@ -287,9 +287,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.tagName === "A") {
       e.preventDefault();
       const positions = getCaseStudyHeadingPositions();
+      if (positions !== undefined) {
       const positionKey = `#${e.target.href.split("#")[1]}-nav`;
       const newScrollPosition = positions[positionKey];
       window.scrollTo(0, newScrollPosition + 5);
+      }
     }
   });
 
