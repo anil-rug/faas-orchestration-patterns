@@ -323,7 +323,7 @@ header figure span {
 
 #patterns nav {
   border-right: 1px solid var(--color-light-grey);
-  display: none;
+  /* display: none; */
   left: 1rem;
   padding-left: 5px;
   padding-right: 15px;
@@ -331,7 +331,7 @@ header figure span {
   overflow-y: scroll;
   top: 0;
   bottom: 0;
-  /* display:block; */
+  display:block;
   /* top: 50%; */
   /* transform: translateY(-50%); */
 }
