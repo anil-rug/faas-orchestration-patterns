@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const position = getScrollPosition() + h2.getBoundingClientRect().top;
       obj[`${selector}-nav`] = position;
       return obj;
+      } else {
+        return obj;
       }
     }, {});
 
