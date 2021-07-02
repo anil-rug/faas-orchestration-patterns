@@ -35,10 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const getCaseStudyHeadingPositions = () =>
     h2Text.reduce((obj, h2Str) => {
       const selector = `#${snakeCaseify(h2Str.replace("!", ""))}`;
+      if (selector !== '#') {
       const h2 = document.querySelector(selector);
       const position = getScrollPosition() + h2.getBoundingClientRect().top;
       obj[`${selector}-nav`] = position;
       return obj;
+      }
     }, {});
 
   const highlightSection = (li, a) => {
