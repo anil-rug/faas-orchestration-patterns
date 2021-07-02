@@ -130,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const handleCaseStudyNavStyles = () => {
     const positions = getCaseStudyHeadingPositions();
+    if (positions !== undefined) {
     const positionValues = Object.values(positions);
     const positionSelectors = Object.keys(positions);
     const mobileCaseStudyNav = document.querySelector("#patterns-mobile");
@@ -151,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (a.getAttribute("style")) a.removeAttribute("style");
       }
     });
+  }
   };
 
   const handleCaseStudyNav = () => {
