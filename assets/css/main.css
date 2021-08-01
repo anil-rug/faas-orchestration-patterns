@@ -1092,3 +1092,12 @@ details {
   background-color: #ACB1BF;
   border-radius: 4px;
 }
+
+
+.pattern-image {
+  border: rgb(144, 12, 63);
+  border-style: solid;
+  border-width: thick;
+  padding: 10px;
+  background: white;
+}
