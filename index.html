@@ -844,14 +844,23 @@ module.exports = df.orchestrator(function* (context) {
                   <h4>Zeebe</h4>
                </summary>
                <div>
-                  "Inclusive Gateway" simulates the <i>Content-based Router</i> operations by controlling the message flow between the various branches. This gateway can also deliver the message to one or multiple branches based on the condition expression, as shown in the below figure.
+                  "Exclusive and Inclusive Gateway" simulates the <i>Content-based Router</i> operations by controlling the message flow between the various branches. The former gateway can deliver the message to exactly one branch while the latter can deliver the message to one or more branches based on the condition expression, as shown in the below figure.
                   <figure>
                      <img
-                        src="assets/images/patterns/zeebe_mapping_content_based_router.png"
+                        src="assets/images/patterns/zeebe_mapping_content_based_router_exclusive.png"
                         alt="Content-based Router"
                         class="pattern-image"
                         />
-                     <figcaption>Content-based Router</figcaption>
+                     <figcaption>Content-based Router - Exclusive Gateway</figcaption>
+                  </figure>
+                  <br/>
+                  <figure>
+                     <img
+                        src="assets/images/patterns/zeebe_mapping_content_based_router_inclusive.png"
+                        alt="Content-based Router"
+                        class="pattern-image"
+                        />
+                     <figcaption>Content-based Router - Inclusive Gateway</figcaption>
                   </figure>
                   <br/>
                </div>
